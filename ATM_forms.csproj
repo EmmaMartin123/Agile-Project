@@ -46,11 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="alert_message_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="alert_message_form.Designer.cs">
+      <DependentUpon>alert_message_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="balance_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="balance_form.Designer.cs">
+      <DependentUpon>balance_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="enter_pin_form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="enter_pin_form.Designer.cs">
       <DependentUpon>enter_pin_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="prompt_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prompt_form.Designer.cs">
+      <DependentUpon>prompt_form.cs</DependentUpon>
     </Compile>
     <Compile Include="select_transaction_form.cs">
       <SubType>Form</SubType>
@@ -66,11 +84,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="alert_message_form.resx">
+      <DependentUpon>alert_message_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="balance_form.resx">
+      <DependentUpon>balance_form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="enter_pin_form.resx">
       <DependentUpon>enter_pin_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="insert_card_form.resx">
       <DependentUpon>insert_card_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prompt_form.resx">
+      <DependentUpon>prompt_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
