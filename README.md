@@ -2,4 +2,6 @@
 
 Naming Rules:
 
-functionNames      ClassNames      file_names
+ - functionNames
+ - ClassNames
+ - file_names
