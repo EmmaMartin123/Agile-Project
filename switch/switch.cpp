@@ -39,6 +39,8 @@ using json = nlohmann::json;
 
 #define MAXDATASIZE 100 // max number of bytes we can get at once 
 
+int networkSim_fd; // file descriptor for the connection to the network simulator
+
 std::vector<int> queuedSockets;
 std::vector<struct pollfd> ATMs;
 
@@ -320,13 +322,14 @@ int bindSocketForClientsAndListen(){
 int main(int argc, char *argv[])
 {
 
-    int networkSim_fd;
+
     networkSim_fd = connectToNetwork();
 
     std::thread pollingThread(pollingFunction);
+
     bindSocketForClientsAndListen();
 
-    
+
     close(networkSim_fd);
     return 0;
 }
