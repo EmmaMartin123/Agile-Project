@@ -31,5 +31,10 @@ namespace ATM_forms
         {
 
         }
+
+        private void pin_txt_box_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

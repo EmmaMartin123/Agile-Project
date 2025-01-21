@@ -29,71 +29,91 @@
         private void InitializeComponent()
         {
             this.select_transaction_panel = new System.Windows.Forms.Panel();
-            this.check_balance_btn = new System.Windows.Forms.Button();
-            this.select_transaction_label = new System.Windows.Forms.Label();
-            this.cash_withdrawal_btn = new System.Windows.Forms.Button();
             this.exit_btn = new System.Windows.Forms.Button();
+            this.cash_withdrawal_btn = new System.Windows.Forms.Button();
+            this.select_transaction_label = new System.Windows.Forms.Label();
+            this.check_balance_btn = new System.Windows.Forms.Button();
             this.select_transaction_panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // select_transaction_panel
             // 
-            this.select_transaction_panel.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.select_transaction_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
             this.select_transaction_panel.Controls.Add(this.exit_btn);
             this.select_transaction_panel.Controls.Add(this.cash_withdrawal_btn);
             this.select_transaction_panel.Controls.Add(this.select_transaction_label);
             this.select_transaction_panel.Controls.Add(this.check_balance_btn);
-            this.select_transaction_panel.Location = new System.Drawing.Point(508, 216);
+            this.select_transaction_panel.Location = new System.Drawing.Point(339, 140);
+            this.select_transaction_panel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.select_transaction_panel.Name = "select_transaction_panel";
-            this.select_transaction_panel.Size = new System.Drawing.Size(886, 536);
+            this.select_transaction_panel.Size = new System.Drawing.Size(591, 348);
             this.select_transaction_panel.TabIndex = 0;
             // 
-            // check_balance_btn
+            // exit_btn
             // 
-            this.check_balance_btn.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.check_balance_btn.Location = new System.Drawing.Point(265, 127);
-            this.check_balance_btn.Name = "check_balance_btn";
-            this.check_balance_btn.Size = new System.Drawing.Size(373, 123);
-            this.check_balance_btn.TabIndex = 0;
-            this.check_balance_btn.Text = "Check Balance";
-            this.check_balance_btn.UseVisualStyleBackColor = true;
+            this.exit_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.exit_btn.FlatAppearance.BorderSize = 3;
+            this.exit_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exit_btn.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exit_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.exit_btn.Location = new System.Drawing.Point(191, 275);
+            this.exit_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.exit_btn.Name = "exit_btn";
+            this.exit_btn.Size = new System.Drawing.Size(210, 60);
+            this.exit_btn.TabIndex = 4;
+            this.exit_btn.Text = "EXIT";
+            this.exit_btn.UseVisualStyleBackColor = true;
+            this.exit_btn.Click += new System.EventHandler(this.exit_btn_Click);
+            // 
+            // cash_withdrawal_btn
+            // 
+            this.cash_withdrawal_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.cash_withdrawal_btn.FlatAppearance.BorderSize = 3;
+            this.cash_withdrawal_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cash_withdrawal_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cash_withdrawal_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.cash_withdrawal_btn.Location = new System.Drawing.Point(113, 173);
+            this.cash_withdrawal_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cash_withdrawal_btn.Name = "cash_withdrawal_btn";
+            this.cash_withdrawal_btn.Size = new System.Drawing.Size(375, 80);
+            this.cash_withdrawal_btn.TabIndex = 2;
+            this.cash_withdrawal_btn.Text = "CASH WITHDRAWAL";
+            this.cash_withdrawal_btn.UseVisualStyleBackColor = true;
             // 
             // select_transaction_label
             // 
             this.select_transaction_label.AutoSize = true;
-            this.select_transaction_label.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.select_transaction_label.Location = new System.Drawing.Point(216, 43);
+            this.select_transaction_label.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.select_transaction_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.select_transaction_label.Location = new System.Drawing.Point(122, 11);
+            this.select_transaction_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.select_transaction_label.Name = "select_transaction_label";
-            this.select_transaction_label.Size = new System.Drawing.Size(459, 65);
+            this.select_transaction_label.Size = new System.Drawing.Size(366, 50);
             this.select_transaction_label.TabIndex = 1;
             this.select_transaction_label.Text = "Select a Transaction";
             // 
-            // cash_withdrawal_btn
+            // check_balance_btn
             // 
-            this.cash_withdrawal_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cash_withdrawal_btn.Location = new System.Drawing.Point(265, 265);
-            this.cash_withdrawal_btn.Name = "cash_withdrawal_btn";
-            this.cash_withdrawal_btn.Size = new System.Drawing.Size(373, 123);
-            this.cash_withdrawal_btn.TabIndex = 2;
-            this.cash_withdrawal_btn.Text = "Cash Withdrawal";
-            this.cash_withdrawal_btn.UseVisualStyleBackColor = true;
-            // 
-            // exit_btn
-            // 
-            this.exit_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exit_btn.Location = new System.Drawing.Point(288, 404);
-            this.exit_btn.Name = "exit_btn";
-            this.exit_btn.Size = new System.Drawing.Size(329, 111);
-            this.exit_btn.TabIndex = 4;
-            this.exit_btn.Text = "Exit";
-            this.exit_btn.UseVisualStyleBackColor = true;
+            this.check_balance_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.check_balance_btn.FlatAppearance.BorderSize = 3;
+            this.check_balance_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.check_balance_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.check_balance_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.check_balance_btn.Location = new System.Drawing.Point(113, 78);
+            this.check_balance_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.check_balance_btn.Name = "check_balance_btn";
+            this.check_balance_btn.Size = new System.Drawing.Size(375, 80);
+            this.check_balance_btn.TabIndex = 0;
+            this.check_balance_btn.Text = "CHECK BALANCE";
+            this.check_balance_btn.UseVisualStyleBackColor = true;
             // 
             // select_transaction_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1445, 770);
+            this.ClientSize = new System.Drawing.Size(1326, 820);
             this.Controls.Add(this.select_transaction_panel);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "select_transaction_form";
             this.Text = "Select Transaction";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

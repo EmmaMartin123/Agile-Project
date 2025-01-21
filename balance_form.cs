@@ -26,5 +26,10 @@ namespace ATM_forms
         {
 
         }
+
+        private void balance_panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

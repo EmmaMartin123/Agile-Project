@@ -21,5 +21,10 @@ namespace ATM_forms
         {
 
         }
+
+        private void exit_btn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
