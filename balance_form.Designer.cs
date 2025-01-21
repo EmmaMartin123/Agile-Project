@@ -1,4 +1,6 @@
-﻿namespace ATM_forms
+﻿using System;
+
+namespace ATM_forms
 {
     partial class balance_form
     {
@@ -74,6 +76,8 @@
             this.done_btn.TabIndex = 4;
             this.done_btn.Text = "DONE";
             this.done_btn.UseVisualStyleBackColor = true;
+            this.done_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
+            this.done_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
             // 
             // balance_label
             // 
@@ -109,5 +113,17 @@
         private System.Windows.Forms.Label balance_heading_label;
         private System.Windows.Forms.Button done_btn;
         private System.Windows.Forms.Label balance_label;
+
+        void Btn_MouseEnter(object sender, EventArgs e)
+        {
+            // Change the button color when the mouse enters
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
+        }
+
+        void Btn_MouseLeave(object sender, EventArgs e)
+        {
+            // Change the button color back to its original color when the mouse leaves
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
+        }
     }
 }

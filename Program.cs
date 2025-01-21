@@ -16,7 +16,7 @@ namespace ATM_forms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new prompt_form());
+            Application.Run(new balance_form());
         }
     }
 }

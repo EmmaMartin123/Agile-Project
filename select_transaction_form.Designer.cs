@@ -1,4 +1,6 @@
-﻿namespace ATM_forms
+﻿using System;
+
+namespace ATM_forms
 {
     partial class select_transaction_form
     {
@@ -64,6 +66,8 @@
             this.exit_btn.Text = "EXIT";
             this.exit_btn.UseVisualStyleBackColor = true;
             this.exit_btn.Click += new System.EventHandler(this.exit_btn_Click);
+            this.exit_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
+            this.exit_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
             // 
             // cash_withdrawal_btn
             // 
@@ -79,6 +83,8 @@
             this.cash_withdrawal_btn.TabIndex = 2;
             this.cash_withdrawal_btn.Text = "CASH WITHDRAWAL";
             this.cash_withdrawal_btn.UseVisualStyleBackColor = true;
+            this.cash_withdrawal_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
+            this.cash_withdrawal_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
             // 
             // select_transaction_label
             // 
@@ -106,6 +112,8 @@
             this.check_balance_btn.TabIndex = 0;
             this.check_balance_btn.Text = "CHECK BALANCE";
             this.check_balance_btn.UseVisualStyleBackColor = true;
+            this.check_balance_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
+            this.check_balance_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
             // 
             // select_transaction_form
             // 
@@ -131,5 +139,17 @@
         private System.Windows.Forms.Label select_transaction_label;
         private System.Windows.Forms.Button check_balance_btn;
         private System.Windows.Forms.Button exit_btn;
+
+        void Btn_MouseEnter(object sender, EventArgs e)
+        {
+            // Change the button color when the mouse enters
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
+        }
+
+        void Btn_MouseLeave(object sender, EventArgs e)
+        {
+            // Change the button color back to its original color when the mouse leaves
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
+        }
     }
 }

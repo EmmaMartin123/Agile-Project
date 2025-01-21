@@ -1,4 +1,6 @@
-﻿namespace ATM_forms
+﻿using System;
+
+namespace ATM_forms
 {
     partial class prompt_form
     {
@@ -87,12 +89,14 @@
             this.yes_btn.Text = "YES";
             this.yes_btn.UseVisualStyleBackColor = true;
             this.yes_btn.Click += new System.EventHandler(this.yes_btn_Click);
+            this.yes_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
+            this.yes_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
             // 
             // no_btn
             // 
             this.no_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
             this.no_btn.FlatAppearance.BorderSize = 3;
-            this.no_btn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            //.no_btn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
             this.no_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.no_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.no_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
@@ -103,6 +107,8 @@
             this.no_btn.TabIndex = 4;
             this.no_btn.Text = "NO";
             this.no_btn.UseVisualStyleBackColor = true;
+            this.no_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
+            this.no_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
             // 
             // prompt_form
             // 
@@ -127,5 +133,17 @@
         private System.Windows.Forms.Label prompt_label2;
         private System.Windows.Forms.Button yes_btn;
         private System.Windows.Forms.Button no_btn;
+
+        void Btn_MouseEnter(object sender, EventArgs e)
+        {
+            // Change the button color when the mouse enters
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
+        }
+
+        void Btn_MouseLeave(object sender, EventArgs e)
+        {
+            // Change the button color back to its original color when the mouse leaves
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
+        }
     }
 }
