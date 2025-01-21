@@ -36,6 +36,7 @@ using json = nlohmann::json;
 #define SWITCH_PORT "8885" // the port ATMs will be connecting to
 
 #define BACKLOG 10   // how many pending connections queue will hold
+//#define SIMULATOR_HOSTNAME ""
 
 std::vector<int> queuedSockets;
 std::vector<struct pollfd> ATMs;
@@ -66,6 +67,11 @@ int connectToNetwork(){
         memset(&hints, 0, sizeof hints);
         hints.ai_family = AF_UNSPEC;
         hints.ai_socktype = SOCK_STREAM;
+
+        std::string hostname = "127.0.0.1";
+        #ifdef SIMULATOR_HOSTNAME
+            hostname = SIMULATOR_HOSTNAME;
+        #endif
 
         // set up data for connection
         if ((rv = getaddrinfo("127.0.0.1", SIMULATOR_PORT, &hints, &servinfo)) != 0) {
