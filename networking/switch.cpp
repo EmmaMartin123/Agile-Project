@@ -6,7 +6,7 @@ This program bridges the network simulation and the client ATMs
 it needs to have a server threadd open to accept connections from ATMs and queue the
 requests it will receive from them and a collection of connections to the ATMs
 
-Best way forward will likely be to do what?
+// data is handled in the polling functions
 
 */
 
@@ -36,8 +36,6 @@ using json = nlohmann::json;
 #define SWITCH_PORT "8885" // the port ATMs will be connecting to
 
 #define BACKLOG 10   // how many pending connections queue will hold
-
-#define MAXDATASIZE 100 // max number of bytes we can get at once 
 
 std::vector<int> queuedSockets;
 std::vector<struct pollfd> ATMs;
@@ -108,12 +106,16 @@ int connectToNetwork(){
     }
 }
 
+// for all the sockets we are working with, check if they have received inputs
 void pollingFunction(){
     char buff[512];
+
+    // check all ports regularly
     while (1)
     {
         int num_events = poll(&(*(ATMs.begin())), ATMs.size(), 150);
 
+        // only scan the ports for data if and event has happened
         if (num_events > 0)
         {
             // check for something in the event that poll doesn't timeout
@@ -124,13 +126,13 @@ void pollingFunction(){
                     int bytesReceived = recv(ATMs[i].fd, buff, 512, 0);
                     if (bytesReceived > 0)
                     {
-                        std::cout << "data received:" << buff << std::endl;
+                        std::cout << "data received:" << buff;
 
                         send(networkSim_fd, buff, bytesReceived, 0);
                         memset(buff, 0, 512);
 
                         recv(networkSim_fd, buff, 512, 0);
-                        std::cout << "response from network: " << buff << std::endl;
+                        std::cout << "response from network: " << buff;
                     }
 
                     ATMs[i].revents = 0;
@@ -242,14 +244,17 @@ int bindSocketForClientsAndListen(){
     return 0;
 }
 
+
 int main(int argc, char *argv[])
 {
+    // connect to the simulator
     networkSim_fd = connectToNetwork();
 
+    // set up a thread to handle clients
     std::thread pollingThread(pollingFunction);
+    // start accepting clients
     bindSocketForClientsAndListen();
 
-    
     close(networkSim_fd);
     return 0;
 }

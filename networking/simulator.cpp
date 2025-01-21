@@ -4,6 +4,9 @@ simulator.cpp, simulator server program
 
 adapted from https://beej.us/guide/bgnet/html/split-wide/client-server-background.html
 
+main loop initiates listening loop and waits for client connections
+handleNewConnection is where all logic relevant to handling incoming data should be
+
 */
 
 #include <iostream>
@@ -49,13 +52,23 @@ void *get_in_addr(struct sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
+///////////////////////////////////////////////////////
+////////            Client Handling         ///////////
+///////////////////////////////////////////////////////
+
+// wait to receive data on the connection and then send a response,
+// always send a response at the end, even 
 void handleNewConnection(int socket){
-    char buffer[100];
-    int rv;
+    char buffer[512];
+    int rv; // return value, equals the number of bytes of data received or 0 if connection terminated or -1 in the case of error
+    std::string response = "";
+
     while (true)
     {
-        memset(buffer, 0, 100);
-        rv = recv(socket, buffer, 100, 0);
+        response = "";
+        memset(buffer, 0, 512);
+
+        rv = recv(socket, buffer, 512, 0);
         if (rv  == -1)
         {
             // something went wrong
@@ -63,16 +76,17 @@ void handleNewConnection(int socket){
             break;
         } else if(rv == 0){
             //connection has been closed
-            std::cout << "connection closed";
+            std::cout << "connection closed\n";
             break;
         } else{
             // handleData
             std::cout << buffer << std::endl;
-            
-            std::string response = "received: " + std::string(buffer);
+
+            response = "received: " + std::string(buffer);
             send(socket, response.c_str(), response.length(), 0);
         }
     }
+    // if we ever leave the loop, the connection has terminated
     close(socket);
 }
 
@@ -81,16 +95,16 @@ int main(void)
 {
 
     // data structs and processing variables
-    int sockfd, new_fd;  // listen on sock_fd, new connection on new_fd
+    int sock_fd, new_fd;  // listen on sock_fd, new connection on new_fd
     struct addrinfo hints, *servinfo, *p;
     struct sockaddr_storage their_addr; // connector's address information
     socklen_t sin_size;
     struct sigaction sa;
     int yes=1;
     char s[INET6_ADDRSTRLEN];
-    int rv;
+    int rv; // return value
 
-    // zero out addressinfor structs to prevent old data in memory altering program
+    // zero out address info structs to prevent old data in memory altering program behaviour
     memset(&hints, 0, sizeof hints);
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
@@ -103,20 +117,20 @@ int main(void)
 
     // loop through all the results and bind to the first we can
     for(p = servinfo; p != NULL; p = p->ai_next) {
-        if ((sockfd = socket(p->ai_family, p->ai_socktype,
+        if ((sock_fd = socket(p->ai_family, p->ai_socktype,
                 p->ai_protocol)) == -1) {
             perror("server: socket");
             continue;
         }
 
-        if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes,
+        if (setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR, &yes,
                 sizeof(int)) == -1) {
             perror("setsockopt");
             exit(1);
         }
 
-        if (bind(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
-            close(sockfd);
+        if (bind(sock_fd, p->ai_addr, p->ai_addrlen) == -1) {
+            close(sock_fd);
             perror("server: bind");
             continue;
         }
@@ -126,16 +140,19 @@ int main(void)
 
     freeaddrinfo(servinfo); // all done with this structure
 
+    // check we are succesfully listening
     if (p == NULL)  {
         fprintf(stderr, "server: failed to bind\n");
         exit(1);
     }
 
-    if (listen(sockfd, BACKLOG) == -1) {
+    // check for errors while listening
+    if (listen(sock_fd, BACKLOG) == -1) {
         perror("listen");
         exit(1);
     }
 
+    // handle the forked processes as they exit
     sa.sa_handler = sigchld_handler; // reap all dead processes
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
@@ -148,7 +165,7 @@ int main(void)
 
     while(1) {  // main accept() loop
         sin_size = sizeof their_addr;
-        new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);
+        new_fd = accept(sock_fd, (struct sockaddr *)&their_addr, &sin_size);
         if (new_fd == -1) {
             perror("accept");
             continue;
@@ -162,8 +179,10 @@ int main(void)
         // create a new process running the exact same code, if it is the original, return to loop start
         // otherwise, run internal code
         if (!fork()) { // this is the child process
-            close(sockfd); // child doesn't need the listening socket
+            close(sock_fd); // child doesn't need the listening socket
             handleNewConnection(new_fd);
+            // exiting the handleNewConnection function means we have severed the connection, we exit because it is specifically
+            // that client handling fork that is leaving
             exit(0);
         }
         close(new_fd);  // parent doesn't need this
