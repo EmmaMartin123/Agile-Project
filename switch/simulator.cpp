@@ -59,6 +59,17 @@ void *get_in_addr(struct sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
+// logging function to log responses back to switch 
+void logResponse(const std::string &response) { 
+    std::ofstream logFile("simulator.log", std::ios_base::app); 
+    if (logFile.is_open()) { 
+        std::time_t now = std::time(nullptr); 
+        std::tm *localTime = std::localtime(&now); 
+        logFile << "[" << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << "] "; 
+        logFile <<  response << "\n"; 
+    } 
+} 
+
 ///////////////////////////////////////////////////////
 ////////            Client Handling         ///////////
 ///////////////////////////////////////////////////////
@@ -104,7 +115,7 @@ void handleNewConnection(int socket){
                 json responseJson;
                 responseJson["transaction_id"] = transactionID;
 
-                // valiating and transaction processing 
+                // validating and transaction processing 
                 if (accounts.find(cardNumber) != accounts.end()) {  
                     auto &account = accounts[cardNumber];         
                     if (account["pin"] == pin && account["expiry_date"] == expiry_date) {  
@@ -125,13 +136,14 @@ void handleNewConnection(int socket){
                     responseJson["reason"] = "Card not found";      
                 }
 
-                //  serilizing response 
+                //  serializing response 
                 response = responseJson.dump();                     
             } catch (const std::exception &e) {                     
                 response = R"({"status": "error", "message": "Invalid request format"})"; 
             }
 
             send(socket, response.c_str(), response.length(), 0); // sending response
+            logResponse(response); // Logging the response ###########
         }
     }
     // if we ever leave the loop, the connection has terminated
@@ -187,7 +199,7 @@ int main(void)
 
     freeaddrinfo(servinfo); // all done with this structure
 
-    // check we are succesfully listening
+    // check we are successfully listening
     if (p == NULL)  {
         fprintf(stderr, "server: failed to bind\n");
         exit(1);
