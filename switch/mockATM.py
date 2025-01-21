@@ -5,14 +5,25 @@ SWITCH_IP = "127.0.0.1"
 SWITCH_PORT = 8885
 
 # example transaction request
+#transaction_request = {
+#    "request_type": "withdraw",
+#    "atm_id": "ATM001",
+#    "transaction_id": "TXN12345",
+#    "card_number": "1234567890123456",
+#    "expiry_date": "12/25",
+#    "pin": "1234",
+#    "withdrawal_amount": 100.0
+#}
+
+# example transaction request with updated dummy data
 transaction_request = {
     "request_type": "withdraw",
     "atm_id": "ATM001",
-    "transaction_id": "TXN12345",
-    "card_number": "1234567890123456",
-    "expiry_date": "12/25",
-    "pin": "1234",
-    "withdrawal_amount": 100.0
+    "transaction_id": "TXN98765",  
+    "card_number": "2234567890123456",  
+    "expiry_date": "05/26",  
+    "pin": "1010",  
+    "withdrawal_amount": 50.0 
 }
 
 def send_transaction(request):
