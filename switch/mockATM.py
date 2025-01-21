@@ -2,6 +2,7 @@ import socket
 import json
 
 SWITCH_IP = "127.0.0.1"  
+SWITCH_PORT = 8885
 
 # example transaction request
 transaction_request = {
