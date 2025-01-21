@@ -22,6 +22,7 @@ handleNewConnection is where all logic relevant to handling incoming data should
 #include <sys/wait.h>
 #include <signal.h>
 #include <string>
+#include <unordered_map>  // ########### Added for account database
 
 #include <fstream>
 #include <nlohmann/json.hpp>
@@ -31,11 +32,12 @@ using json = nlohmann::json;
 
 #define BACKLOG 10   // how many pending connections queue will hold
 
-// a in-memory account database for now (card Number, balance)
-std::unordered_map<std::string, double> accounts = {  
-    {"1234567890123456", 1000.0},                     
-    {"9876543210987654", 500.0}                       
-};
+//  in memory account database (card number account details)
+std::unordered_map<std::string, json> accounts = {  
+    {"2234567890123456", {{"pin", "1010"}, {"expiry_date", "05/26"}, {"balance", 785.3}}},
+    {"3698521478965412", {{"pin", "5842"}, {"expiry_date", "04/25"}, {"balance", 110.72}}}, 
+    {"4521478523695201", {{"pin", "2351"}, {"expiry_date", "08/26"}, {"balance", 280.5}}}   
+}; 
 
 void sigchld_handler(int s)
 {
@@ -46,7 +48,6 @@ void sigchld_handler(int s)
 
     errno = saved_errno;
 }
-
 
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
@@ -89,41 +90,48 @@ void handleNewConnection(int socket){
             std::cout << buffer << std::endl;
 
             try {  
-                // parsing incoming JSON #
+                // parsing incoming JSON 
                 json request = json::parse(buffer);  
 
-                // Extract transaction details #
+                // extracting transaction details 
                 std::string cardNumber = request["card_number"];
+                std::string pin = request["pin"];
+                std::string expiry_date = request["expiry_date"];
                 double withdrawalAmount = request.value("withdrawal_amount", 0.0);
                 std::string transactionID = request["transaction_id"];
 
-                // preping response #
+                // preping response 
                 json responseJson;
                 responseJson["transaction_id"] = transactionID;
 
-                // validation and process transaction #
+                // valiating and transaction processing 
                 if (accounts.find(cardNumber) != accounts.end()) {  
-                    double &balance = accounts[cardNumber];         
-                    if (withdrawalAmount <= balance) {              
-                        balance -= withdrawalAmount;                
-                        responseJson["status"] = "approved";        
-                        responseJson["remaining_balance"] = balance; 
-                    } else {                                        
-                        responseJson["status"] = "declined";        
-                        responseJson["reason"] = "Insufficient funds"; 
+                    auto &account = accounts[cardNumber];         
+                    if (account["pin"] == pin && account["expiry_date"] == expiry_date) {  
+                        if (withdrawalAmount <= account["balance"].get<double>()) {              
+                            account["balance"] = account["balance"].get<double>() - withdrawalAmount; 
+                            responseJson["status"] = "approved";        
+                            responseJson["remaining_balance"] = account["balance"]; 
+                        } else {                                        
+                            responseJson["status"] = "declined";        
+                            responseJson["reason"] = "Insufficient funds"; 
+                        }
+                    } else {                                            
+                        responseJson["status"] = "declined";            
+                        responseJson["reason"] = "Invalid PIN or expiry date";  
                     }
                 } else {                                            
                     responseJson["status"] = "declined";            
                     responseJson["reason"] = "Card not found";      
                 }
 
-                // serializing response 
+                //  serilizing response 
                 response = responseJson.dump();                     
             } catch (const std::exception &e) {                     
                 response = R"({"status": "error", "message": "Invalid request format"})"; 
             }
 
-            send(socket, response.c_str(), response.length(), 0); // sending response 
+            send(socket, response.c_str(), response.length(), 0); // sending response
         }
     }
     // if we ever leave the loop, the connection has terminated
@@ -133,7 +141,6 @@ void handleNewConnection(int socket){
 // set up server and to respond to requests by with a positive response and logging any data passed to it
 int main(void)
 {
-
     // data structs and processing variables
     int sock_fd, new_fd;  // listen on sock_fd, new connection on new_fd
     struct addrinfo hints, *servinfo, *p;
