@@ -20,10 +20,20 @@ namespace ATM_forms
 
         private void prompt_form_Load(object sender, EventArgs e)
         {
+            Program.form_load(sender,e);
+        }
+        private void prompt_label1_Click(object sender, EventArgs e)
+        {
 
         }
 
+
         private void yes_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void no_btn_Click(object sender, EventArgs e)
         {
 
         }

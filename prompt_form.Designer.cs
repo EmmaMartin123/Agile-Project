@@ -30,9 +30,9 @@
         {
             this.prompt_panel = new System.Windows.Forms.Panel();
             this.prompt_label1 = new System.Windows.Forms.Label();
-            this.prompt_label2 = new System.Windows.Forms.Label();
-            this.yes_btn = new System.Windows.Forms.Button();
             this.no_btn = new System.Windows.Forms.Button();
+            this.yes_btn = new System.Windows.Forms.Button();
+            this.prompt_label2 = new System.Windows.Forms.Label();
             this.prompt_panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,50 +43,22 @@
             this.prompt_panel.Controls.Add(this.no_btn);
             this.prompt_panel.Controls.Add(this.yes_btn);
             this.prompt_panel.Controls.Add(this.prompt_label2);
-            this.prompt_panel.Location = new System.Drawing.Point(339, 140);
-            this.prompt_panel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.prompt_panel.Location = new System.Drawing.Point(508, 215);
             this.prompt_panel.Name = "prompt_panel";
-            this.prompt_panel.Size = new System.Drawing.Size(591, 348);
+            this.prompt_panel.Size = new System.Drawing.Size(886, 535);
             this.prompt_panel.TabIndex = 0;
             // 
             // prompt_label1
             // 
             this.prompt_label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.prompt_label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
-            this.prompt_label1.Location = new System.Drawing.Point(2, 120);
-            this.prompt_label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.prompt_label1.Location = new System.Drawing.Point(3, 185);
             this.prompt_label1.Name = "prompt_label1";
-            this.prompt_label1.Size = new System.Drawing.Size(591, 81);
+            this.prompt_label1.Size = new System.Drawing.Size(886, 125);
             this.prompt_label1.TabIndex = 0;
             this.prompt_label1.Text = "Prompt....";
             this.prompt_label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // prompt_label2
-            // 
-            this.prompt_label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prompt_label2.Location = new System.Drawing.Point(0, 120);
-            this.prompt_label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.prompt_label2.Name = "prompt_label2";
-            this.prompt_label2.Size = new System.Drawing.Size(591, 70);
-            this.prompt_label2.TabIndex = 0;
-            this.prompt_label2.Text = "Prompt2...";
-            this.prompt_label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // yes_btn
-            // 
-            this.yes_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
-            this.yes_btn.FlatAppearance.BorderSize = 3;
-            this.yes_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.yes_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yes_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
-            this.yes_btn.Location = new System.Drawing.Point(298, 256);
-            this.yes_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.yes_btn.Name = "yes_btn";
-            this.yes_btn.Size = new System.Drawing.Size(280, 80);
-            this.yes_btn.TabIndex = 4;
-            this.yes_btn.Text = "YES";
-            this.yes_btn.UseVisualStyleBackColor = true;
-            this.yes_btn.Click += new System.EventHandler(this.yes_btn_Click);
+            this.prompt_label1.Click += new System.EventHandler(this.prompt_label1_Click);
             // 
             // no_btn
             // 
@@ -96,21 +68,45 @@
             this.no_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.no_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.no_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
-            this.no_btn.Location = new System.Drawing.Point(14, 256);
-            this.no_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.no_btn.Location = new System.Drawing.Point(21, 394);
             this.no_btn.Name = "no_btn";
-            this.no_btn.Size = new System.Drawing.Size(280, 80);
+            this.no_btn.Size = new System.Drawing.Size(420, 123);
             this.no_btn.TabIndex = 4;
             this.no_btn.Text = "NO";
             this.no_btn.UseVisualStyleBackColor = true;
+            this.no_btn.Click += new System.EventHandler(this.no_btn_Click);
+            // 
+            // yes_btn
+            // 
+            this.yes_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.yes_btn.FlatAppearance.BorderSize = 3;
+            this.yes_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.yes_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yes_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.yes_btn.Location = new System.Drawing.Point(447, 394);
+            this.yes_btn.Name = "yes_btn";
+            this.yes_btn.Size = new System.Drawing.Size(420, 123);
+            this.yes_btn.TabIndex = 4;
+            this.yes_btn.Text = "YES";
+            this.yes_btn.UseVisualStyleBackColor = true;
+            this.yes_btn.Click += new System.EventHandler(this.yes_btn_Click);
+            // 
+            // prompt_label2
+            // 
+            this.prompt_label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prompt_label2.Location = new System.Drawing.Point(0, 185);
+            this.prompt_label2.Name = "prompt_label2";
+            this.prompt_label2.Size = new System.Drawing.Size(886, 108);
+            this.prompt_label2.TabIndex = 0;
+            this.prompt_label2.Text = "Prompt2...";
+            this.prompt_label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // prompt_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1277, 716);
+            this.ClientSize = new System.Drawing.Size(1916, 1050);
             this.Controls.Add(this.prompt_panel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "prompt_form";
             this.Text = "prompts";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
