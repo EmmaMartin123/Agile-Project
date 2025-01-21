@@ -44,12 +44,12 @@ std::vector<struct pollfd> ATMs;
 
 std::mutex queuedSocketsMutex;
 
-// Logging function 
+// logging function 
 void logTransaction(const std::string &transactionType, const std::string &atmID, 
                     const std::string &transactionID, const std::string &cardNumber, 
                     const std::string &expiryDate, const std::string &pin, 
                     double withdrawalAmount, bool success) {
-
+                        
     std::ofstream logFile("transactions.log", std::ios_base::app); // opening in append mode
     if (logFile.is_open()) {
         std::time_t now = std::time(nullptr);
@@ -132,6 +132,35 @@ int connectToNetwork(){
     }
 }
 
+// forward request to simulator 
+void forwardToSimulator(const json &request) {
+
+    std::string requestStr = request.dump(); // serializing JSON
+
+    if (send(networkSim_fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
+        perror("Error sending request to simulator");
+    }
+}
+
+// Handle simulator response 
+void handleSimulatorResponse(int atm_fd) {
+    char responseBuffer[512];
+    int bytesReceived = recv(networkSim_fd, responseBuffer, sizeof(responseBuffer) - 1, 0);
+    if (bytesReceived > 0) {
+        responseBuffer[bytesReceived] = '\0';
+        std::string response(responseBuffer);
+
+        // forwarding the simulator's response to the ATM
+        if (send(atm_fd, response.c_str(), response.size(), 0) == -1) {
+            perror("Error sending response to ATM");
+        }
+    } else if (bytesReceived == 0) {
+        std::cerr << "Simulator connection closed unexpectedly.\n";
+    } else {
+        perror("Error receiving response from simulator");
+    }
+}
+
 void pollingFunction(){
     char buff[512];
     while (1)
@@ -148,7 +177,7 @@ void pollingFunction(){
                     int bytesReceived = recv(ATMs[i].fd, buff, 512, 0);
                     if (bytesReceived > 0)
                     {
-                        buff[bytesReceived] = '\0'; // Null-terminate the received data ###############################33333333
+                        buff[bytesReceived] = '\0'; // Null-terminate the received data 
                         std::string data(buff);
 
                         try {
@@ -164,16 +193,15 @@ void pollingFunction(){
                             std::string pin = request["pin"];
                             double withdrawalAmount = request.value("withdrawal_amount", 0.0);
 
-                            // logging transaction 
+                            // logging the transaction 
                             logTransaction(transactionType, atmID, transactionID, cardNumber, expiryDate, pin, withdrawalAmount, true);
 
-                            // Respond back to ATM
-                            json response = {
-                                {"status", "success"},
-                                {"message", "Transaction processed"}
-                            };
-                            std::string responseStr = response.dump();
-                            send(ATMs[i].fd, responseStr.c_str(), responseStr.size(), 0);
+                            // forwarding request to simulator
+                            forwardToSimulator(request);
+
+                            // handling simulator response & forward to ATM 
+                            handleSimulatorResponse(ATMs[i].fd);
+
                         } catch (const std::exception &e) {
                             std::cerr << "Error parsing transaction data: " << e.what() << std::endl;
                         }
