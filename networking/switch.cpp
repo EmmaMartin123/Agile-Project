@@ -44,6 +44,8 @@ std::vector<struct pollfd> ATMs;
 
 std::mutex queuedSocketsMutex;
 
+int networkSim_fd;
+
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
 {
@@ -123,7 +125,12 @@ void pollingFunction(){
                     if (bytesReceived > 0)
                     {
                         std::cout << "data received:" << buff << std::endl;
+
+                        send(networkSim_fd, buff, bytesReceived, 0);
                         memset(buff, 0, 512);
+
+                        recv(networkSim_fd, buff, 512, 0);
+                        std::cout << "response from network: " << buff << std::endl;
                     }
 
                     ATMs[i].revents = 0;
@@ -237,8 +244,6 @@ int bindSocketForClientsAndListen(){
 
 int main(int argc, char *argv[])
 {
-
-    int networkSim_fd;
     networkSim_fd = connectToNetwork();
 
     std::thread pollingThread(pollingFunction);

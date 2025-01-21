@@ -11,7 +11,6 @@ adapted from https://beej.us/guide/bgnet/html/split-wide/client-server-backgroun
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
-#include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -19,6 +18,7 @@ adapted from https://beej.us/guide/bgnet/html/split-wide/client-server-backgroun
 #include <arpa/inet.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <string>
 
 #include <fstream>
 #include <nlohmann/json.hpp>
@@ -52,7 +52,6 @@ void *get_in_addr(struct sockaddr *sa)
 void handleNewConnection(int socket){
     char buffer[100];
     int rv;
-    if (send(socket, "Hello, client!", 13, 0) == -1) perror("send");
     while (true)
     {
         memset(buffer, 0, 100);
@@ -69,6 +68,9 @@ void handleNewConnection(int socket){
         } else{
             // handleData
             std::cout << buffer << std::endl;
+            
+            std::string response = "received: " + std::string(buffer);
+            send(socket, response.c_str(), response.length(), 0);
         }
     }
     close(socket);
