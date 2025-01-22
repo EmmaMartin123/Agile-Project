@@ -1,7 +1,7 @@
 import socket
 import json
 
-SWITCH_IP = "127.0.0.1"  
+SWITCH_IP = "ec2-52-90-113-181.compute-1.amazonaws.com"
 SWITCH_PORT = 8885
 
 # example transaction request
