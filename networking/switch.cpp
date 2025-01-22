@@ -38,12 +38,38 @@ using json = nlohmann::json;
 #define BACKLOG 10   // how many pending connections queue will hold
 //#define SIMULATOR_HOSTNAME ""
 
+int networkSim_fd; // file descriptor for the connection to the network simulator
+
 std::vector<int> queuedSockets;
 std::vector<struct pollfd> ATMs;
 
 std::mutex queuedSocketsMutex;
 
-int networkSim_fd;
+// logging function 
+void logTransaction(const std::string &transactionType, const std::string &atmID, 
+                    const std::string &transactionID, const std::string &cardNumber, 
+                    const std::string &expiryDate, const std::string &pin, 
+                    double withdrawalAmount, bool success) {
+                        
+    std::ofstream logFile("transactions.log", std::ios_base::app); // opening in append mode
+    if (logFile.is_open()) {
+        std::time_t now = std::time(nullptr);
+        std::tm *localTime = std::localtime(&now);
+
+        logFile << "[" << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << "] ";
+        logFile << "ATM ID: " << atmID << ", ";
+        logFile << "Transaction ID: " << transactionID << ", ";
+        logFile << "Card: " << cardNumber << ", ";
+        logFile << "Expiry: " << expiryDate << ", ";
+        logFile << "PIN: " << pin << ", ";
+        logFile << "Type: " << transactionType << ", ";
+        if (transactionType == "withdraw") {
+            logFile << "Amount: $" << withdrawalAmount << ", ";
+        }
+
+        logFile << "Status: " << (success ? "Success" : "Failed") << "\n";
+    }
+}
 
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
@@ -74,7 +100,7 @@ int connectToNetwork(){
         #endif
 
         // set up data for connection
-        if ((rv = getaddrinfo("127.0.0.1", SIMULATOR_PORT, &hints, &servinfo)) != 0) {
+        if ((rv = getaddrinfo(hostname.c_str(), SIMULATOR_PORT, &hints, &servinfo)) != 0) {
             fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
             std::cout << "failed to resolve data" << std::endl;
             exit(1);
@@ -112,6 +138,35 @@ int connectToNetwork(){
     }
 }
 
+// forward request to simulator 
+void forwardToSimulator(const json &request) {
+
+    std::string requestStr = request.dump(); // serializing JSON
+
+    if (send(networkSim_fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
+        perror("Error sending request to simulator");
+    }
+}
+
+// Handle simulator response 
+void handleSimulatorResponse(int atm_fd) {
+    char responseBuffer[512];
+    int bytesReceived = recv(networkSim_fd, responseBuffer, sizeof(responseBuffer) - 1, 0);
+    if (bytesReceived > 0) {
+        responseBuffer[bytesReceived] = '\0';
+        std::string response(responseBuffer);
+
+        // forwarding the simulator's response to the ATM
+        if (send(atm_fd, response.c_str(), response.size(), 0) == -1) {
+            perror("Error sending response to ATM");
+        }
+    } else if (bytesReceived == 0) {
+        std::cerr << "Simulator connection closed unexpectedly.\n";
+    } else {
+        perror("Error receiving response from simulator");
+    }
+}
+
 // for all the sockets we are working with, check if they have received inputs
 void pollingFunction(){
     char buff[512];
@@ -132,13 +187,36 @@ void pollingFunction(){
                     int bytesReceived = recv(ATMs[i].fd, buff, 512, 0);
                     if (bytesReceived > 0)
                     {
-                        std::cout << "data received:" << buff;
+                        buff[bytesReceived] = '\0'; // Null-terminate the received data 
+                        std::string data(buff);
 
-                        send(networkSim_fd, buff, bytesReceived, 0);
+                        try {
+                            // parsing JSON data 
+                            json request = json::parse(data);
+
+                            // extracting relevant fields 
+                            std::string transactionType = request["request_type"];
+                            std::string atmID = request["atm_id"];
+                            std::string transactionID = request["transaction_id"];
+                            std::string cardNumber = request["card_number"];
+                            std::string expiryDate = request["expiry_date"];
+                            std::string pin = request["pin"];
+                            double withdrawalAmount = request.value("withdrawal_amount", 0.0);
+
+                            // logging the transaction 
+                            logTransaction(transactionType, atmID, transactionID, cardNumber, expiryDate, pin, withdrawalAmount, true);
+
+                            // forwarding request to simulator
+                            forwardToSimulator(request);
+
+                            // handling simulator response & forward to ATM 
+                            handleSimulatorResponse(ATMs[i].fd);
+
+                        } catch (const std::exception &e) {
+                            std::cerr << "Error parsing transaction data: " << e.what() << std::endl;
+                        }
+
                         memset(buff, 0, 512);
-
-                        recv(networkSim_fd, buff, 512, 0);
-                        std::cout << "response from network: " << buff;
                     }
 
                     ATMs[i].revents = 0;
@@ -162,7 +240,6 @@ void pollingFunction(){
 
         queuedSocketsMutex.unlock();
     }
-
 }
 
 int bindSocketForClientsAndListen(){
@@ -249,7 +326,6 @@ int bindSocketForClientsAndListen(){
 
     return 0;
 }
-
 
 int main(int argc, char *argv[])
 {
