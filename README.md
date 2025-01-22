@@ -41,4 +41,4 @@ What is constructive feedback?
 Take your time.
 
 From Google's coding standards:
-A key point here is that there is no such thing as “perfect” code—there is only better code. Reviewers should not require the author to polish every tiny piece of a CL before granting approval. Rather, the reviewer should balance out the need to make forward progress compared to the importance of the changes they are suggesting.
+A key point here is that there is no such thing as “perfect” code—there is only better code. Reviewers should not require the author to polish every tiny piece before granting approval. Rather, the reviewer should balance out the need to make forward progress compared to the importance of the changes they are suggesting.
