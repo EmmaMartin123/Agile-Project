@@ -183,8 +183,18 @@ void handleSimulatorResponse(int atm_fd) {
         }
     } else if (bytesReceived == 0) {
         std::cerr << "Simulator connection closed unexpectedly.\n";
+        json request;
+        request["transaction_outcome"] = 10;
+        request["reason"] = "connection terminated";
+        std::string response = request.dump();
+        send(atm_fd, response.c_str(), response.length(), 0);
     } else {
         perror("Error receiving response from simulator");
+        json request;
+        request["transaction_outcome"] = 10;    
+        request["reason"] = "error with response";
+        std::string response = request.dump();
+        send(atm_fd, response.c_str(), response.length(), 0);
     }
 }
 
@@ -222,10 +232,22 @@ void pollingFunction(){
                             logTransaction(transactionType, request);
 
                             // forwarding request to simulator
-                            forwardToSimulator(request);
+                            int responseReachedNetwork = forwardToSimulator(request);
 
-                            // handling simulator response & forward to ATM 
-                            handleSimulatorResponse(ATMs[i].fd);
+                            
+
+                            if (responseReachedNetwork == 0)
+                            { // response made it
+                                // proceed as normal
+                                // handling simulator response & forward to ATM 
+                                handleSimulatorResponse(ATMs[i].fd);
+                            }else
+                            { // connection to network broken, send ATM error response
+                                request["transaction_outcome"] = 10;
+                                request["reason"] = "connection terminated";
+                                std::string response = request.dump();
+                                send(ATMs[i].fd, response.c_str(), response.length(), 0);
+                            }
 
                         } catch (const std::exception &e) {
                             std::cerr << "Error parsing transaction data: " << e.what() << std::endl;
