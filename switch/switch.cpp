@@ -46,29 +46,46 @@ std::vector<struct pollfd> ATMs;
 std::mutex queuedSocketsMutex;
 
 // logging function 
-void logTransaction(const std::string &transactionType, const std::string &atmID, 
-                    const std::string &transactionID, const std::string &cardNumber, 
-                    const std::string &expiryDate, const std::string &pin, 
-                    double withdrawalAmount, bool success) {
-                        
+void logTransaction(int transactionType, const json &request) {
     std::ofstream logFile("transactions.log", std::ios_base::app); // opening in append mode
-    if (logFile.is_open()) {
-        std::time_t now = std::time(nullptr);
-        std::tm *localTime = std::localtime(&now);
 
-        logFile << "[" << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << "] ";
-        logFile << "ATM ID: " << atmID << ", ";
-        logFile << "Transaction ID: " << transactionID << ", ";
-        logFile << "Card: " << cardNumber << ", ";
-        logFile << "Expiry: " << expiryDate << ", ";
-        logFile << "PIN: " << pin << ", ";
-        logFile << "Type: " << transactionType << ", ";
-        if (transactionType == "withdraw") {
-            logFile << "Amount: $" << withdrawalAmount << ", ";
-        }
-
-        logFile << "Status: " << (success ? "Success" : "Failed") << "\n";
+    if (!logFile.is_open()){
+        return;
     }
+
+    std::time_t now = std::time(nullptr);
+    std::tm *localTime = std::localtime(&now);
+
+    logFile << "[" << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << "] ";
+
+    // always expecting atm_id and pan_number
+    std::string atmID = request["atm_id"];
+    std::string panNumber = request["pan_number"];
+
+    logFile << " card " << panNumber << " is at ATM: " << atmID << "making request: ";
+
+    switch (transactionType)
+    {
+    case 0: // Validate Pin
+        // expecting pin
+        logFile << "Validate Pin with PIN: " << request["pin"];
+        break;
+    case 1: // Display Balance
+        // expecting nothing from ATM
+        logFile << "Display Balance ";
+        break;
+    case 2: // Withdraw
+        // expecting transaction_value (amount to be withdrawn)
+        logFile << "Withdraw Cash of amount: " << request["transaction_value"];
+        /* code */
+        break;
+    
+    default:
+        logFile << "Invalid request: " << request.dump();
+        break;
+    }
+
+    logFile << "\n";
 }
 
 // get sockaddr, IPv4 or IPv6:
@@ -139,13 +156,17 @@ int connectToNetwork(){
 }
 
 // forward request to simulator 
-void forwardToSimulator(const json &request) {
+// adding return value to allow telling the ATMs cabout network issues
+int forwardToSimulator(const json &request) {
 
     std::string requestStr = request.dump(); // serializing JSON
 
     if (send(networkSim_fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
         perror("Error sending request to simulator");
+        return -1;
     }
+
+    return 0;
 }
 
 // Handle simulator response 
@@ -195,16 +216,10 @@ void pollingFunction(){
                             json request = json::parse(data);
 
                             // extracting relevant fields 
-                            std::string transactionType = request["request_type"];
-                            std::string atmID = request["atm_id"];
-                            std::string transactionID = request["transaction_id"];
-                            std::string cardNumber = request["card_number"];
-                            std::string expiryDate = request["expiry_date"];
-                            std::string pin = request["pin"];
-                            double withdrawalAmount = request.value("withdrawal_amount", 0.0);
+                            int transactionType = request.value("request_type", -1);
 
                             // logging the transaction 
-                            logTransaction(transactionType, atmID, transactionID, cardNumber, expiryDate, pin, withdrawalAmount, true);
+                            logTransaction(transactionType, request);
 
                             // forwarding request to simulator
                             forwardToSimulator(request);
