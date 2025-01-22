@@ -56,6 +56,9 @@ void loadAccountsFromFile()
         std::getline(stream, expiryDate, ',');
         stream >> balance;
 
+        pin.erase(std::remove(pin.begin(), pin.end(), '"'), pin.end());  // remove quotes
+        expiryDate.erase(std::remove(expiryDate.begin(), expiryDate.end(), '"'), expiryDate.end());
+
         accounts[cardNumber] = {{"pin", pin}, {"expiry_date", expiryDate}, {"balance", balance}};
     }
     file.close();
@@ -118,6 +121,8 @@ void logResponse(const std::string &response)
 ////////            Client Handling         ///////////
 ///////////////////////////////////////////////////////
 
+
+
 // wait to receive data on the connection and then send a response,
 // always send a response at the end, even
 void handleNewConnection(int socket)
@@ -171,14 +176,25 @@ void handleNewConnection(int socket)
                     auto &account = accounts[cardNumber];
                     if (account["pin"] == pin)
                     {
-                        // https://stackoverflow.com/questions/3673226/how-to-print-time-in-format-2009-08-10-181754-811
                         // todays date
-                        char buff[5];
+                        char buff[6]; // Adjust buffer size to avoid overflow 
                         time_t now = time(0);
-                        strftime(buff, 100, "%m/%y", localtime(&now));
+                        strftime(buff, sizeof(buff), "%m/%y", localtime(&now)); // using sizeof(buff)
                         std::string dateToday(buff);
-                        // compare expiry date to today's date
-                        if (stoi(account["expiry_date"].substr(3, 4)) >= stoi(dateToday.substr(3, 4)) && stoi(account["expiry_date"].substr(0, 1)) >= stoi(dateToday.substr(0, 1)))
+
+                        // Extract expiry date from JSON properly 
+                        std::string expiryDate = account["expiry_date"].get<std::string>();
+                    try
+                    {
+
+                    
+                        // Compare expiry date to today's date
+                        int expiryYear = std::stoi(expiryDate.substr(3, 2)) + 2000; // parsing year correctly 
+                        int expiryMonth = std::stoi(expiryDate.substr(0, 2));      // parsing month correctly 
+                        int currentYear = std::stoi(dateToday.substr(3, 2)) + 2000;
+                        int currentMonth = std::stoi(dateToday.substr(0, 2));
+
+                        if (expiryYear > currentYear || (expiryYear == currentYear && expiryMonth >= currentMonth)) // correcting comparison logic 
                         {
                             if (withdrawalAmount <= account["balance"].get<double>())
                             {
@@ -196,30 +212,52 @@ void handleNewConnection(int socket)
                         else
                         {
                             responseJson["status"] = "declined";
-                            responseJson["reason"] = "Invalid PIN or expiry date";
+                            responseJson["reason"] = "Card expired";
                         }
+                    }
+                    catch (const std::exception &e)
+                    {
+                        responseJson["status"] = "error [simulator side]";
+                        responseJson["reason"] = "Invalid expiry date format";
+                        std::cerr << "Error parsing expiry date: " << e.what() << "\n";
+
+                    }
+
                     }
                     else
                     {
                         responseJson["status"] = "declined";
-                        responseJson["reason"] = "Card not found";
+                        responseJson["reason"] = "Invalid PIN"; 
                     }
-
-                    //  serializing response
-                    response = responseJson.dump();
                 }
-                catch (const std::exception &e)
+                else
                 {
-                    response = R"({"status": "error", "message": "Invalid request format"})";
+                    responseJson["status"] = "declined";
+                    responseJson["reason"] = "Card not found";
                 }
 
-                send(socket, response.c_str(), response.length(), 0); // sending response
-                logResponse(response);                                // Logging response
+                // serializing response
+                response = responseJson.dump();
             }
+            catch (const std::exception &e) 
+            {
+                response = R"({"status": "error", "message": "Invalid request format"})";
+            }
+
+            send(socket, response.c_str(), response.length(), 0); // sending response
+            logResponse(response);                                // Logging response
         }
-        // if we ever leave the loop, the connection has terminated
-        close(socket);
     }
+    // if we ever leave the loop, the connection has terminated
+    close(socket);
+}
+
+
+
+
+
+
+
 
     // set up server and to respond to requests by with a positive response and logging any data passed to it
     int main(void)
