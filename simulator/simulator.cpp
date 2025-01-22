@@ -147,8 +147,6 @@ void handleNewConnection(int socket) {
         else
         {
             // handleData
-            std::cout << buffer << std::endl;
-
             try
             {
                 // parsing incoming JSON
