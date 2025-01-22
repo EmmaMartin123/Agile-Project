@@ -52,7 +52,7 @@ namespace ATM_forms
             // 
             this.insert_card_label.AutoSize = true;
             this.insert_card_label.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.insert_card_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.insert_card_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.insert_card_label.Location = new System.Drawing.Point(814, 234);
             this.insert_card_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.insert_card_label.Name = "insert_card_label";

@@ -39,7 +39,7 @@ namespace ATM_forms
             // 
             // balance_panel
             // 
-            this.balance_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
+            this.balance_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.balance_panel.Controls.Add(this.balance_label);
             this.balance_panel.Controls.Add(this.balance_heading_label);
             this.balance_panel.Controls.Add(this.done_btn);
@@ -52,7 +52,7 @@ namespace ATM_forms
             // balance_label
             // 
             this.balance_label.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.balance_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.balance_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.balance_label.Location = new System.Drawing.Point(-3, 192);
             this.balance_label.Name = "balance_label";
             this.balance_label.Size = new System.Drawing.Size(886, 108);
@@ -63,7 +63,7 @@ namespace ATM_forms
             // balance_heading_label
             // 
             this.balance_heading_label.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.balance_heading_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.balance_heading_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.balance_heading_label.Location = new System.Drawing.Point(0, 0);
             this.balance_heading_label.Name = "balance_heading_label";
             this.balance_heading_label.Size = new System.Drawing.Size(886, 108);
@@ -73,11 +73,12 @@ namespace ATM_forms
             // 
             // done_btn
             // 
-            this.done_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.done_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
+            this.done_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
             this.done_btn.FlatAppearance.BorderSize = 3;
             this.done_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.done_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.done_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.done_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.done_btn.Location = new System.Drawing.Point(230, 395);
             this.done_btn.Name = "done_btn";
             this.done_btn.Size = new System.Drawing.Size(420, 123);
@@ -112,13 +113,13 @@ namespace ATM_forms
         void Btn_MouseEnter(object sender, EventArgs e)
         {
             // Change the button color when the mouse enters
-            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
         }
 
         void Btn_MouseLeave(object sender, EventArgs e)
         {
             // Change the button color back to its original color when the mouse leaves
-            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
         }
     }
 }

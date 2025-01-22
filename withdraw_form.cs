@@ -75,6 +75,13 @@ namespace ATM_forms
             amount_txtbox.Text = "£";
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            select_transaction_form cardForm = new select_transaction_form(); // instance of select_transaction_form
+            cardForm.Show();
+            this.Close();  // terminates this form
+        }
+
         private void amount_txtbox_TextChanged(object sender, EventArgs e)
         {
 

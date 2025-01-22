@@ -40,7 +40,7 @@ namespace ATM_forms
             // 
             // prompt_panel
             // 
-            this.prompt_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
+            this.prompt_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.prompt_panel.Controls.Add(this.prompt_label1);
             this.prompt_panel.Controls.Add(this.no_btn);
             this.prompt_panel.Controls.Add(this.yes_btn);
@@ -53,7 +53,7 @@ namespace ATM_forms
             // prompt_label1
             // 
             this.prompt_label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prompt_label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.prompt_label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.prompt_label1.Location = new System.Drawing.Point(3, 185);
             this.prompt_label1.Name = "prompt_label1";
             this.prompt_label1.Size = new System.Drawing.Size(886, 125);
@@ -64,35 +64,37 @@ namespace ATM_forms
             // 
             // no_btn
             // 
-            this.no_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.no_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.no_btn.FlatAppearance.BorderSize = 3;
             this.no_btn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
             this.no_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.no_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.no_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.no_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.no_btn.Location = new System.Drawing.Point(21, 394);
             this.no_btn.Name = "no_btn";
             this.no_btn.Size = new System.Drawing.Size(420, 123);
             this.no_btn.TabIndex = 4;
             this.no_btn.Text = "NO";
             this.no_btn.UseVisualStyleBackColor = true;
+            this.no_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
             this.no_btn.Click += new System.EventHandler(this.no_btn_Click);
             this.no_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
             this.no_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
             // 
             // yes_btn
             // 
-            this.yes_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.yes_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.yes_btn.FlatAppearance.BorderSize = 3;
             this.yes_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.yes_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yes_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.yes_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.yes_btn.Location = new System.Drawing.Point(447, 394);
             this.yes_btn.Name = "yes_btn";
             this.yes_btn.Size = new System.Drawing.Size(420, 123);
             this.yes_btn.TabIndex = 4;
             this.yes_btn.Text = "YES";
             this.yes_btn.UseVisualStyleBackColor = true;
+            this.yes_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
             this.yes_btn.Click += new System.EventHandler(this.yes_btn_Click);
             this.yes_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
             this.yes_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
@@ -133,13 +135,13 @@ namespace ATM_forms
         void Btn_MouseEnter(object sender, EventArgs e)
         {
             // Change the button color when the mouse enters
-            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
         }
 
         void Btn_MouseLeave(object sender, EventArgs e)
         {
             // Change the button color back to its original color when the mouse leaves
-            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
         }
     }
 }

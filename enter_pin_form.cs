@@ -34,6 +34,11 @@ namespace ATM_forms
 
         }
 
+        private void pintxtbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
         private void pin_txt_box_TextChanged(object sender, EventArgs e)
         {
 
@@ -49,14 +54,14 @@ namespace ATM_forms
 
         }
 
-        private void pin_txt_box_KeyPress(object sender, KeyPressEventArgs e)
+        /*private void pin_txt_box_KeyPress(object sender, KeyPressEventArgs e)
         {
             // allows only numeric characters
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
-        }
+        }*/
 
         private void delete_btn_Click(object sender, EventArgs e)
         {
@@ -67,6 +72,14 @@ namespace ATM_forms
                 pin_txt_box.Text = pin_txt_box.Text.Substring(0, pin_txt_box.Text.Length - 1);
             }
 
+        }
+
+        private void numberBtn_Click(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                pin_txt_box.Text += button.Text; // appends the text to the textBox
+            }
         }
 
         private void exit_btn_Click(object sender, EventArgs e)
