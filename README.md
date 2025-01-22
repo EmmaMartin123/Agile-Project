@@ -10,10 +10,10 @@ Naming Rules:
 Stlying Info for ATM:
 
 ---- Colours ----
-
-- Primary RGB: 235, 120, 219
-- Secondary RGB: 237, 202, 232
-- Tertiary RGB: 255, 255, 255
+- Background RGB: 203, 216, 235
+- Text RGB: 2, 7, 93
+- Button background RGB: 163, 179, 201
+- Hover RGB: 203, 216, 235
 
 ---- Fonts ----
 
