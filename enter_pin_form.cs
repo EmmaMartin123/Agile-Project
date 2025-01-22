@@ -100,12 +100,11 @@ namespace ATM_forms
                         NetworkClient.CloseConnection();
 
                         dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                        string reason = parsedResponse.reason;
-                        int transaction_outcome = Int32.Parse(parsedResponse.status);
+                        int transaction_outcome = Int32.Parse(parsedResponse.transaction_outcome);
 
                         // assume the response is true for now and set it manually
 
-                        transaction_outcome = 0; // for testing only
+                        transaction_outcome = 0; // for testing only as we can't currently get a response
 
                         if (transaction_outcome == 0)
                         {
@@ -117,6 +116,7 @@ namespace ATM_forms
                         else
                         {
                             // if the PIN does not match
+                            string reason = parsedResponse.reason;
                             MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             pin_txt_box.Clear();
                         }
