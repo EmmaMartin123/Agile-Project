@@ -34,16 +34,23 @@ namespace ATM_forms
 
         private void check_balance_btn_Click(object sender, EventArgs e)
         {
+            TransactionData.transactionType = 1;
             balance_form cardForm = new balance_form(); // instance of balance_for
             cardForm.Show();
             this.Close();  // terminates this form
         }
 
         private void cash_withdrawal_btn_Click(object sender, EventArgs e)
-        {
+        { 
+            TransactionData.transactionType = 2;
             withdraw_form cardForm = new withdraw_form(); // instance of withdraw_form
             cardForm.Show();
             this.Close();  // terminates this form
+        }
+
+        private void select_transaction_label_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

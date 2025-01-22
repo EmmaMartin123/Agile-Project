@@ -93,19 +93,9 @@ namespace ATM_forms
         [STAThread]
         static void Main()
         {
-            try
-            {
-                // network stuff here
-                NetworkClient.ConnectToSwitch("ec2-52-90-113-181.compute-1.amazonaws.com", 8885); // replace the IP???
-                NetworkClient.SendRequest("{\"request_type\":\"withdraw\", \"atm_id\":\"5678\", \"transaction_id\":\"1234\", \"card_number\":\"2345678901234567\", \"expiry_date\":\"12/25\", \"pin\":\"1234\", \"withdrawal_amount\":100.0}");
-                string response = NetworkClient.ReceiveResponse();
-                Console.WriteLine($"Response: {response}");
-                NetworkClient.CloseConnection();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"error in network operations: {ex.Message}");
-            }
+            // generate random number for the atm id
+            Random rnd = new Random();
+            TransactionData.ATMID = rnd.Next(1, 10000);
 
             //run the application
             Application.EnableVisualStyles();
@@ -140,10 +130,10 @@ namespace ATM_forms
     {
         // transaction variables (dummy data for now)
         public static decimal CurrentBalance = 500;
-        public static int TransactionID = 1234;
-        public static int ATMID = 5678;
-        public static string PAN = "2345678901234567";
-        public static int PIN = 1234;
+        public static int transactionType = -1;
+        public static int ATMID = 0;
+        public static string PAN = "2234567890123456";
+        public static int PIN = 1010;
     }
 
 }
