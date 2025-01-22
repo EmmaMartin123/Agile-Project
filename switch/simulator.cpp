@@ -22,9 +22,10 @@ handleNewConnection is where all logic relevant to handling incoming data should
 #include <sys/wait.h>
 #include <signal.h>
 #include <string>
-#include <unordered_map>  // ########### Added for account database
+#include <unordered_map>  //account database
 
 #include <fstream>
+#include <sstream>  
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
@@ -32,12 +33,46 @@ using json = nlohmann::json;
 
 #define BACKLOG 10   // how many pending connections queue will hold
 
-//  in memory account database (card number account details)
-std::unordered_map<std::string, json> accounts = {  
-    {"2234567890123456", {{"pin", "1010"}, {"expiry_date", "05/26"}, {"balance", 785.3}}},
-    {"3698521478965412", {{"pin", "5842"}, {"expiry_date", "04/25"}, {"balance", 110.72}}}, 
-    {"4521478523695201", {{"pin", "2351"}, {"expiry_date", "08/26"}, {"balance", 280.5}}}   
-}; 
+std::unordered_map<std::string, json> accounts;  // updating fro dynamic loading
+
+// load accounts from file 
+void loadAccountsFromFile() { 
+    std::ifstream file("dummy_accounts.txt"); 
+    if (!file.is_open()) { 
+        std::cerr << "Failed to open accounts file.\n"; 
+        return; 
+    } 
+
+    std::string line; 
+    while (std::getline(file, line)) { 
+        std::istringstream stream(line); 
+        std::string cardNumber, pin, expiryDate; 
+        double balance; 
+
+        std::getline(stream, cardNumber, ','); 
+        std::getline(stream, pin, ','); 
+        std::getline(stream, expiryDate, ','); 
+        stream >> balance; 
+
+        accounts[cardNumber] = {{"pin", pin}, {"expiry_date", expiryDate}, {"balance", balance}}; 
+    } 
+    file.close(); 
+} 
+
+// save accounts back to file
+void saveAccountsToFile() { 
+    std::ofstream file("dummy_accounts.txt", std::ios::trunc); 
+    if (!file.is_open()) { 
+        std::cerr << "Failed to save accounts file.\n"; 
+        return; 
+    } 
+
+    for (const auto& [cardNumber, accountDetails] : accounts) { 
+        file << cardNumber << "," << accountDetails["pin"] << "," 
+             << accountDetails["expiry_date"] << "," << accountDetails["balance"].get<double>() << "\n"; 
+    } 
+    file.close(); 
+}
 
 void sigchld_handler(int s)
 {
@@ -123,6 +158,7 @@ void handleNewConnection(int socket){
                             account["balance"] = account["balance"].get<double>() - withdrawalAmount; 
                             responseJson["status"] = "approved";        
                             responseJson["remaining_balance"] = account["balance"]; 
+                            saveAccountsToFile(); //save updated account data
                         } else {                                        
                             responseJson["status"] = "declined";        
                             responseJson["reason"] = "Insufficient funds"; 
@@ -143,7 +179,7 @@ void handleNewConnection(int socket){
             }
 
             send(socket, response.c_str(), response.length(), 0); // sending response
-            logResponse(response); // Logging the response ###########
+            logResponse(response); // Logging response 
         }
     }
     // if we ever leave the loop, the connection has terminated
@@ -153,6 +189,8 @@ void handleNewConnection(int socket){
 // set up server and to respond to requests by with a positive response and logging any data passed to it
 int main(void)
 {
+    loadAccountsFromFile(); //load accounts at startup
+
     // data structs and processing variables
     int sock_fd, new_fd;  // listen on sock_fd, new connection on new_fd
     struct addrinfo hints, *servinfo, *p;
