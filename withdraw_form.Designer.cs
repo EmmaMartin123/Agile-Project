@@ -71,7 +71,6 @@ namespace ATM_forms
             this.withdraw_panel.Name = "withdraw_panel";
             this.withdraw_panel.Size = new System.Drawing.Size(886, 536);
             this.withdraw_panel.TabIndex = 0;
-            //this.withdraw_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.withdraw_panel_Paint);
             // 
             // amount_label
             // 
@@ -344,7 +343,7 @@ namespace ATM_forms
             this.btnExit.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.btnExit.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
-            // withdraw_form
+            // WithdrawForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -353,7 +352,7 @@ namespace ATM_forms
             this.Name = "WithdrawForm";
             this.Text = "Withdraw";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            //this.Load += new System.EventHandler(this.withdraw_form_Load);
+            this.Load += new System.EventHandler(this.WithdrawForm_Load);
             this.withdraw_panel.ResumeLayout(false);
             this.withdraw_panel.PerformLayout();
             this.ResumeLayout(false);

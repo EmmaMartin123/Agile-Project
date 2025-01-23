@@ -108,7 +108,7 @@ namespace ATM_forms
                         if (transaction_outcome == 0)
                         {
                             // if the PIN matches then proceed
-                            select_transaction_form cardForm = new select_transaction_form(); // instance of select_transaction_form
+                            SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
                             cardForm.Show();
                             this.Close();
                         }
@@ -137,6 +137,11 @@ namespace ATM_forms
                 // if the PIN is not exactly 4 digits
                 MessageBox.Show("Please enter a 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void EnterPinForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

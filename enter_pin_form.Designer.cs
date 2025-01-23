@@ -72,7 +72,6 @@ namespace ATM_forms
             this.enter_pin_panel.Name = "enter_pin_panel";
             this.enter_pin_panel.Size = new System.Drawing.Size(886, 535);
             this.enter_pin_panel.TabIndex = 0;
-            //this.enter_pin_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.enter_pin_panel_Paint);
             // 
             // continue_btn
             // 
@@ -342,7 +341,7 @@ namespace ATM_forms
             this.btn9.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.btn9.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
-            // enter_pin_form
+            // EnterPinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -352,7 +351,7 @@ namespace ATM_forms
             this.Name = "EnterPinForm";
             this.Text = "Enter Pin";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            //this.Load += new System.EventHandler(this.EnterPinFormLoad);
+            this.Load += new System.EventHandler(this.EnterPinForm_Load);
             this.enter_pin_panel.ResumeLayout(false);
             this.enter_pin_panel.PerformLayout();
             this.ResumeLayout(false);

@@ -25,7 +25,7 @@ namespace ATM_forms
         private void CheckBalancebtnClick(object sender, EventArgs e)
         {
 
-            Program.show_insert_card_form(this);
+            Program.ShowInsertCardForm(this);
         }
 
         private void select_transaction_panel_Paint(object sender, PaintEventArgs e)
@@ -36,7 +36,7 @@ namespace ATM_forms
         private void check_balance_btn_Click(object sender, EventArgs e)
         {
             TransactionData.transactionType = 1;
-            balance_form cardForm = new balance_form(); // instance of balance_form
+            BalanceForm cardForm = new BalanceForm(); // instance of balance_form
             cardForm.Show();
             this.Close();  // terminates this form
         }
@@ -44,12 +44,22 @@ namespace ATM_forms
         private void cash_withdrawal_btn_Click(object sender, EventArgs e)
         { 
             TransactionData.transactionType = 2;
-            withdraw_form cardForm = new withdraw_form(); // instance of withdraw_form
+            WithdrawForm cardForm = new WithdrawForm(); // instance of withdraw_form
             cardForm.Show();
             this.Close();  // terminates this form
         }
 
         private void select_transaction_label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SelectTransactionForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SelectTransactionForm_Load_1(object sender, EventArgs e)
         {
 
         }
