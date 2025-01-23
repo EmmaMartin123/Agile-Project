@@ -221,9 +221,11 @@ void pollingFunction(){
                         buff[bytesReceived] = '\0'; // Null-terminate the received data 
                         std::string data(buff);
 
+                        json request;
+
                         try {
                             // parsing JSON data 
-                            json request = json::parse(data);
+                            request = json::parse(data);
 
                             // extracting relevant fields 
                             int transactionType = request.value("request_type", -1);
@@ -249,6 +251,7 @@ void pollingFunction(){
 
                         } catch (const std::exception &e) {
                             std::cerr << "Error parsing transaction data: " << e.what() << std::endl;
+                            std::cerr << "request is: " << request.dump() << "\n";
                         }
 
                         memset(buff, 0, 512);
