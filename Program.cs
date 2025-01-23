@@ -130,6 +130,7 @@ namespace ATM_forms
     public static class TransactionData
     {
         // transaction variables (dummy data for now)
+        public static string connectionAddress = "ec2-44-202-45-231.compute-1.amazonaws.com";
         public static decimal CurrentBalance = 500;
         public static int transactionType = -1;
         public static int ATMID = 0;

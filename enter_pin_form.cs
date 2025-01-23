@@ -88,23 +88,25 @@ namespace ATM_forms
             {
                 if (int.TryParse(pin_txt_box.Text, out int enteredPin))
                 {
+                    TransactionData.PIN = enteredPin;
                     TransactionData.transactionType = 0;
                     // send the pin to the switch to deal with
                     try
                     {
-                        // network stuff here
-                        NetworkClient.ConnectToSwitch("ec2-44-211-248-152.compute-1.amazonaws.com", 8885);
-                        NetworkClient.SendRequest("{\"request_type\": \"0\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
+
+                        // connect and send response in json format
+                        NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                        NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
                         string response = NetworkClient.ReceiveResponse();
                         Console.WriteLine($"Response: {response}");
                         NetworkClient.CloseConnection();
 
                         dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                        int transaction_outcome = Int32.Parse(parsedResponse.transaction_outcome);
+                        int transaction_outcome = parsedResponse.transaction_outcome;
 
                         // assume the response is true for now and set it manually
 
-                        transaction_outcome = 0; // for testing only as we can't currently get a response
+                        //transaction_outcome en= 0; // for testing only as we can't currently get a response
 
                         if (transaction_outcome == 0)
                         {

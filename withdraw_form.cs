@@ -47,20 +47,19 @@ namespace ATM_forms
             // checks the amount entered is valid - must be a multiple of 5 and a valid number
             if (decimal.TryParse(amountText, out amount) && amount > 0 && amount % 5 == 0)
             {
+                // send amount to switch to deal with
                 try
                 {
-                    // network stuff here
-                    NetworkClient.ConnectToSwitch("ec2-44-211-248-152.compute-1.amazonaws.com", 8885);
-                    NetworkClient.SendRequest("{\"request_type\": \"2\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\", \"transaction_value\": \"" + amount + "\"}");
+                    // connect and send response in json format
+                    NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                    Console.WriteLine(amount);
+                    NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\", \"transaction_value\": \""+amount+"\"}");
                     string response = NetworkClient.ReceiveResponse();
                     Console.WriteLine($"Response: {response}");
                     NetworkClient.CloseConnection();
 
                     dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                    int transaction_outcome = Int32.Parse(parsedResponse.transaction_outcome);
-
-                    // assume the response is true for now and set it manually
-                    transaction_outcome = 0; // for testing only as we can't currently get a response
+                    int transaction_outcome = parsedResponse.transaction_outcome;
 
                     // checks if the balance is there to withdraw
                     if (transaction_outcome == 0)
