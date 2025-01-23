@@ -82,7 +82,7 @@ void saveAccountsToFile()
     file.close();
 }
 
-void sigchld_handler(int s)
+void sigchldHandler(int s)
 {
     // waitpid() might overwrite errno, so we save and restore it:
     int saved_errno = errno;
@@ -93,7 +93,7 @@ void sigchld_handler(int s)
 }
 
 // get sockaddr, IPv4 or IPv6:
-void *get_in_addr(struct sockaddr *sa)
+void *getInAddr(struct sockaddr *sa)
 {
     if (sa->sa_family == AF_INET) {
         return &(((struct sockaddr_in *)sa)->sin_addr);
