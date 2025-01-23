@@ -2,7 +2,7 @@
 
 ## Naming Rules
 
- - functionNames
+ - functionNames (FunctionNames in C#)
  - ClassNames
  - file_names
 
