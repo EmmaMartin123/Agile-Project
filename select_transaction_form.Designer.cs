@@ -2,7 +2,7 @@
 
 namespace ATM_forms
 {
-    partial class select_transaction_form
+    partial class SelectTransactionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@ namespace ATM_forms
             // 
             // select_transaction_panel
             // 
-            this.select_transaction_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
+            this.select_transaction_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.select_transaction_panel.Controls.Add(this.exit_btn);
             this.select_transaction_panel.Controls.Add(this.cash_withdrawal_btn);
             this.select_transaction_panel.Controls.Add(this.select_transaction_label);
@@ -49,15 +49,16 @@ namespace ATM_forms
             this.select_transaction_panel.Name = "select_transaction_panel";
             this.select_transaction_panel.Size = new System.Drawing.Size(886, 535);
             this.select_transaction_panel.TabIndex = 0;
-            this.select_transaction_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.select_transaction_panel_Paint);
+            //this.select_transaction_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.select_transaction_panel_Paint);
             // 
             // exit_btn
             // 
-            this.exit_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.exit_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
+            this.exit_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.exit_btn.FlatAppearance.BorderSize = 3;
             this.exit_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exit_btn.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exit_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.exit_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.exit_btn.Location = new System.Drawing.Point(286, 423);
             this.exit_btn.Name = "exit_btn";
             this.exit_btn.Size = new System.Drawing.Size(315, 92);
@@ -70,11 +71,12 @@ namespace ATM_forms
             // 
             // cash_withdrawal_btn
             // 
-            this.cash_withdrawal_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.cash_withdrawal_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
+            this.cash_withdrawal_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.cash_withdrawal_btn.FlatAppearance.BorderSize = 3;
             this.cash_withdrawal_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cash_withdrawal_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cash_withdrawal_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.cash_withdrawal_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.cash_withdrawal_btn.Location = new System.Drawing.Point(170, 266);
             this.cash_withdrawal_btn.Name = "cash_withdrawal_btn";
             this.cash_withdrawal_btn.Size = new System.Drawing.Size(562, 123);
@@ -89,7 +91,7 @@ namespace ATM_forms
             // 
             this.select_transaction_label.AutoSize = true;
             this.select_transaction_label.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.select_transaction_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.select_transaction_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.select_transaction_label.Location = new System.Drawing.Point(183, 17);
             this.select_transaction_label.Name = "select_transaction_label";
             this.select_transaction_label.Size = new System.Drawing.Size(551, 74);
@@ -99,11 +101,12 @@ namespace ATM_forms
             // 
             // check_balance_btn
             // 
-            this.check_balance_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.check_balance_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
+            this.check_balance_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.check_balance_btn.FlatAppearance.BorderSize = 3;
             this.check_balance_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.check_balance_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.check_balance_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
+            this.check_balance_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.check_balance_btn.Location = new System.Drawing.Point(170, 120);
             this.check_balance_btn.Name = "check_balance_btn";
             this.check_balance_btn.Size = new System.Drawing.Size(562, 123);
@@ -113,6 +116,7 @@ namespace ATM_forms
             this.check_balance_btn.Click += new System.EventHandler(this.check_balance_btn_Click);
             this.check_balance_btn.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
             this.check_balance_btn.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+
             // 
             // select_transaction_form
             // 
@@ -120,9 +124,10 @@ namespace ATM_forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1050);
             this.Controls.Add(this.select_transaction_panel);
-            this.Name = "select_transaction_form";
+            this.Name = "SelectTransactionForm";
             this.Text = "Select Transaction";
-            this.Load += new System.EventHandler(this.select_transaction_form_Load);
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            //this.Load += new System.EventHandler(this.select_transaction_form_Load);
             this.select_transaction_panel.ResumeLayout(false);
             this.select_transaction_panel.PerformLayout();
             this.ResumeLayout(false);
@@ -137,16 +142,16 @@ namespace ATM_forms
         private System.Windows.Forms.Button check_balance_btn;
         private System.Windows.Forms.Button exit_btn;
 
-        void Btn_MouseEnter(object sender, EventArgs e)
+        void BtnMouseEnter(object sender, EventArgs e)
         {
             // Change the button color when the mouse enters
-            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
         }
 
-        void Btn_MouseLeave(object sender, EventArgs e)
+        void BtnMouseLeave(object sender, EventArgs e)
         {
             // Change the button color back to its original color when the mouse leaves
-            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(202)))), ((int)(((byte)(232)))));
+            ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
         }
     }
 }

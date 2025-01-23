@@ -101,30 +101,17 @@ namespace ATM_forms
             //run the application
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form insertCardForm = new insert_card_form();
-            insertCardForm.Load += new EventHandler(form_load);
-            Application.Run(new insert_card_form());
+            //Form InsertCardForm = new InsertCardForm();
+            Application.Run(new InsertCardForm());
         }
 
-        public static void show_insert_card_form(Form currentForm)
+        public static void ShowInsertCardForm(Form currentForm)
         {
-            insert_card_form cardForm = new insert_card_form(); // instance of insert_card_form
+            InsertCardForm cardForm = new InsertCardForm(); // instance of insert_card_form
             cardForm.Show();
             currentForm.Close();
         }
 
-        // a shared form_load method for all forms to prevent lagging
-        public static void form_load(object sender, EventArgs e)
-        {
-            int w = Screen.PrimaryScreen.Bounds.Width;
-            int h = Screen.PrimaryScreen.Bounds.Height;
-
-            if (sender is Form form)
-            {
-                form.Location = new Point(0, 0);
-                form.Size = new Size(w, h);
-            }
-        }
     }
 
     public static class TransactionData

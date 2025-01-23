@@ -11,20 +11,16 @@ using System.Windows.Forms;
 
 namespace ATM_forms
 {
-    public partial class withdraw_form : Form
+    public partial class WithdrawForm : Form
     {
-        public withdraw_form()
+        public WithdrawForm()
         {
             InitializeComponent();
         }
 
-        private void withdraw_form_Load(object sender, EventArgs e)
-        {
-            Program.form_load(sender, e);
-        }
 
         // single event handler for all number buttons
-        private void NumberButton_Click(object sender, EventArgs e)
+        private void NumberButtonClick(object sender, EventArgs e)
         {
             if (sender is Button button)
             {
@@ -33,12 +29,12 @@ namespace ATM_forms
         }
 
         // prevents keypress for amount_txtbox
-        private void amount_txtbox_KeyPress(object sender, KeyPressEventArgs e)
+        private void AmounttxtboxKeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true; 
         }
 
-        private void btnY_Click(object sender, EventArgs e)
+        private void  BtnYClick(object sender, EventArgs e)
         {
 
             decimal amount;
@@ -50,6 +46,7 @@ namespace ATM_forms
                 // send amount to switch to deal with
                 try
                 {
+
                     // connect and send response in json format
                     NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                     Console.WriteLine(amount);
@@ -90,19 +87,22 @@ namespace ATM_forms
 
         }
 
-        private void btnN_Click(object sender, EventArgs e)
+        private void BtnNClick(object sender, EventArgs e)
         {
             amount_txtbox.Text = "£";
         }
 
-        private void amount_txtbox_TextChanged(object sender, EventArgs e)
+        private void ExitbtnClick(object sender, EventArgs e)
+        {
+            SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
+            cardForm.Show();
+            this.Close();  // terminates this form
+        }
+
+        private void AmounttxtboxTextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void withdraw_panel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

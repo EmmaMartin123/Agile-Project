@@ -10,20 +10,21 @@ using System.Windows.Forms;
 
 namespace ATM_forms
 {
-    public partial class select_transaction_form : Form
+    public partial class SelectTransactionForm : Form
     {
-        public select_transaction_form()
+        public SelectTransactionForm()
         {
             InitializeComponent();
         }
 
-        private void select_transaction_form_Load(object sender, EventArgs e)
+        private void ExitbtnClick(object sender, EventArgs e)
         {
-            Program.form_load(sender, e);
+            Program.ShowInsertCardForm(this);
         }
 
-        private void exit_btn_Click(object sender, EventArgs e)
+        private void CheckBalancebtnClick(object sender, EventArgs e)
         {
+
             Program.show_insert_card_form(this);
         }
 
@@ -35,7 +36,7 @@ namespace ATM_forms
         private void check_balance_btn_Click(object sender, EventArgs e)
         {
             TransactionData.transactionType = 1;
-            balance_form cardForm = new balance_form(); // instance of balance_for
+            balance_form cardForm = new balance_form(); // instance of balance_form
             cardForm.Show();
             this.Close();  // terminates this form
         }

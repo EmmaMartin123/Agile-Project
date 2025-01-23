@@ -14,31 +14,20 @@ using Newtonsoft.Json;
 
 namespace ATM_forms
 {
-    public partial class enter_pin_form : Form
+    public partial class EnterPinForm : Form
     {
-        public enter_pin_form()
+        public EnterPinForm()
         {
             InitializeComponent();
 
         }
 
-        private void enter_pin_form_Load(object sender, EventArgs e)
+        private void PintxtboxKeyPress(object sender, KeyPressEventArgs e)
         {
-            Program.form_load(sender, e); 
-
+            e.Handled = true;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void enter_pin_panel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pin_txt_box_TextChanged(object sender, EventArgs e)
+        private void PinTxtboxTextChanged(object sender, EventArgs e)
         {
 
             pin_txt_box.PasswordChar = '*';   // hides input 
@@ -53,16 +42,16 @@ namespace ATM_forms
 
         }
 
-        private void pin_txt_box_KeyPress(object sender, KeyPressEventArgs e)
+        /*private void pin_txt_box_KeyPress(object sender, KeyPressEventArgs e)
         {
             // allows only numeric characters
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
-        }
+        }*/
 
-        private void delete_btn_Click(object sender, EventArgs e)
+        private void DeletebtnClick(object sender, EventArgs e)
         {
 
             if (pin_txt_box.Text.Length > 0)
@@ -73,13 +62,21 @@ namespace ATM_forms
 
         }
 
-        private void exit_btn_Click(object sender, EventArgs e)
+        private void NumberbtnClick(object sender, EventArgs e)
         {
-            Program.show_insert_card_form(this);
+            if (sender is Button button)
+            {
+                pin_txt_box.Text += button.Text; // appends the text to the textBox
+            }
+        }
+
+        private void ExitbtnClick(object sender, EventArgs e)
+        {
+            Program.ShowInsertCardForm(this);
 
         }
 
-        private void continue_btn_Click(object sender, EventArgs e)
+        private void ContinuebtnClick(object sender, EventArgs e)
         {
             //int correctPin = TransactionData.PIN;
 
@@ -122,6 +119,7 @@ namespace ATM_forms
                             MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             pin_txt_box.Clear();
                         }
+
                     }
                     catch (Exception ex)
                     {
