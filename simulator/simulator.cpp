@@ -156,7 +156,8 @@ void handleNewConnection(int socket) {
 
                 // extracting transaction details
                 // check card is in file
-                int transactionType = request.value("transaction_type", -1);
+                std::string s_transactionType = request["request_type"];
+                int transactionType = std::stoi(s_transactionType);
                 std::string panNumber = request["pan_number"];
 
                 if (accounts.find(panNumber) == accounts.end()){
