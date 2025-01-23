@@ -125,6 +125,7 @@ void handleNewConnection(int socket) {
     char buffer[512];
     int rv; // return value, equals the number of bytes of data received or 0 if connection terminated or -1 in the case of error
     std::string response = "";
+    json responseJson;
 
     while (true)
     {
@@ -152,7 +153,7 @@ void handleNewConnection(int socket) {
                 // parsing incoming JSON
                 json request = json::parse(buffer);
 
-                json responseJson = request;
+                responseJson = request;
 
                 // extracting transaction details
                 // check card is in file
@@ -165,6 +166,8 @@ void handleNewConnection(int socket) {
                     responseJson["reason"] = "Card Not Found in Data";
 
                     // send response and continue to next loop
+                    logResponse(response);   
+                    send(socket, response.c_str(), response.length(), 0); // sending response
                     continue;
                 }
 
@@ -193,11 +196,13 @@ void handleNewConnection(int socket) {
                         responseJson["reason"] = "Card Expired";
 
                         // send response and continue to next loop
+                        logResponse(response);   
+                        send(socket, response.c_str(), response.length(), 0); // sending response
                         continue;
                     }
                 } catch (const std::exception &e)
                 {
-                    responseJson["transaction_outcome"] = "error [simulator side]";
+                    responseJson["transaction_outcome"] = 10;
                     responseJson["reason"] = e.what();
                     std::cerr << "Error parsing expiry date: " << e.what() << "\n";
 
@@ -210,11 +215,11 @@ void handleNewConnection(int socket) {
                 case 0: // validate pin
                     if (request["pin"] == account["pin"])
                     {
-                        responseJson["transaction_outcome"] = "0"; //successful
+                        responseJson["transaction_outcome"] = 0; //successful
                     }
                     else
                     {
-                        responseJson["transaction_outcome"] = "1";
+                        responseJson["transaction_outcome"] = 1;
                         responseJson["reason"] = "incorrect pin";
                     }
                     break;
@@ -226,20 +231,20 @@ void handleNewConnection(int socket) {
                     // if matching return the json with corresponding outcome and reason
                     {
 
-                    std::string s_transactionValue = request["transaction_value", 0];
+                    std::string s_transactionValue = request["transaction_value"];
                     double transactionValue = std::stod(s_transactionValue);
 
                     if (transactionValue <= account["balance"].get<double>())
                     {
                         
                         account["balance"] = account["balance"].get<double>() - transactionValue;
-                        responseJson["transaction_outcome"] = "approved";
+                        responseJson["transaction_outcome"] = 0;
                         responseJson["remaining_balance"] = account["balance"];
                         saveAccountsToFile(); // save updated account data
                     }
                     else
                     {
-                        responseJson["transaction_outcome"] = "declined";
+                        responseJson["transaction_outcome"] = 1;
                         responseJson["reason"] = "Insufficient funds";
                     }
                     }
@@ -251,15 +256,17 @@ void handleNewConnection(int socket) {
                     break;
                 }
 
-                // serializing response
-                response = responseJson.dump();
+                
             }
             catch (const std::exception &e) 
             {
 
-                response = R"({"status": "error", "message": "Invalid request format" + +"})";
+                responseJson["transaction_outcome"] = 10;
+                responseJson["reason"] = e.what();
                 std::cout << e.what();
             }
+            // serializing response
+            response = responseJson.dump();
 
             send(socket, response.c_str(), response.length(), 0); // sending response
             logResponse(response);                                // Logging response
