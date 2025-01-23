@@ -345,7 +345,7 @@ int main(void)
     }
 
     // handle the forked processes as they exit
-    sa.sa_handler = sigchld_handler; // reap all dead processes
+    sa.sa_handler = sigchldHandler; // reap all dead processes
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
     if (sigaction(SIGCHLD, &sa, NULL) == -1)
@@ -367,7 +367,7 @@ int main(void)
         }
 
         inet_ntop(their_addr.ss_family,
-            get_in_addr((struct sockaddr *)&their_addr),
+            getInAddr((struct sockaddr *)&their_addr),
             s, sizeof s);
         printf("server: got connection from %s\n", s);
 
