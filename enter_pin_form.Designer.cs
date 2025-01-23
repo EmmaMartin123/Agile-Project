@@ -168,6 +168,7 @@ namespace ATM_forms
             this.btn0.TabIndex = 9;
             this.btn0.Text = "0";
             this.btn0.UseVisualStyleBackColor = false;
+            this.btn0.Click += new System.EventHandler(this.numberBtn_Click);
             this.btn0.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
             this.btn0.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
             // 
