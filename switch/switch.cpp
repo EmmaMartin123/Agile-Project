@@ -252,6 +252,10 @@ void pollingFunction(){
                         } catch (const std::exception &e) {
                             std::cerr << "Error parsing transaction data: " << e.what() << std::endl;
                             std::cerr << "request is: " << request.dump() << "\n";
+                            request["transaction_outcome"] = 10;
+                            request["reason"] = e.what();
+                            std::string response = request.dump();
+                            send(ATMs[i].fd, response.c_str(), response.length(), 0);
                         }
 
                         memset(buff, 0, 512);
