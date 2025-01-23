@@ -234,8 +234,6 @@ void pollingFunction(){
                             // forwarding request to simulator
                             int responseReachedNetwork = forwardToSimulator(request);
 
-                            
-
                             if (responseReachedNetwork == 0)
                             { // response made it
                                 // proceed as normal
