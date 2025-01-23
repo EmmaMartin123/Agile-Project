@@ -224,9 +224,15 @@ void handleNewConnection(int socket) {
                 case 2: // withdraw cash
                     // check the provided pin against the dummy accounts and 
                     // if matching return the json with corresponding outcome and reason
-                    if (request.value("transaction_value", 0) <= account["balance"].get<double>())
                     {
-                        account["balance"] = account["balance"].get<double>() - request.value("transaction_value", 0);
+
+                    std::string s_transactionValue = request["transaction_value", 0];
+                    double transactionValue = std::stod(s_transactionValue);
+
+                    if (transactionValue <= account["balance"].get<double>())
+                    {
+                        
+                        account["balance"] = account["balance"].get<double>() - transactionValue;
                         responseJson["transaction_outcome"] = "approved";
                         responseJson["remaining_balance"] = account["balance"];
                         saveAccountsToFile(); // save updated account data
@@ -235,6 +241,7 @@ void handleNewConnection(int socket) {
                     {
                         responseJson["transaction_outcome"] = "declined";
                         responseJson["reason"] = "Insufficient funds";
+                    }
                     }
                     break;
                 default:
@@ -249,7 +256,9 @@ void handleNewConnection(int socket) {
             }
             catch (const std::exception &e) 
             {
-                response = R"({"status": "error", "message": "Invalid request format"})";
+
+                response = R"({"status": "error", "message": "Invalid request format" + +"})";
+                std::cout << e.what();
             }
 
             send(socket, response.c_str(), response.length(), 0); // sending response
