@@ -2,7 +2,7 @@
 
 Naming Rules:
 
- - functionNames
+ - FunctionNames
  - ClassNames
  - file_names
 
