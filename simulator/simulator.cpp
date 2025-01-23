@@ -152,81 +152,95 @@ void handleNewConnection(int socket) {
                 // parsing incoming JSON
                 json request = json::parse(buffer);
 
+                json responseJson = request;
+
                 // extracting transaction details
-                std::string cardNumber = request["card_number"];
-                std::string pin = request["pin"];
-                std::string expiry_date = request["expiry_date"];
-                double withdrawalAmount = request.value("withdrawal_amount", 0.0);
-                std::string transactionID = request["transaction_id"];
+                // check card is in file
+                int transactionType = request.value("transaction_type", -1);
+                std::string panNumber = request["pan_number"];
 
-                // preping response
-                json responseJson;
-                responseJson["transaction_id"] = transactionID;
+                if (accounts.find(panNumber) == accounts.end()){
+                    responseJson["transaction_outcome"] = 1; //failure
+                    responseJson["reason"] = "Card Not Found in Data";
 
-                // validating and transaction processing
-                if (accounts.find(cardNumber) != accounts.end())
+                    // send response and continue to next loop
+                    continue;
+                }
+
+                auto &account = accounts[panNumber];
+
+                // catch formatting or read errors in data
+                try
                 {
-                    auto &account = accounts[cardNumber];
-                    if (account["pin"] == pin)
-                    {
-                        // todays date
-                        char buff[6]; // Adjust buffer size to avoid overflow 
-                        time_t now = time(0);
-                        strftime(buff, sizeof(buff), "%m/%y", localtime(&now)); // using sizeof(buff)
-                        std::string dateToday(buff);
+                    // check card is in date
+                    // todays date
+                    char buff[6]; // Adjust buffer size to avoid overflow 
+                    time_t now = time(0);
+                    strftime(buff, sizeof(buff), "%m/%y", localtime(&now)); // using sizeof(buff)
+                    std::string dateToday(buff);
 
-                        // Extract expiry date from JSON properly 
-                        std::string expiryDate = account["expiry_date"].get<std::string>();
-                    try
-                    {
+                    // Extract expiry date from JSON properly
+                    std::string expiryDate = account["expiry_date"].get<std::string>();
 
-                    
-                        // Compare expiry date to today's date
-                        int expiryYear = std::stoi(expiryDate.substr(3, 2)) + 2000; // parsing year correctly 
-                        int expiryMonth = std::stoi(expiryDate.substr(0, 2));      // parsing month correctly 
-                        int currentYear = std::stoi(dateToday.substr(3, 2)) + 2000;
-                        int currentMonth = std::stoi(dateToday.substr(0, 2));
+                    int expiryYear = std::stoi(expiryDate.substr(3, 2)) + 2000; // parsing year correctly 
+                    int expiryMonth = std::stoi(expiryDate.substr(0, 2));      // parsing month correctly 
+                    int currentYear = std::stoi(dateToday.substr(3, 2)) + 2000;
+                    int currentMonth = std::stoi(dateToday.substr(0, 2));
 
-                        if (expiryYear > currentYear || (expiryYear == currentYear && expiryMonth >= currentMonth)) // correcting comparison logic 
-                        {
-                            if (withdrawalAmount <= account["balance"].get<double>())
-                            {
-                                account["balance"] = account["balance"].get<double>() - withdrawalAmount;
-                                responseJson["status"] = "approved";
-                                responseJson["remaining_balance"] = account["balance"];
-                                saveAccountsToFile(); // save updated account data
-                            }
-                            else
-                            {
-                                responseJson["status"] = "declined";
-                                responseJson["reason"] = "Insufficient funds";
-                            }
-                        }
-                        else
-                        {
-                            responseJson["status"] = "declined";
-                            responseJson["reason"] = "Card expired";
-                        }
+                    if (!(expiryYear > currentYear || (expiryYear == currentYear && expiryMonth >= currentMonth))){
+                        responseJson["transaction_outcome"] = 1; //failure
+                        responseJson["reason"] = "Card Expired";
+
+                        // send response and continue to next loop
+                        continue;
                     }
-                    catch (const std::exception &e)
+                } catch (const std::exception &e)
+                {
+                    responseJson["transaction_outcome"] = "error [simulator side]";
+                    responseJson["reason"] = e.what();
+                    std::cerr << "Error parsing expiry date: " << e.what() << "\n";
+
+                    // send response and continue to next loop
+                    continue;
+                }
+
+                switch (transactionType)
+                {
+                case 0: // validate pin
+                    if (request["pin"] == account["pin"])
                     {
-                        responseJson["status"] = "error [simulator side]";
-                        responseJson["reason"] = "Invalid expiry date format";
-                        std::cerr << "Error parsing expiry date: " << e.what() << "\n";
-
-                    }
-
+                        responseJson["transaction_outcome"] = "0"; //successful
                     }
                     else
                     {
-                        responseJson["status"] = "declined";
-                        responseJson["reason"] = "Invalid PIN"; 
+                        responseJson["transaction_outcome"] = "1";
+                        responseJson["reason"] = "incorrect pin";
                     }
-                }
-                else
-                {
-                    responseJson["status"] = "declined";
-                    responseJson["reason"] = "Card not found";
+                    break;
+                case 1: // display balance
+                        responseJson["transaction_value"] = account["balance"];
+                    break;
+                case 2: // withdraw cash
+                    // check the provided pin against the dummy accounts and 
+                    // if matching return the json with corresponding outcome and reason
+                    if (request.value("transaction_value", 0) <= account["balance"].get<double>())
+                    {
+                        account["balance"] = account["balance"].get<double>() - request.value("transaction_value", 0);
+                        responseJson["transaction_outcome"] = "approved";
+                        responseJson["remaining_balance"] = account["balance"];
+                        saveAccountsToFile(); // save updated account data
+                    }
+                    else
+                    {
+                        responseJson["transaction_outcome"] = "declined";
+                        responseJson["reason"] = "Insufficient funds";
+                    }
+                    break;
+                default:
+                    // request not recognized
+                    responseJson["transaction_outcome"] = 1;
+                    responseJson["reason"] = "request type not recognized: " + std::to_string(transactionType);
+                    break;
                 }
 
                 // serializing response
