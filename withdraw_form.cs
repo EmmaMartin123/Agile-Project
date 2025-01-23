@@ -62,7 +62,7 @@ namespace ATM_forms
                     if (transaction_outcome == 0)
                     {
                         MessageBox.Show($"You have successfully withdrawn £{amount}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        select_transaction_form cardForm = new select_transaction_form(); // instance of select_transaction_form
+                        SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
                         cardForm.Show();
                         this.Close();  // terminates this form
                     }
@@ -104,5 +104,9 @@ namespace ATM_forms
 
         }
 
+        private void WithdrawForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

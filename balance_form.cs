@@ -20,7 +20,6 @@ namespace ATM_forms
 
         private void BalanceformLoad(object sender, EventArgs e)
         {
-            Program.form_load(sender, e);
             // send the balance request to the switch to deal with
             try
             {
