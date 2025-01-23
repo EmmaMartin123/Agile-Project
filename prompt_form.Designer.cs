@@ -2,7 +2,7 @@
 
 namespace ATM_forms
 {
-    partial class prompt_form
+    partial class PromptForm
     {
         /// <summary>
         /// Required designer variable.
@@ -60,7 +60,7 @@ namespace ATM_forms
             this.prompt_label1.TabIndex = 0;
             this.prompt_label1.Text = "Prompt....";
             this.prompt_label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.prompt_label1.Click += new System.EventHandler(this.prompt_label1_Click);
+            //this.prompt_label1.Click += new System.EventHandler(this.prompt_label1_Click);
             // 
             // no_btn
             // 
@@ -77,9 +77,9 @@ namespace ATM_forms
             this.no_btn.Text = "NO";
             this.no_btn.UseVisualStyleBackColor = true;
             this.no_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
-            this.no_btn.Click += new System.EventHandler(this.no_btn_Click);
-            this.no_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
-            this.no_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
+            this.no_btn.Click += new System.EventHandler(this.NobtnClick);
+            this.no_btn.MouseEnter += new EventHandler(this.BtnMouseEnter);
+            this.no_btn.MouseLeave += new EventHandler(this.BtnMouseLeave);
             // 
             // yes_btn
             // 
@@ -95,9 +95,9 @@ namespace ATM_forms
             this.yes_btn.Text = "YES";
             this.yes_btn.UseVisualStyleBackColor = true;
             this.yes_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
-            this.yes_btn.Click += new System.EventHandler(this.yes_btn_Click);
-            this.yes_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
-            this.yes_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
+            this.yes_btn.Click += new System.EventHandler(this.YesbtnClick);
+            this.yes_btn.MouseEnter += new EventHandler(this.BtnMouseEnter);
+            this.yes_btn.MouseLeave += new EventHandler(this.BtnMouseLeave);
             // 
             // prompt_label2
             // 
@@ -115,10 +115,10 @@ namespace ATM_forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1916, 1050);
             this.Controls.Add(this.prompt_panel);
-            this.Name = "prompt_form";
+            this.Name = "PromptForm";
             this.Text = "prompts";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.prompt_form_Load);
+            //this.Load += new System.EventHandler(this.prompt_form_Load);
             this.prompt_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -132,13 +132,13 @@ namespace ATM_forms
         private System.Windows.Forms.Button yes_btn;
         private System.Windows.Forms.Button no_btn;
 
-        void Btn_MouseEnter(object sender, EventArgs e)
+        void BtnMouseEnter(object sender, EventArgs e)
         {
             // Change the button color when the mouse enters
             ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
         }
 
-        void Btn_MouseLeave(object sender, EventArgs e)
+        void BtnMouseLeave(object sender, EventArgs e)
         {
             // Change the button color back to its original color when the mouse leaves
             ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));

@@ -10,36 +10,20 @@ using System.Windows.Forms;
 
 namespace ATM_forms
 {
-    public partial class enter_pin_form : Form
+    public partial class EnterPinForm : Form
     {
-        public enter_pin_form()
+        public EnterPinForm()
         {
             InitializeComponent();
 
         }
 
-        private void enter_pin_form_Load(object sender, EventArgs e)
-        {
-           
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void enter_pin_panel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pintxtbox_KeyPress(object sender, KeyPressEventArgs e)
+        private void PintxtboxKeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void pin_txt_box_TextChanged(object sender, EventArgs e)
+        private void PinTxtboxTextChanged(object sender, EventArgs e)
         {
 
             pin_txt_box.PasswordChar = '*';   // hides input 
@@ -63,7 +47,7 @@ namespace ATM_forms
             }
         }*/
 
-        private void delete_btn_Click(object sender, EventArgs e)
+        private void DeletebtnClick(object sender, EventArgs e)
         {
 
             if (pin_txt_box.Text.Length > 0)
@@ -74,7 +58,7 @@ namespace ATM_forms
 
         }
 
-        private void numberBtn_Click(object sender, EventArgs e)
+        private void NumberbtnClick(object sender, EventArgs e)
         {
             if (sender is Button button)
             {
@@ -82,13 +66,13 @@ namespace ATM_forms
             }
         }
 
-        private void exit_btn_Click(object sender, EventArgs e)
+        private void ExitbtnClick(object sender, EventArgs e)
         {
-            Program.show_insert_card_form(this);
+            Program.ShowInsertCardForm(this);
 
         }
 
-        private void continue_btn_Click(object sender, EventArgs e)
+        private void ContinuebtnClick(object sender, EventArgs e)
         {
             int correctPin = TransactionData.PIN;
 
@@ -101,7 +85,7 @@ namespace ATM_forms
                     if (enteredPin == correctPin)
                     {
                         // if the PIN matches then proceed
-                        select_transaction_form cardForm = new select_transaction_form(); // instance of select_transaction_form
+                        SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
                         cardForm.Show();
                         this.Close();
                     }

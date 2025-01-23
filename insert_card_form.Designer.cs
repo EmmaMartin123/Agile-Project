@@ -2,7 +2,7 @@
 
 namespace ATM_forms
 {
-    partial class insert_card_form
+    partial class InsertCardForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace ATM_forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(insert_card_form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InsertCardForm));
             this.insert_card_picture_box = new System.Windows.Forms.PictureBox();
             this.insert_card_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.insert_card_picture_box)).BeginInit();
@@ -46,7 +46,7 @@ namespace ATM_forms
             this.insert_card_picture_box.Size = new System.Drawing.Size(750, 769);
             this.insert_card_picture_box.TabIndex = 0;
             this.insert_card_picture_box.TabStop = false;
-            this.insert_card_picture_box.Click += new System.EventHandler(this.insert_card_picture_box_Click);
+            this.insert_card_picture_box.Click += new System.EventHandler(this.InsertcardpictureboxClick);
             // 
             // insert_card_label
             // 
@@ -67,10 +67,10 @@ namespace ATM_forms
             this.ClientSize = new System.Drawing.Size(1924, 1050);
             this.Controls.Add(this.insert_card_label);
             this.Controls.Add(this.insert_card_picture_box);
-            this.Name = "insert_card_form";
+            this.Name = "InsertCardForm";
             this.Text = "Insert Card";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.insert_card_form_Load);
+            this.Load += new System.EventHandler(this.InsertCardFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.insert_card_picture_box)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

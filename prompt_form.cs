@@ -11,29 +11,20 @@ using System.Windows.Forms;
 
 namespace ATM_forms
 {
-    public partial class prompt_form : Form
+    public partial class PromptForm : Form
     {
-        public prompt_form()
+        public PromptForm()
         {
             InitializeComponent();
         }
 
-        private void prompt_form_Load(object sender, EventArgs e)
-        {
-           
-        }
-        private void prompt_label1_Click(object sender, EventArgs e)
+
+        private void YesbtnClick(object sender, EventArgs e)
         {
 
         }
 
-
-        private void yes_btn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void no_btn_Click(object sender, EventArgs e)
+        private void NobtnClick(object sender, EventArgs e)
         {
 
         }

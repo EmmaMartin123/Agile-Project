@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ATM_forms
 {
-    public partial class alert_message_form : Form
+    public partial class AlertMessageForm : Form
     {
-        public alert_message_form()
+        public AlertMessageForm()
         {
             InitializeComponent();
-        }
-
-        private void alert_message_form_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

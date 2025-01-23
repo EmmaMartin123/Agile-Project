@@ -17,13 +17,13 @@ namespace ATM_forms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form insertCardForm = new insert_card_form();
-            Application.Run(new insert_card_form());
+            //Form InsertCardForm = new InsertCardForm();
+            Application.Run(new InsertCardForm());
         }
 
-        public static void show_insert_card_form(Form currentForm)
+        public static void ShowInsertCardForm(Form currentForm)
         {
-            insert_card_form cardForm = new insert_card_form(); // instance of insert_card_form
+            InsertCardForm cardForm = new InsertCardForm(); // instance of insert_card_form
             cardForm.Show();
             currentForm.Close();  
         }

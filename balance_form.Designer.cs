@@ -2,7 +2,7 @@
 
 namespace ATM_forms
 {
-    partial class balance_form
+    partial class BalanceForm
     {
         /// <summary>
         /// Required designer variable.
@@ -47,7 +47,7 @@ namespace ATM_forms
             this.balance_panel.Name = "balance_panel";
             this.balance_panel.Size = new System.Drawing.Size(886, 535);
             this.balance_panel.TabIndex = 0;
-            this.balance_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.balance_panel_Paint);
+            //this.balance_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.balance_panel_Paint);
             // 
             // balance_label
             // 
@@ -85,9 +85,9 @@ namespace ATM_forms
             this.done_btn.TabIndex = 4;
             this.done_btn.Text = "DONE";
             this.done_btn.UseVisualStyleBackColor = true;
-            this.done_btn.Click += new System.EventHandler(this.done_btn_Click);
-            this.done_btn.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.done_btn.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.done_btn.Click += new System.EventHandler(this.DonebtnClick);
+            this.done_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.done_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // balance_form
             // 
@@ -95,10 +95,10 @@ namespace ATM_forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1050);
             this.Controls.Add(this.balance_panel);
-            this.Name = "balance_form";
+            this.Name = "BalanceForm";
             this.Text = "Check balance";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.balance_form_Load);
+            this.Load += new System.EventHandler(this.BalanceformLoad);
             this.balance_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -111,13 +111,13 @@ namespace ATM_forms
         private System.Windows.Forms.Button done_btn;
         private System.Windows.Forms.Label balance_label;
 
-        void Btn_MouseEnter(object sender, EventArgs e)
+        void BtnMouseEnter(object sender, EventArgs e)
         {
             // Change the button color when the mouse enters
             ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
         }
 
-        void Btn_MouseLeave(object sender, EventArgs e)
+        void BtnMouseLeave(object sender, EventArgs e)
         {
             // Change the button color back to its original color when the mouse leaves
             ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));

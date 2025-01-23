@@ -1,6 +1,6 @@
 ﻿namespace ATM_forms
 {
-    partial class alert_message_form
+    partial class AlertMessageForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(alert_message_form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlertMessageForm));
             this.alert_Picture_Box = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.alert_Picture_Box)).BeginInit();
             this.SuspendLayout();
@@ -49,10 +49,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1848, 1050);
             this.Controls.Add(this.alert_Picture_Box);
-            this.Name = "alert_message_form";
+            this.Name = "AlertMessageForm";
             this.Text = "alert_message_form";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.alert_message_form_Load);
+            //this.Load += new System.EventHandler(this.alert_message_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.alert_Picture_Box)).EndInit();
             this.ResumeLayout(false);
 

@@ -2,7 +2,7 @@
 
 namespace ATM_forms
 {
-    partial class select_transaction_form
+    partial class SelectTransactionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -49,7 +49,7 @@ namespace ATM_forms
             this.select_transaction_panel.Name = "select_transaction_panel";
             this.select_transaction_panel.Size = new System.Drawing.Size(886, 535);
             this.select_transaction_panel.TabIndex = 0;
-            this.select_transaction_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.select_transaction_panel_Paint);
+            //this.select_transaction_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.select_transaction_panel_Paint);
             // 
             // exit_btn
             // 
@@ -65,9 +65,9 @@ namespace ATM_forms
             this.exit_btn.TabIndex = 4;
             this.exit_btn.Text = "EXIT";
             this.exit_btn.UseVisualStyleBackColor = true;
-            this.exit_btn.Click += new System.EventHandler(this.exit_btn_Click);
-            this.exit_btn.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.exit_btn.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.exit_btn.Click += new System.EventHandler(this.ExitbtnClick);
+            this.exit_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.exit_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // cash_withdrawal_btn
             // 
@@ -83,9 +83,9 @@ namespace ATM_forms
             this.cash_withdrawal_btn.TabIndex = 2;
             this.cash_withdrawal_btn.Text = "CASH WITHDRAWAL";
             this.cash_withdrawal_btn.UseVisualStyleBackColor = true;
-            this.cash_withdrawal_btn.Click += new System.EventHandler(this.cash_withdrawal_btn_Click);
-            this.cash_withdrawal_btn.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.cash_withdrawal_btn.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.cash_withdrawal_btn.Click += new System.EventHandler(this.CashWithdrawalbtnClick);
+            this.cash_withdrawal_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.cash_withdrawal_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // select_transaction_label
             // 
@@ -112,9 +112,9 @@ namespace ATM_forms
             this.check_balance_btn.TabIndex = 0;
             this.check_balance_btn.Text = "CHECK BALANCE";
             this.check_balance_btn.UseVisualStyleBackColor = true;
-            this.check_balance_btn.Click += new System.EventHandler(this.check_balance_btn_Click);
-            this.check_balance_btn.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.check_balance_btn.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.check_balance_btn.Click += new System.EventHandler(this.CheckBalancebtnClick);
+            this.check_balance_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.check_balance_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // select_transaction_form
             // 
@@ -122,10 +122,10 @@ namespace ATM_forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1050);
             this.Controls.Add(this.select_transaction_panel);
-            this.Name = "select_transaction_form";
+            this.Name = "SelectTransactionForm";
             this.Text = "Select Transaction";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.select_transaction_form_Load);
+            //this.Load += new System.EventHandler(this.select_transaction_form_Load);
             this.select_transaction_panel.ResumeLayout(false);
             this.select_transaction_panel.PerformLayout();
             this.ResumeLayout(false);
@@ -140,13 +140,13 @@ namespace ATM_forms
         private System.Windows.Forms.Button check_balance_btn;
         private System.Windows.Forms.Button exit_btn;
 
-        void Btn_MouseEnter(object sender, EventArgs e)
+        void BtnMouseEnter(object sender, EventArgs e)
         {
             // Change the button color when the mouse enters
             ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
         }
 
-        void Btn_MouseLeave(object sender, EventArgs e)
+        void BtnMouseLeave(object sender, EventArgs e)
         {
             // Change the button color back to its original color when the mouse leaves
             ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));

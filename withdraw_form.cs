@@ -10,20 +10,16 @@ using System.Windows.Forms;
 
 namespace ATM_forms
 {
-    public partial class withdraw_form : Form
+    public partial class WithdrawForm : Form
     {
-        public withdraw_form()
+        public WithdrawForm()
         {
             InitializeComponent();
         }
 
-        private void withdraw_form_Load(object sender, EventArgs e)
-        {
-            
-        }
 
         // single event handler for all number buttons
-        private void NumberButton_Click(object sender, EventArgs e)
+        private void NumberButtonClick(object sender, EventArgs e)
         {
             if (sender is Button button)
             {
@@ -32,12 +28,12 @@ namespace ATM_forms
         }
 
         // prevents keypress for amount_txtbox
-        private void amount_txtbox_KeyPress(object sender, KeyPressEventArgs e)
+        private void AmounttxtboxKeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true; 
         }
 
-        private void btnY_Click(object sender, EventArgs e)
+        private void  BtnYClick(object sender, EventArgs e)
         {
 
             decimal amount;
@@ -51,7 +47,7 @@ namespace ATM_forms
                 {
                     TransactionData.CurrentBalance -= amount; // deduct the amount from balance
                     MessageBox.Show($"You have successfully withdrawn £{amount}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    select_transaction_form cardForm = new select_transaction_form(); // instance of select_transaction_form
+                    SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
                     cardForm.Show();
                     this.Close();  // terminates this form
                 }
@@ -70,26 +66,22 @@ namespace ATM_forms
 
         }
 
-        private void btnN_Click(object sender, EventArgs e)
+        private void BtnNClick(object sender, EventArgs e)
         {
             amount_txtbox.Text = "£";
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
+        private void ExitbtnClick(object sender, EventArgs e)
         {
-            select_transaction_form cardForm = new select_transaction_form(); // instance of select_transaction_form
+            SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
             cardForm.Show();
             this.Close();  // terminates this form
         }
 
-        private void amount_txtbox_TextChanged(object sender, EventArgs e)
+        private void AmounttxtboxTextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void withdraw_panel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

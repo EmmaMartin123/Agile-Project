@@ -2,7 +2,7 @@
 
 namespace ATM_forms
 {
-    partial class withdraw_form
+    partial class WithdrawForm
     {
         /// <summary>
         /// Required designer variable.
@@ -71,7 +71,7 @@ namespace ATM_forms
             this.withdraw_panel.Name = "withdraw_panel";
             this.withdraw_panel.Size = new System.Drawing.Size(886, 536);
             this.withdraw_panel.TabIndex = 0;
-            this.withdraw_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.withdraw_panel_Paint);
+            //this.withdraw_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.withdraw_panel_Paint);
             // 
             // amount_label
             // 
@@ -94,8 +94,8 @@ namespace ATM_forms
             this.amount_txtbox.Size = new System.Drawing.Size(335, 82);
             this.amount_txtbox.TabIndex = 1;
             this.amount_txtbox.Text = "£";
-            this.amount_txtbox.TextChanged += new System.EventHandler(this.amount_txtbox_TextChanged);
-            this.amount_txtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amount_txtbox_KeyPress);
+            this.amount_txtbox.TextChanged += new System.EventHandler(this.AmounttxtboxTextChanged);
+            this.amount_txtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AmounttxtboxKeyPress);
             // 
             // btn0
             // 
@@ -112,9 +112,9 @@ namespace ATM_forms
             this.btn0.TabIndex = 9;
             this.btn0.Text = "0";
             this.btn0.UseVisualStyleBackColor = false;
-            this.btn0.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn0.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn0.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn0.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn0.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn0.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btn1
             // 
@@ -131,9 +131,9 @@ namespace ATM_forms
             this.btn1.TabIndex = 9;
             this.btn1.Text = "1";
             this.btn1.UseVisualStyleBackColor = false;
-            this.btn1.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn1.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn1.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn1.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn1.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn1.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btn2
             // 
@@ -150,9 +150,9 @@ namespace ATM_forms
             this.btn2.TabIndex = 9;
             this.btn2.Text = "2";
             this.btn2.UseVisualStyleBackColor = false;
-            this.btn2.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn2.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn2.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn2.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn2.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn2.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btn3
             // 
@@ -169,9 +169,9 @@ namespace ATM_forms
             this.btn3.TabIndex = 9;
             this.btn3.Text = "3";
             this.btn3.UseVisualStyleBackColor = false;
-            this.btn3.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn3.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn3.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn3.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn3.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn3.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btn4
             // 
@@ -188,9 +188,9 @@ namespace ATM_forms
             this.btn4.TabIndex = 9;
             this.btn4.Text = "4";
             this.btn4.UseVisualStyleBackColor = false;
-            this.btn4.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn4.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn4.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn4.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn4.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn4.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btn5
             // 
@@ -207,9 +207,9 @@ namespace ATM_forms
             this.btn5.TabIndex = 9;
             this.btn5.Text = "5";
             this.btn5.UseVisualStyleBackColor = false;
-            this.btn5.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn5.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn5.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn5.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn5.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn5.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btn6
             // 
@@ -226,9 +226,9 @@ namespace ATM_forms
             this.btn6.TabIndex = 9;
             this.btn6.Text = "6";
             this.btn6.UseVisualStyleBackColor = false;
-            this.btn6.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn6.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn6.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn6.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn6.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn6.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btn7
             // 
@@ -245,9 +245,9 @@ namespace ATM_forms
             this.btn7.TabIndex = 9;
             this.btn7.Text = "7";
             this.btn7.UseVisualStyleBackColor = false;
-            this.btn7.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn7.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn7.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn7.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn7.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn7.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btn8
             // 
@@ -264,9 +264,9 @@ namespace ATM_forms
             this.btn8.TabIndex = 9;
             this.btn8.Text = "8";
             this.btn8.UseVisualStyleBackColor = false;
-            this.btn8.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn8.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn8.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn8.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn8.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn8.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btn9
             // 
@@ -283,9 +283,9 @@ namespace ATM_forms
             this.btn9.TabIndex = 9;
             this.btn9.Text = "9";
             this.btn9.UseVisualStyleBackColor = false;
-            this.btn9.Click += new System.EventHandler(this.NumberButton_Click);
-            this.btn9.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btn9.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btn9.Click += new System.EventHandler(this.NumberButtonClick);
+            this.btn9.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btn9.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btnY
             // 
@@ -302,9 +302,9 @@ namespace ATM_forms
             this.btnY.TabIndex = 9;
             this.btnY.Text = "Yes";
             this.btnY.UseVisualStyleBackColor = false;
-            this.btnY.Click += new System.EventHandler(this.btnY_Click);
-            this.btnY.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btnY.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btnY.Click += new System.EventHandler(this.BtnYClick);
+            this.btnY.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btnY.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btnN
             // 
@@ -321,9 +321,9 @@ namespace ATM_forms
             this.btnN.TabIndex = 9;
             this.btnN.Text = "No";
             this.btnN.UseVisualStyleBackColor = false;
-            this.btnN.Click += new System.EventHandler(this.btnN_Click);
-            this.btnN.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btnN.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btnN.Click += new System.EventHandler(this.BtnNClick);
+            this.btnN.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btnN.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // btnExit
             // 
@@ -340,9 +340,9 @@ namespace ATM_forms
             this.btnExit.TabIndex = 9;
             this.btnExit.Text = "Cancel";
             this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            this.btnExit.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
-            this.btnExit.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
+            this.btnExit.Click += new System.EventHandler(this.ExitbtnClick);
+            this.btnExit.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.btnExit.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // withdraw_form
             // 
@@ -350,10 +350,10 @@ namespace ATM_forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1445, 770);
             this.Controls.Add(this.withdraw_panel);
-            this.Name = "withdraw_form";
+            this.Name = "WithdrawForm";
             this.Text = "Withdraw";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.withdraw_form_Load);
+            //this.Load += new System.EventHandler(this.withdraw_form_Load);
             this.withdraw_panel.ResumeLayout(false);
             this.withdraw_panel.PerformLayout();
             this.ResumeLayout(false);
@@ -378,13 +378,13 @@ namespace ATM_forms
         private System.Windows.Forms.Button btnN;
         private System.Windows.Forms.Button btnExit;
 
-        void Btn_MouseEnter(object sender, EventArgs e)
+        void BtnMouseEnter(object sender, EventArgs e)
         {
             // Change the button color when the mouse enters
             ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
         }
 
-        void Btn_MouseLeave(object sender, EventArgs e)
+        void BtnMouseLeave(object sender, EventArgs e)
         {
             // Change the button color back to its original color when the mouse leaves
             ((System.Windows.Forms.Button)sender).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));

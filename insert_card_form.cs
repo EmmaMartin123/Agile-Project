@@ -10,21 +10,21 @@ using System.Windows.Forms;
 
 namespace ATM_forms
 {
-    public partial class insert_card_form : Form
+    public partial class InsertCardForm : Form
     {
-        public insert_card_form()
+        public InsertCardForm()
         {
             InitializeComponent(); 
         }
 
-        private void insert_card_form_Load(object sender, EventArgs e)
+        private void InsertCardFormLoad(object sender, EventArgs e)
         {
           
         }
 
-        private void insert_card_picture_box_Click(object sender, EventArgs e)
+        private void InsertcardpictureboxClick(object sender, EventArgs e)
         {
-            enter_pin_form enterPinForm = new enter_pin_form();  // instance of the enter_pin_form
+            EnterPinForm enterPinForm = new EnterPinForm();  // instance of the enter_pin_form
             enterPinForm.Show();
             this.Hide();
 
