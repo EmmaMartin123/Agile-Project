@@ -228,7 +228,8 @@ void pollingFunction(){
                             request = json::parse(data);
 
                             // extracting relevant fields 
-                            int transactionType = request.value("request_type", -1);
+                            std::string s_transactionType = request["request_type"];
+                            int transactionType = std::stoi(s_transactionType);
 
                             // logging the transaction 
                             logTransaction(transactionType, request);
