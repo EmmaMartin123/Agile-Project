@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,10 +20,26 @@ namespace ATM_forms
 
         private void BalanceformLoad(object sender, EventArgs e)
         {
-            // gets the balance from the TransactionData class
-            decimal currentBalance = TransactionData.CurrentBalance;
+            Program.form_load(sender, e);
+            // send the balance request to the switch to deal with
+            try
+            {
+                // connect and send response in json format
+                NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
+                string response = NetworkClient.ReceiveResponse();
+                Console.WriteLine($"Response: {response}");
+                NetworkClient.CloseConnection();
 
-            balance_label.Text = $"£{currentBalance:F2}"; // F2 for two decimal places
+                dynamic parsedResponse = JsonConvert.DeserializeObject(response);
+                int transaction_value = parsedResponse.transaction_value;
+
+                balance_label.Text = $"£{transaction_value:F2}"; // F2 for two decimal places
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"error in network operations: {ex.Message}");
+            }
         }
 
         private void DonebtnClick(object sender, EventArgs e)

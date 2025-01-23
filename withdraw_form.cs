@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,20 +43,40 @@ namespace ATM_forms
             // checks the amount entered is valid - must be a multiple of 5 and a valid number
             if (decimal.TryParse(amountText, out amount) && amount > 0 && amount % 5 == 0)
             {
-                // checks if the balance is there to withdraw
-                if (TransactionData.CurrentBalance >= amount)
+                // send amount to switch to deal with
+                try
                 {
-                    TransactionData.CurrentBalance -= amount; // deduct the amount from balance
-                    MessageBox.Show($"You have successfully withdrawn £{amount}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
-                    cardForm.Show();
-                    this.Close();  // terminates this form
+
+                    // connect and send response in json format
+                    NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                    Console.WriteLine(amount);
+                    NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\", \"transaction_value\": \""+amount+"\"}");
+                    string response = NetworkClient.ReceiveResponse();
+                    Console.WriteLine($"Response: {response}");
+                    NetworkClient.CloseConnection();
+
+                    dynamic parsedResponse = JsonConvert.DeserializeObject(response);
+                    int transaction_outcome = parsedResponse.transaction_outcome;
+
+                    // checks if the balance is there to withdraw
+                    if (transaction_outcome == 0)
+                    {
+                        MessageBox.Show($"You have successfully withdrawn £{amount}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        select_transaction_form cardForm = new select_transaction_form(); // instance of select_transaction_form
+                        cardForm.Show();
+                        this.Close();  // terminates this form
+                    }
+                    else
+                    {
+                        // if not enough funds
+                        MessageBox.Show("An error occurred!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    // if not enough funds
-                    MessageBox.Show("Insufficient balance!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine($"error in network operations: {ex.Message}");
                 }
+                
             }
             else
             {

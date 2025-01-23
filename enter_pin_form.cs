@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace ATM_forms
 {
@@ -74,26 +78,52 @@ namespace ATM_forms
 
         private void ContinuebtnClick(object sender, EventArgs e)
         {
-            int correctPin = TransactionData.PIN;
+            //int correctPin = TransactionData.PIN;
 
             // checks if the PIN is exactly 4 digits 
             if (pin_txt_box.Text.Length == 4)
             {
                 if (int.TryParse(pin_txt_box.Text, out int enteredPin))
                 {
-                    // compares the entered PIN with the correct PIN
-                    if (enteredPin == correctPin)
+                    TransactionData.PIN = enteredPin;
+                    TransactionData.transactionType = 0;
+                    // send the pin to the switch to deal with
+                    try
                     {
-                        // if the PIN matches then proceed
-                        SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
-                        cardForm.Show();
-                        this.Close();
+
+                        // connect and send response in json format
+                        NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                        NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
+                        string response = NetworkClient.ReceiveResponse();
+                        Console.WriteLine($"Response: {response}");
+                        NetworkClient.CloseConnection();
+
+                        dynamic parsedResponse = JsonConvert.DeserializeObject(response);
+                        int transaction_outcome = parsedResponse.transaction_outcome;
+
+                        // assume the response is true for now and set it manually
+
+                        //transaction_outcome en= 0; // for testing only as we can't currently get a response
+
+                        if (transaction_outcome == 0)
+                        {
+                            // if the PIN matches then proceed
+                            select_transaction_form cardForm = new select_transaction_form(); // instance of select_transaction_form
+                            cardForm.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            // if the PIN does not match
+                            string reason = parsedResponse.reason;
+                            MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            pin_txt_box.Clear();
+                        }
+
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        // if the PIN does not match
-                        MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        pin_txt_box.Clear();
+                        Console.WriteLine($"error in network operations: {ex.Message}");
                     }
                 }
                 else

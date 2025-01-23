@@ -16,6 +16,7 @@
  - Transaction type: integer, 0 (validate pin), 1 (display balance), 2 (withdraw)
  - Transaction value (i.e. the amount to be withdrawn, or balance to be displayed): integer, should be a multiple of 5
 
+
 ## Code Review
 
 Use these guidelines to review code after testing but before merging.
@@ -68,3 +69,12 @@ A key point here is that there is no such thing as “perfect” code—there is
 - Buttons should be flat with a primary colour border of size 3
 - Windows in forms should be vertically and horizontally centred
 - Forms should be full screen
+
+
+---- Sizing ----
+
+
+---- Interaction ----
+
+- ?could be cool if on hover buttons set their background colour to primary and their text colour to tertiary. Also should be relatively easy to implement
+
