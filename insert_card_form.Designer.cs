@@ -40,10 +40,9 @@ namespace ATM_forms
             // 
             this.insert_card_picture_box.Image = ((System.Drawing.Image)(resources.GetObject("insert_card_picture_box.Image")));
             this.insert_card_picture_box.InitialImage = ((System.Drawing.Image)(resources.GetObject("insert_card_picture_box.InitialImage")));
-            this.insert_card_picture_box.Location = new System.Drawing.Point(606, 365);
-            this.insert_card_picture_box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.insert_card_picture_box.Location = new System.Drawing.Point(404, 237);
             this.insert_card_picture_box.Name = "insert_card_picture_box";
-            this.insert_card_picture_box.Size = new System.Drawing.Size(748, 771);
+            this.insert_card_picture_box.Size = new System.Drawing.Size(500, 500);
             this.insert_card_picture_box.TabIndex = 0;
             this.insert_card_picture_box.TabStop = false;
             this.insert_card_picture_box.Click += new System.EventHandler(this.insert_card_picture_box_Click);
@@ -53,20 +52,20 @@ namespace ATM_forms
             this.insert_card_label.AutoSize = true;
             this.insert_card_label.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.insert_card_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.insert_card_label.Location = new System.Drawing.Point(814, 234);
-            this.insert_card_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.insert_card_label.Location = new System.Drawing.Point(543, 152);
             this.insert_card_label.Name = "insert_card_label";
-            this.insert_card_label.Size = new System.Drawing.Size(322, 74);
+            this.insert_card_label.Size = new System.Drawing.Size(213, 50);
             this.insert_card_label.TabIndex = 1;
             this.insert_card_label.Text = "Insert Card";
             // 
             // insert_card_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 1050);
+            this.ClientSize = new System.Drawing.Size(1429, 947);
             this.Controls.Add(this.insert_card_label);
             this.Controls.Add(this.insert_card_picture_box);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "insert_card_form";
             this.Text = "Insert Card";
             this.Load += new System.EventHandler(this.insert_card_form_Load);
