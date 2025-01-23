@@ -19,7 +19,7 @@ namespace ATM_forms
 
         private void withdraw_form_Load(object sender, EventArgs e)
         {
-            Program.form_load(sender, e);
+            
         }
 
         // single event handler for all number buttons

@@ -18,7 +18,6 @@ namespace ATM_forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form insertCardForm = new insert_card_form();
-            insertCardForm.Load += new EventHandler(form_load);
             Application.Run(new insert_card_form());
         }
 
@@ -29,18 +28,6 @@ namespace ATM_forms
             currentForm.Close();  
         }
 
-        // a shared form_load method for all forms to prevent lagging
-        public static void form_load(object sender, EventArgs e)
-        {
-            int w = Screen.PrimaryScreen.Bounds.Width;
-            int h = Screen.PrimaryScreen.Bounds.Height;
-
-            if (sender is Form form)
-            {
-                form.Location = new Point(0, 0);
-                form.Size = new Size(w, h);
-            }
-        }
     }
 
     public static class TransactionData

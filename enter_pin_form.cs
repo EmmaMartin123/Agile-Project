@@ -20,7 +20,7 @@ namespace ATM_forms
 
         private void enter_pin_form_Load(object sender, EventArgs e)
         {
-            Program.form_load(sender, e); 
+           
 
         }
 

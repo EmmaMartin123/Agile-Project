@@ -73,8 +73,8 @@ namespace ATM_forms
             // 
             // done_btn
             // 
-            this.done_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.done_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
+            this.done_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.done_btn.FlatAppearance.BorderSize = 3;
             this.done_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.done_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -86,8 +86,8 @@ namespace ATM_forms
             this.done_btn.Text = "DONE";
             this.done_btn.UseVisualStyleBackColor = true;
             this.done_btn.Click += new System.EventHandler(this.done_btn_Click);
-            this.done_btn.MouseEnter += new EventHandler(this.Btn_MouseEnter);
-            this.done_btn.MouseLeave += new EventHandler(this.Btn_MouseLeave);
+            this.done_btn.MouseEnter += new System.EventHandler(this.Btn_MouseEnter);
+            this.done_btn.MouseLeave += new System.EventHandler(this.Btn_MouseLeave);
             // 
             // balance_form
             // 
@@ -97,6 +97,7 @@ namespace ATM_forms
             this.Controls.Add(this.balance_panel);
             this.Name = "balance_form";
             this.Text = "Check balance";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.balance_form_Load);
             this.balance_panel.ResumeLayout(false);
             this.ResumeLayout(false);

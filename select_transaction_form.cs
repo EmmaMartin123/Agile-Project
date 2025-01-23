@@ -19,7 +19,7 @@ namespace ATM_forms
 
         private void select_transaction_form_Load(object sender, EventArgs e)
         {
-            Program.form_load(sender, e);
+          
         }
 
         private void exit_btn_Click(object sender, EventArgs e)
