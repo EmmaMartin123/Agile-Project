@@ -69,6 +69,8 @@ A key point here is that there is no such thing as “perfect” code—there is
 - Windows in forms should be vertically and horizontally centred
 - Forms should be full screen
 
+- ?could be cool if on hover buttons set their background colour to primary and their text colour to tertiary. Also should be relatively easy to implement
+
 ## Meeting Recording
 
 https://youtu.be/e6jpi1J9lqg 
