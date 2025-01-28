@@ -42,6 +42,7 @@ int networkSim_fd; // file descriptor for the connection to the network simulato
 
 std::vector<int> queuedSockets;
 std::vector<struct pollfd> ATMs;
+std::vector<struct pollfd> Sims;
 
 std::mutex queuedSocketsMutex;
 
@@ -200,7 +201,27 @@ void handleSimulatorResponse(int atm_fd) {
 
 // for any sims we have, check for responses to send back to ATMs
 void SimToAtmComms(){
+    char buff[512];
 
+    while (1)
+    {
+        int numEvents = poll(&(*(Sims.begin())), Sims.size(), 150);
+
+        // received response from sims
+        if (numEvents > 0)
+        {
+            // check for something in the event that poll doesn't timeout
+            for (int i = 0; i < Sims.size(); i++)
+            {
+                if (ATMs[i].revents & POLLIN)
+                {
+
+                    ATMs[i].revents = 0;
+                }
+            }
+        }
+    }
+    
 }
 
 // for all the ATM sockets we are working with, check if they have received inputs and pass them to sims
@@ -210,10 +231,10 @@ void AtmToSimComms(){
     // check all ports regularly
     while (1)
     {
-        int num_events = poll(&(*(ATMs.begin())), ATMs.size(), 150);
+        int numEvents = poll(&(*(ATMs.begin())), ATMs.size(), 150);
 
         // only scan the ports for data if and event has happened
-        if (num_events > 0)
+        if (numEvents > 0)
         {
             // check for something in the event that poll doesn't timeout
             for (int i = 0; i < ATMs.size(); i++)
@@ -374,11 +395,12 @@ int main(int argc, char *argv[])
 {
     // connect to the simulator
     networkSim_fd = connectToNetwork();
+    Sims.push_back(pollfd{networkSim_fd, POLLIN, 0});
 
     // set up a thread to handle clients
     std::thread AtmPollingThread(AtmToSimComms);
     // create another thread to handle simulators responding
-    //std::thread responseThread();
+    std::thread responseThread(SimToAtmComms);
 
     // start accepting clients
     bindSocketForClientsAndListen();
