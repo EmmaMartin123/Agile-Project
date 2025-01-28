@@ -67,7 +67,8 @@ namespace ATM_forms
             this.withdraw_panel.Controls.Add(this.btnY);
             this.withdraw_panel.Controls.Add(this.btnN);
             this.withdraw_panel.Controls.Add(this.btnExit);
-            this.withdraw_panel.Location = new System.Drawing.Point(508, 216);
+            this.withdraw_panel.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.withdraw_panel.Location = new System.Drawing.Point(285, 76);
             this.withdraw_panel.Name = "withdraw_panel";
             this.withdraw_panel.Size = new System.Drawing.Size(886, 536);
             this.withdraw_panel.TabIndex = 0;
@@ -292,7 +293,7 @@ namespace ATM_forms
             this.btnY.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.btnY.FlatAppearance.BorderSize = 3;
             this.btnY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnY.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnY.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.btnY.Location = new System.Drawing.Point(320, 396);
             this.btnY.Margin = new System.Windows.Forms.Padding(2);
@@ -311,7 +312,7 @@ namespace ATM_forms
             this.btnN.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.btnN.FlatAppearance.BorderSize = 3;
             this.btnN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnN.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnN.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.btnN.Location = new System.Drawing.Point(490, 396);
             this.btnN.Margin = new System.Windows.Forms.Padding(2);
@@ -349,6 +350,7 @@ namespace ATM_forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1445, 770);
             this.Controls.Add(this.withdraw_panel);
+            this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.Name = "WithdrawForm";
             this.Text = "Withdraw";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

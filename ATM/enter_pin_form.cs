@@ -19,8 +19,8 @@ namespace ATM_forms
         public EnterPinForm()
         {
             InitializeComponent();
-
         }
+
 
         private void PintxtboxKeyPress(object sender, KeyPressEventArgs e)
         {
@@ -82,7 +82,23 @@ namespace ATM_forms
 
         private void EnterPinForm_Load(object sender, EventArgs e)
         {
+            // make the form invisible while loading so that it doesn't lag 
+            this.Visible = false;
+            // center the main panel
+            enter_pin_panel.Left = (this.ClientSize.Width - enter_pin_panel.Width) / 2;
+            enter_pin_panel.Top = (this.ClientSize.Height - enter_pin_panel.Height) / 2;
+            // add an event handler to handle resizing
+            this.SizeChanged += new EventHandler(this.EnterPin_SizeChanged);
+            this.Visible = true; // make form visible again
+        }
 
+        /*
+         * Event handler to continue to center the panel even if the size changes
+         */
+        private void EnterPin_SizeChanged(object sender, System.EventArgs e)
+        {
+            enter_pin_panel.Left = (this.ClientSize.Width - enter_pin_panel.Width) / 2;
+            enter_pin_panel.Top = (this.ClientSize.Height - enter_pin_panel.Height) / 2;
         }
 
         private void EnterButtonClick(object sender, EventArgs e)
@@ -112,7 +128,7 @@ namespace ATM_forms
 
                         // assume the response is true for now and set it manually
 
-                        //int transaction_outcome = 0; // for testing only as we can't currently get a response
+                        //int transaction_outcome = 0; // for testing only
 
                         if (transaction_outcome == 0)
                         {
@@ -147,6 +163,11 @@ namespace ATM_forms
                 // if the PIN is not exactly 4 digits
                 MessageBox.Show("Please enter a 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void enter_pin_panel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

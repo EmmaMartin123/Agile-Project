@@ -35,6 +35,7 @@
             // 
             // alert_Picture_Box
             // 
+            this.alert_Picture_Box.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.alert_Picture_Box.Image = ((System.Drawing.Image)(resources.GetObject("alert_Picture_Box.Image")));
             this.alert_Picture_Box.Location = new System.Drawing.Point(482, 203);
             this.alert_Picture_Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -43,7 +44,7 @@
             this.alert_Picture_Box.TabIndex = 0;
             this.alert_Picture_Box.TabStop = false;
             // 
-            // alert_message_form
+            // AlertMessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -52,7 +53,7 @@
             this.Name = "AlertMessageForm";
             this.Text = "alert_message_form";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            //this.Load += new System.EventHandler(this.alert_message_form_Load);
+            this.Load += new System.EventHandler(this.AlertMessageForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.alert_Picture_Box)).EndInit();
             this.ResumeLayout(false);
 
