@@ -108,11 +108,14 @@ namespace ATM_forms
 
         private void WithdrawForm_Load(object sender, EventArgs e)
         {
+            // make the form invisible while loading so that it doesn't lag 
+            this.Visible = false;
             // center the main panel
             withdraw_panel.Left = (this.ClientSize.Width - withdraw_panel.Width) / 2;
             withdraw_panel.Top = (this.ClientSize.Height - withdraw_panel.Height) / 2;
             // add an event handler to handle resizing
             this.SizeChanged += new EventHandler(this.Withdraw_SizeChanged);
+            this.Visible = true; // make form visible again
         }
 
         /*

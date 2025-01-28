@@ -82,11 +82,14 @@ namespace ATM_forms
 
         private void EnterPinForm_Load(object sender, EventArgs e)
         {
+            // make the form invisible while loading so that it doesn't lag 
+            this.Visible = false;
             // center the main panel
             enter_pin_panel.Left = (this.ClientSize.Width - enter_pin_panel.Width) / 2;
             enter_pin_panel.Top = (this.ClientSize.Height - enter_pin_panel.Height) / 2;
             // add an event handler to handle resizing
             this.SizeChanged += new EventHandler(this.EnterPin_SizeChanged);
+            this.Visible = true; // make form visible again
         }
 
         /*
