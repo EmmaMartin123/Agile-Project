@@ -41,7 +41,6 @@ namespace ATM_forms
             // 
             // select_transaction_panel
             // 
-            this.select_transaction_panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.select_transaction_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.select_transaction_panel.Controls.Add(this.exit_btn);
             this.select_transaction_panel.Controls.Add(this.cash_withdrawal_btn);

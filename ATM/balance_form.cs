@@ -21,6 +21,12 @@ namespace ATM_forms
 
         private void BalanceformLoad(object sender, EventArgs e)
         {
+            // center the main panel
+            balance_panel.Left = (this.ClientSize.Width - balance_panel.Width) / 2;
+            balance_panel.Top = (this.ClientSize.Height - balance_panel.Height) / 2;
+            // add an event handler to handle resizing
+            this.SizeChanged += new EventHandler(this.Balance_SizeChanged);
+        
             // send the balance request to the switch to deal with
             try
             {
@@ -41,6 +47,15 @@ namespace ATM_forms
             {
                 Console.WriteLine($"error in network operations: {ex.Message}");
             }
+        }
+
+        /*
+         * Event handler to continue to center the panel even if the size changes
+         */
+        private void Balance_SizeChanged(object sender, System.EventArgs e)
+        {
+            balance_panel.Left = (this.ClientSize.Width - balance_panel.Width) / 2;
+            balance_panel.Top = (this.ClientSize.Height - balance_panel.Height) / 2;
         }
 
         private void DonebtnClick(object sender, EventArgs e)

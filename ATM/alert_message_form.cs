@@ -16,5 +16,10 @@ namespace ATM_forms
         {
             InitializeComponent();
         }
+
+        private void AlertMessageForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

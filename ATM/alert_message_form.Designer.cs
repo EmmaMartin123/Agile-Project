@@ -53,6 +53,7 @@
             this.Name = "AlertMessageForm";
             this.Text = "alert_message_form";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.AlertMessageForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.alert_Picture_Box)).EndInit();
             this.ResumeLayout(false);
 

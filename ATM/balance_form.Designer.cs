@@ -39,7 +39,6 @@ namespace ATM_forms
             // 
             // balance_panel
             // 
-            this.balance_panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.balance_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.balance_panel.Controls.Add(this.balance_label);
             this.balance_panel.Controls.Add(this.balance_heading_label);

@@ -19,8 +19,8 @@ namespace ATM_forms
         public EnterPinForm()
         {
             InitializeComponent();
-
         }
+
 
         private void PintxtboxKeyPress(object sender, KeyPressEventArgs e)
         {
