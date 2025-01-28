@@ -31,6 +31,7 @@ namespace ATM_forms
         private void InitializeComponent()
         {
             this.enter_pin_panel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.exit_btn = new System.Windows.Forms.Button();
             this.delete_btn = new System.Windows.Forms.Button();
             this.pin_txt_box = new System.Windows.Forms.TextBox();
@@ -45,7 +46,6 @@ namespace ATM_forms
             this.btn7 = new System.Windows.Forms.Button();
             this.btn8 = new System.Windows.Forms.Button();
             this.btn9 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.enter_pin_panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,6 +73,22 @@ namespace ATM_forms
             this.enter_pin_panel.Size = new System.Drawing.Size(886, 535);
             this.enter_pin_panel.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
+            this.button1.FlatAppearance.BorderSize = 3;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
+            this.button1.Location = new System.Drawing.Point(320, 402);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(79, 71);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Enter";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // exit_btn
             // 
             this.exit_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
@@ -85,7 +101,7 @@ namespace ATM_forms
             this.exit_btn.Name = "exit_btn";
             this.exit_btn.Size = new System.Drawing.Size(250, 50);
             this.exit_btn.TabIndex = 3;
-            this.exit_btn.Text = "Clear";
+            this.exit_btn.Text = "Cancel";
             this.exit_btn.UseVisualStyleBackColor = true;
             this.exit_btn.Click += new System.EventHandler(this.ExitbtnClick);
             this.exit_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
@@ -321,22 +337,6 @@ namespace ATM_forms
             this.btn9.Click += new System.EventHandler(this.NumberbtnClick);
             this.btn9.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.btn9.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.button1.FlatAppearance.BorderSize = 3;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.button1.Location = new System.Drawing.Point(320, 402);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 71);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Enter";
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // EnterPinForm
             // 
