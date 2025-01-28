@@ -148,5 +148,10 @@ namespace ATM_forms
                 MessageBox.Show("Please enter a 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void enter_pin_panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
