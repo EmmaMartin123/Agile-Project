@@ -34,14 +34,28 @@ namespace ATM_forms
             e.Handled = true; 
         }
 
-        private void  BtnYClick(object sender, EventArgs e)
+        private void BtnYClick(object sender, EventArgs e)
         {
 
             decimal amount;
             string amountText = amount_txtbox.Text.Replace("£", "").Trim(); // removes the pound sign
+            // parse input string to decimal
+            decimal.TryParse(amountText, out amount);
+
+
+            // check cash can be withdrawn before sending to switch
+            if(!ATMContents.CanWithdrawCash(amount))
+            {
+                MessageBox.Show("ATM has insufficient funds", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // clear what was in the withdraw box
+                amount_txtbox.Text = "£";
+
+                return;
+            }
 
             // checks the amount entered is valid - must be a multiple of 5 and a valid number
-            if (decimal.TryParse(amountText, out amount) && amount > 0 && amount % 5 == 0)
+            if (amount > 0 && amount % 5 == 0)
             {
                 // send amount to switch to deal with
                 try
@@ -61,7 +75,11 @@ namespace ATM_forms
                     // checks if the balance is there to withdraw
                     if (transaction_outcome == 0)
                     {
+                        // remove the cash from ATM stores after confirmation from user bank
+                        ATMContents.WithdrawCash(amount);
+
                         MessageBox.Show($"You have successfully withdrawn £{amount}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                         SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
                         cardForm.Show();
                         this.Close();  // terminates this form
