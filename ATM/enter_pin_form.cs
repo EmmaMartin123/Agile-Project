@@ -117,18 +117,18 @@ namespace ATM_forms
                     {
 
                         // connect and send response in json format
-                        /*NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                        NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                         NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
                         string response = NetworkClient.ReceiveResponse();
                         Console.WriteLine($"Response: {response}");
                         NetworkClient.CloseConnection();
 
                         dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                        int transaction_outcome = parsedResponse.transaction_outcome;*/
+                        int transaction_outcome = parsedResponse.transaction_outcome;
 
                         // assume the response is true for now and set it manually
 
-                        int transaction_outcome = 0; // for testing only
+                        //int transaction_outcome = 0; // for testing only
 
                         if (transaction_outcome == 0)
                         {
@@ -141,7 +141,7 @@ namespace ATM_forms
                         else
                         {
                             // if the PIN does not match
-                            //string reason = parsedResponse.reason;
+                            string reason = parsedResponse.reason;
                             MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             pin_txt_box.Clear();
                         }

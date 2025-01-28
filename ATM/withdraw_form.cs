@@ -48,7 +48,7 @@ namespace ATM_forms
                 {
 
                     // connect and send response in json format
-                    /*NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                    NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                     Console.WriteLine(amount);
                     NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\", \"transaction_value\": \""+amount+"\"}");
                     string response = NetworkClient.ReceiveResponse();
@@ -56,9 +56,9 @@ namespace ATM_forms
                     NetworkClient.CloseConnection();
 
                     dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                    int transaction_outcome = parsedResponse.transaction_outcome;*/
+                    int transaction_outcome = parsedResponse.transaction_outcome;
 
-                    int transaction_outcome = 0;
+                    //int transaction_outcome = 0; test data
 
                     // checks if the balance is there to withdraw
                     if (transaction_outcome == 0)
