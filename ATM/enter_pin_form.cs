@@ -53,7 +53,7 @@ namespace ATM_forms
 
         private void DeletebtnClick(object sender, EventArgs e)
         {
-
+            s
             if (pin_txt_box.Text.Length > 0)
             {
                 // removes the last character from the pin_txt_box
