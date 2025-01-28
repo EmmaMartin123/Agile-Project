@@ -104,7 +104,7 @@ namespace ATM_forms
             this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn0.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn0.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn0.Location = new System.Drawing.Point(405, 399);
+            this.btn0.Location = new System.Drawing.Point(405, 396);
             this.btn0.Margin = new System.Windows.Forms.Padding(2);
             this.btn0.Name = "btn0";
             this.btn0.Size = new System.Drawing.Size(79, 71);
@@ -237,7 +237,7 @@ namespace ATM_forms
             this.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn7.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn7.Location = new System.Drawing.Point(320, 322);
+            this.btn7.Location = new System.Drawing.Point(320, 319);
             this.btn7.Margin = new System.Windows.Forms.Padding(2);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(79, 71);
@@ -294,7 +294,7 @@ namespace ATM_forms
             this.btnY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnY.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btnY.Location = new System.Drawing.Point(320, 399);
+            this.btnY.Location = new System.Drawing.Point(320, 396);
             this.btnY.Margin = new System.Windows.Forms.Padding(2);
             this.btnY.Name = "btnY";
             this.btnY.Size = new System.Drawing.Size(79, 71);
@@ -313,7 +313,7 @@ namespace ATM_forms
             this.btnN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnN.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btnN.Location = new System.Drawing.Point(490, 399);
+            this.btnN.Location = new System.Drawing.Point(490, 396);
             this.btnN.Margin = new System.Windows.Forms.Padding(2);
             this.btnN.Name = "btnN";
             this.btnN.Size = new System.Drawing.Size(79, 71);
@@ -332,10 +332,10 @@ namespace ATM_forms
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btnExit.Location = new System.Drawing.Point(320, 474);
+            this.btnExit.Location = new System.Drawing.Point(320, 473);
             this.btnExit.Margin = new System.Windows.Forms.Padding(2);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(249, 47);
+            this.btnExit.Size = new System.Drawing.Size(250, 50);
             this.btnExit.TabIndex = 9;
             this.btnExit.Text = "Cancel";
             this.btnExit.UseVisualStyleBackColor = false;
