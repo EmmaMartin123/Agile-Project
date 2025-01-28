@@ -55,22 +55,42 @@ namespace ATM_forms
                     Console.WriteLine($"Response: {response}");
                     NetworkClient.CloseConnection();
 
+                    //parse the response
                     dynamic parsedResponse = JsonConvert.DeserializeObject(response);
                     int transaction_outcome = parsedResponse.transaction_outcome;
 
-                    // checks if the balance is there to withdraw
-                    if (transaction_outcome == 0)
+                    //to store the message displayed to the user
+                    string message;
+
+                    // handles transaction outcomes
+                    switch (transaction_outcome)
                     {
-                        MessageBox.Show($"You have successfully withdrawn £{amount}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
-                        cardForm.Show();
-                        this.Close();  // terminates this form
+                        case 0: // success
+                            message = $"You have successfully withdrawn £{amount}.";
+                            MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            SelectTransactionForm cardForm = new SelectTransactionForm();
+                            cardForm.Show();
+                            this.Close();
+                            break;
+
+                        case 1: // insufficient funds
+                            string reason = parsedResponse.reason ?? "Insufficient funds."; 
+                            message = $"Transaction failed: {reason}";
+                            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+
+                        case 10: // general error
+                            message = "An error occurred during the transaction. Please try again later.";
+                            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+
+                        default: // unknown outcome
+                            message = "Unexpected response from the server.";
+                            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
                     }
-                    else
-                    {
-                        // if not enough funds
-                        MessageBox.Show("An error occurred!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+
                 }
                 catch (Exception ex)
                 {
