@@ -94,7 +94,7 @@ namespace ATM_forms
                             decimal closest_amount = Math.Floor(available_balance / 5) * 5;
 
                             // display the message with closest value
-                            MessageBox.Show($"Transaction failed: {reason}. The minimum you can withdraw is £{closest_amount}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                             // update the amount text box with the suggested withdrawal amount
                             amount_txtbox.Text = "£" + closest_amount.ToString();
