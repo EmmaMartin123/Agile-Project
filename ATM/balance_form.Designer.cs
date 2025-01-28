@@ -45,14 +45,14 @@ namespace ATM_forms
             this.balance_panel.Controls.Add(this.done_btn);
             this.balance_panel.Location = new System.Drawing.Point(508, 215);
             this.balance_panel.Name = "balance_panel";
-            this.balance_panel.Size = new System.Drawing.Size(886, 535);
+            this.balance_panel.Size = new System.Drawing.Size(1300, 900);
             this.balance_panel.TabIndex = 0;
             // 
             // balance_label
             // 
-            this.balance_label.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balance_label.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.balance_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.balance_label.Location = new System.Drawing.Point(-3, 192);
+            this.balance_label.Location = new System.Drawing.Point(207, 300);
             this.balance_label.Name = "balance_label";
             this.balance_label.Size = new System.Drawing.Size(886, 108);
             this.balance_label.TabIndex = 5;
@@ -61,9 +61,9 @@ namespace ATM_forms
             // 
             // balance_heading_label
             // 
-            this.balance_heading_label.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balance_heading_label.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.balance_heading_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.balance_heading_label.Location = new System.Drawing.Point(0, 0);
+            this.balance_heading_label.Location = new System.Drawing.Point(207, 20);
             this.balance_heading_label.Name = "balance_heading_label";
             this.balance_heading_label.Size = new System.Drawing.Size(886, 108);
             this.balance_heading_label.TabIndex = 0;
@@ -76,11 +76,11 @@ namespace ATM_forms
             this.done_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.done_btn.FlatAppearance.BorderSize = 3;
             this.done_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.done_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.done_btn.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.done_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.done_btn.Location = new System.Drawing.Point(230, 395);
+            this.done_btn.Location = new System.Drawing.Point(390, 616);
             this.done_btn.Name = "done_btn";
-            this.done_btn.Size = new System.Drawing.Size(420, 123);
+            this.done_btn.Size = new System.Drawing.Size(440, 130);
             this.done_btn.TabIndex = 4;
             this.done_btn.Text = "DONE";
             this.done_btn.UseVisualStyleBackColor = true;
