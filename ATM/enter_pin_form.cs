@@ -53,7 +53,6 @@ namespace ATM_forms
 
         private void DeletebtnClick(object sender, EventArgs e)
         {
-            s
             if (pin_txt_box.Text.Length > 0)
             {
                 // removes the last character from the pin_txt_box
@@ -78,7 +77,17 @@ namespace ATM_forms
 
         private void ContinuebtnClick(object sender, EventArgs e)
         {
-            //int correctPin = TransactionData.PIN;
+            
+        }
+
+        private void EnterPinForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EnterButtonClick(object sender, EventArgs e)
+        {
+            Console.WriteLine("continuing");
 
             // checks if the PIN is exactly 4 digits 
             if (pin_txt_box.Text.Length == 4)
@@ -103,10 +112,11 @@ namespace ATM_forms
 
                         // assume the response is true for now and set it manually
 
-                        //transaction_outcome en= 0; // for testing only as we can't currently get a response
+                        //int transaction_outcome = 0; // for testing only as we can't currently get a response
 
                         if (transaction_outcome == 0)
                         {
+                            Console.WriteLine("transaction was successful");
                             // if the PIN matches then proceed
                             SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
                             cardForm.Show();
@@ -137,11 +147,6 @@ namespace ATM_forms
                 // if the PIN is not exactly 4 digits
                 MessageBox.Show("Please enter a 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        private void EnterPinForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
