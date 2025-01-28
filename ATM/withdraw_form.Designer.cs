@@ -51,6 +51,7 @@ namespace ATM_forms
             // 
             // withdraw_panel
             // 
+            this.withdraw_panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.withdraw_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.withdraw_panel.Controls.Add(this.amount_label);
             this.withdraw_panel.Controls.Add(this.amount_txtbox);
@@ -292,7 +293,7 @@ namespace ATM_forms
             this.btnY.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.btnY.FlatAppearance.BorderSize = 3;
             this.btnY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnY.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnY.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.btnY.Location = new System.Drawing.Point(320, 396);
             this.btnY.Margin = new System.Windows.Forms.Padding(2);
@@ -311,7 +312,7 @@ namespace ATM_forms
             this.btnN.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.btnN.FlatAppearance.BorderSize = 3;
             this.btnN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnN.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnN.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.btnN.Location = new System.Drawing.Point(490, 396);
             this.btnN.Margin = new System.Windows.Forms.Padding(2);

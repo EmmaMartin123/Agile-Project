@@ -128,6 +128,7 @@ namespace ATM_forms
             // 
             // pin_txt_box
             // 
+            this.pin_txt_box.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pin_txt_box.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.pin_txt_box.Font = new System.Drawing.Font("Segoe UI Semibold", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pin_txt_box.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
