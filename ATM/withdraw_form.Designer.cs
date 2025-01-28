@@ -51,7 +51,6 @@ namespace ATM_forms
             // 
             // withdraw_panel
             // 
-            this.withdraw_panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.withdraw_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.withdraw_panel.Controls.Add(this.amount_label);
             this.withdraw_panel.Controls.Add(this.amount_txtbox);
