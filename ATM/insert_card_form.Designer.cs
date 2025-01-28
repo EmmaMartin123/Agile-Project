@@ -43,7 +43,7 @@ namespace ATM_forms
             this.insert_card_picture_box.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.insert_card_picture_box.Image = ((System.Drawing.Image)(resources.GetObject("insert_card_picture_box.Image")));
             this.insert_card_picture_box.InitialImage = ((System.Drawing.Image)(resources.GetObject("insert_card_picture_box.InitialImage")));
-            this.insert_card_picture_box.Location = new System.Drawing.Point(127, 109);
+            this.insert_card_picture_box.Location = new System.Drawing.Point(275, 120);
             this.insert_card_picture_box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insert_card_picture_box.Name = "insert_card_picture_box";
             this.insert_card_picture_box.Size = new System.Drawing.Size(750, 769);
@@ -54,12 +54,12 @@ namespace ATM_forms
             // insert_card_label
             // 
             this.insert_card_label.AutoSize = true;
-            this.insert_card_label.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.insert_card_label.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.insert_card_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.insert_card_label.Location = new System.Drawing.Point(351, 30);
+            this.insert_card_label.Location = new System.Drawing.Point(442, 20);
             this.insert_card_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.insert_card_label.Name = "insert_card_label";
-            this.insert_card_label.Size = new System.Drawing.Size(322, 74);
+            this.insert_card_label.Size = new System.Drawing.Size(415, 96);
             this.insert_card_label.TabIndex = 1;
             this.insert_card_label.Text = "Insert Card";
             // 
@@ -70,7 +70,7 @@ namespace ATM_forms
             this.insert_card_panel.Controls.Add(this.insert_card_picture_box);
             this.insert_card_panel.Location = new System.Drawing.Point(335, 106);
             this.insert_card_panel.Name = "insert_card_panel";
-            this.insert_card_panel.Size = new System.Drawing.Size(1000, 900);
+            this.insert_card_panel.Size = new System.Drawing.Size(1300, 900);
             this.insert_card_panel.TabIndex = 2;
             // 
             // InsertCardForm
