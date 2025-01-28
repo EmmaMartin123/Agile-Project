@@ -75,9 +75,29 @@ namespace ATM_forms
                             break;
 
                         case 1: // insufficient funds
-                            string reason = parsedResponse.reason ?? "Insufficient funds."; 
+                            string reason = parsedResponse.reason ?? "Insufficient funds.";
                             message = $"Transaction failed: {reason}";
-                            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            //send balance request
+                            TransactionData.transactionType = 1;
+                            NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                            NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
+                            string balanceResponse = NetworkClient.ReceiveResponse();
+                            Console.WriteLine($"Balance Response: {balanceResponse}");
+                            NetworkClient.CloseConnection();
+
+                            dynamic balanceParsedResponse = JsonConvert.DeserializeObject(balanceResponse);
+                            decimal available_balance = balanceParsedResponse.transaction_value;
+                            Console.WriteLine(available_balance);
+
+                            // calculate closest multiple of 5 to the available balance
+                            decimal closest_amount = Math.Floor(available_balance / 5) * 5;
+
+                            // display the message with closest value
+                            MessageBox.Show($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            // update the amount text box with the suggested withdrawal amount
+                            amount_txtbox.Text = "£" + closest_amount.ToString();
                             break;
 
                         case 10: // general error
