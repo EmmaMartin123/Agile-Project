@@ -82,7 +82,20 @@ namespace ATM_forms
 
         private void EnterPinForm_Load(object sender, EventArgs e)
         {
+            // center the main panel
+            enter_pin_panel.Left = (this.ClientSize.Width - enter_pin_panel.Width) / 2;
+            enter_pin_panel.Top = (this.ClientSize.Height - enter_pin_panel.Height) / 2;
+            // add an event handler to handle resizing
+            this.SizeChanged += new EventHandler(this.EnterPin_SizeChanged);
+        }
 
+        /*
+         * Event handler to continue to center the panel even if the size changes
+         */
+        private void EnterPin_SizeChanged(object sender, System.EventArgs e)
+        {
+            enter_pin_panel.Left = (this.ClientSize.Width - enter_pin_panel.Width) / 2;
+            enter_pin_panel.Top = (this.ClientSize.Height - enter_pin_panel.Height) / 2;
         }
 
         private void EnterButtonClick(object sender, EventArgs e)

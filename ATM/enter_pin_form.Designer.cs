@@ -52,7 +52,6 @@ namespace ATM_forms
             // enter_pin_panel
             // 
             this.enter_pin_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
-            this.enter_pin_panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.enter_pin_panel.Controls.Add(this.EnterButton);
             this.enter_pin_panel.Controls.Add(this.exit_btn);
             this.enter_pin_panel.Controls.Add(this.delete_btn);
@@ -69,10 +68,9 @@ namespace ATM_forms
             this.enter_pin_panel.Controls.Add(this.btn8);
             this.enter_pin_panel.Controls.Add(this.btn9);
             this.enter_pin_panel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.enter_pin_panel.Location = new System.Drawing.Point(339, 140);
-            this.enter_pin_panel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.enter_pin_panel.Location = new System.Drawing.Point(285, 76);
             this.enter_pin_panel.Name = "enter_pin_panel";
-            this.enter_pin_panel.Size = new System.Drawing.Size(591, 348);
+            this.enter_pin_panel.Size = new System.Drawing.Size(886, 536);
             this.enter_pin_panel.TabIndex = 0;
             this.enter_pin_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.enter_pin_panel_Paint);
             // 
@@ -84,10 +82,10 @@ namespace ATM_forms
             this.EnterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EnterButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EnterButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.EnterButton.Location = new System.Drawing.Point(213, 261);
-            this.EnterButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.EnterButton.Location = new System.Drawing.Point(320, 402);
+            this.EnterButton.Margin = new System.Windows.Forms.Padding(2);
             this.EnterButton.Name = "EnterButton";
-            this.EnterButton.Size = new System.Drawing.Size(53, 46);
+            this.EnterButton.Size = new System.Drawing.Size(80, 71);
             this.EnterButton.TabIndex = 10;
             this.EnterButton.Text = "Enter";
             this.EnterButton.UseVisualStyleBackColor = false;
@@ -101,10 +99,9 @@ namespace ATM_forms
             this.exit_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exit_btn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exit_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.exit_btn.Location = new System.Drawing.Point(213, 311);
-            this.exit_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.exit_btn.Location = new System.Drawing.Point(320, 478);
             this.exit_btn.Name = "exit_btn";
-            this.exit_btn.Size = new System.Drawing.Size(167, 32);
+            this.exit_btn.Size = new System.Drawing.Size(250, 49);
             this.exit_btn.TabIndex = 3;
             this.exit_btn.Text = "Cancel";
             this.exit_btn.UseVisualStyleBackColor = true;
@@ -120,10 +117,9 @@ namespace ATM_forms
             this.delete_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.delete_btn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delete_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.delete_btn.Location = new System.Drawing.Point(327, 261);
-            this.delete_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.delete_btn.Location = new System.Drawing.Point(490, 402);
             this.delete_btn.Name = "delete_btn";
-            this.delete_btn.Size = new System.Drawing.Size(53, 46);
+            this.delete_btn.Size = new System.Drawing.Size(80, 71);
             this.delete_btn.TabIndex = 2;
             this.delete_btn.Text = "Clear";
             this.delete_btn.UseVisualStyleBackColor = true;
@@ -137,10 +133,9 @@ namespace ATM_forms
             this.pin_txt_box.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.pin_txt_box.Font = new System.Drawing.Font("Segoe UI Semibold", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pin_txt_box.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.pin_txt_box.Location = new System.Drawing.Point(185, 58);
-            this.pin_txt_box.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pin_txt_box.Location = new System.Drawing.Point(278, 90);
             this.pin_txt_box.Name = "pin_txt_box";
-            this.pin_txt_box.Size = new System.Drawing.Size(223, 50);
+            this.pin_txt_box.Size = new System.Drawing.Size(334, 75);
             this.pin_txt_box.TabIndex = 1;
             this.pin_txt_box.TextChanged += new System.EventHandler(this.PinTxtboxTextChanged);
             this.pin_txt_box.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PintxtboxKeyPress);
@@ -150,10 +145,9 @@ namespace ATM_forms
             this.pin_prompt.AutoSize = true;
             this.pin_prompt.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pin_prompt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.pin_prompt.Location = new System.Drawing.Point(21, 9);
-            this.pin_prompt.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.pin_prompt.Location = new System.Drawing.Point(32, 14);
             this.pin_prompt.Name = "pin_prompt";
-            this.pin_prompt.Size = new System.Drawing.Size(561, 50);
+            this.pin_prompt.Size = new System.Drawing.Size(845, 74);
             this.pin_prompt.TabIndex = 0;
             this.pin_prompt.Text = "Enter PIN and Press ENTER Key";
             // 
@@ -165,10 +159,10 @@ namespace ATM_forms
             this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn0.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn0.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn0.Location = new System.Drawing.Point(270, 261);
-            this.btn0.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn0.Location = new System.Drawing.Point(405, 402);
+            this.btn0.Margin = new System.Windows.Forms.Padding(2);
             this.btn0.Name = "btn0";
-            this.btn0.Size = new System.Drawing.Size(53, 46);
+            this.btn0.Size = new System.Drawing.Size(80, 71);
             this.btn0.TabIndex = 9;
             this.btn0.Text = "0";
             this.btn0.UseVisualStyleBackColor = false;
@@ -184,10 +178,10 @@ namespace ATM_forms
             this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn1.Location = new System.Drawing.Point(213, 111);
-            this.btn1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn1.Location = new System.Drawing.Point(320, 171);
+            this.btn1.Margin = new System.Windows.Forms.Padding(2);
             this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(53, 46);
+            this.btn1.Size = new System.Drawing.Size(80, 71);
             this.btn1.TabIndex = 9;
             this.btn1.Text = "1";
             this.btn1.UseVisualStyleBackColor = false;
@@ -203,10 +197,10 @@ namespace ATM_forms
             this.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn2.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn2.Location = new System.Drawing.Point(270, 111);
-            this.btn2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn2.Location = new System.Drawing.Point(405, 171);
+            this.btn2.Margin = new System.Windows.Forms.Padding(2);
             this.btn2.Name = "btn2";
-            this.btn2.Size = new System.Drawing.Size(53, 46);
+            this.btn2.Size = new System.Drawing.Size(80, 71);
             this.btn2.TabIndex = 9;
             this.btn2.Text = "2";
             this.btn2.UseVisualStyleBackColor = false;
@@ -222,10 +216,10 @@ namespace ATM_forms
             this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn3.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn3.Location = new System.Drawing.Point(327, 111);
-            this.btn3.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn3.Location = new System.Drawing.Point(490, 171);
+            this.btn3.Margin = new System.Windows.Forms.Padding(2);
             this.btn3.Name = "btn3";
-            this.btn3.Size = new System.Drawing.Size(53, 46);
+            this.btn3.Size = new System.Drawing.Size(80, 71);
             this.btn3.TabIndex = 9;
             this.btn3.Text = "3";
             this.btn3.UseVisualStyleBackColor = false;
@@ -241,10 +235,10 @@ namespace ATM_forms
             this.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn4.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn4.Location = new System.Drawing.Point(213, 161);
-            this.btn4.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn4.Location = new System.Drawing.Point(320, 248);
+            this.btn4.Margin = new System.Windows.Forms.Padding(2);
             this.btn4.Name = "btn4";
-            this.btn4.Size = new System.Drawing.Size(53, 46);
+            this.btn4.Size = new System.Drawing.Size(80, 71);
             this.btn4.TabIndex = 9;
             this.btn4.Text = "4";
             this.btn4.UseVisualStyleBackColor = false;
@@ -260,10 +254,10 @@ namespace ATM_forms
             this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn5.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn5.Location = new System.Drawing.Point(270, 161);
-            this.btn5.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn5.Location = new System.Drawing.Point(405, 248);
+            this.btn5.Margin = new System.Windows.Forms.Padding(2);
             this.btn5.Name = "btn5";
-            this.btn5.Size = new System.Drawing.Size(53, 46);
+            this.btn5.Size = new System.Drawing.Size(80, 71);
             this.btn5.TabIndex = 9;
             this.btn5.Text = "5";
             this.btn5.UseVisualStyleBackColor = false;
@@ -279,10 +273,10 @@ namespace ATM_forms
             this.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn6.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn6.Location = new System.Drawing.Point(327, 161);
-            this.btn6.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn6.Location = new System.Drawing.Point(490, 248);
+            this.btn6.Margin = new System.Windows.Forms.Padding(2);
             this.btn6.Name = "btn6";
-            this.btn6.Size = new System.Drawing.Size(53, 46);
+            this.btn6.Size = new System.Drawing.Size(80, 71);
             this.btn6.TabIndex = 9;
             this.btn6.Text = "6";
             this.btn6.UseVisualStyleBackColor = false;
@@ -298,10 +292,10 @@ namespace ATM_forms
             this.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn7.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn7.Location = new System.Drawing.Point(213, 211);
-            this.btn7.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn7.Location = new System.Drawing.Point(320, 325);
+            this.btn7.Margin = new System.Windows.Forms.Padding(2);
             this.btn7.Name = "btn7";
-            this.btn7.Size = new System.Drawing.Size(53, 46);
+            this.btn7.Size = new System.Drawing.Size(80, 71);
             this.btn7.TabIndex = 9;
             this.btn7.Text = "7";
             this.btn7.UseVisualStyleBackColor = false;
@@ -317,10 +311,10 @@ namespace ATM_forms
             this.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn8.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn8.Location = new System.Drawing.Point(270, 211);
-            this.btn8.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn8.Location = new System.Drawing.Point(405, 325);
+            this.btn8.Margin = new System.Windows.Forms.Padding(2);
             this.btn8.Name = "btn8";
-            this.btn8.Size = new System.Drawing.Size(53, 46);
+            this.btn8.Size = new System.Drawing.Size(80, 71);
             this.btn8.TabIndex = 9;
             this.btn8.Text = "8";
             this.btn8.UseVisualStyleBackColor = false;
@@ -336,10 +330,10 @@ namespace ATM_forms
             this.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn9.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.btn9.Location = new System.Drawing.Point(327, 211);
-            this.btn9.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btn9.Location = new System.Drawing.Point(490, 325);
+            this.btn9.Margin = new System.Windows.Forms.Padding(2);
             this.btn9.Name = "btn9";
-            this.btn9.Size = new System.Drawing.Size(53, 46);
+            this.btn9.Size = new System.Drawing.Size(80, 71);
             this.btn9.TabIndex = 9;
             this.btn9.Text = "9";
             this.btn9.UseVisualStyleBackColor = false;
@@ -349,12 +343,11 @@ namespace ATM_forms
             // 
             // EnterPinForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1260, 682);
+            this.ClientSize = new System.Drawing.Size(1778, 944);
             this.Controls.Add(this.enter_pin_panel);
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "EnterPinForm";
             this.Text = "Enter Pin";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
