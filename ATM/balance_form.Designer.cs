@@ -47,7 +47,6 @@ namespace ATM_forms
             this.balance_panel.Name = "balance_panel";
             this.balance_panel.Size = new System.Drawing.Size(886, 535);
             this.balance_panel.TabIndex = 0;
-            //this.balance_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.balance_panel_Paint);
             // 
             // balance_label
             // 
@@ -59,6 +58,7 @@ namespace ATM_forms
             this.balance_label.TabIndex = 5;
             this.balance_label.Text = "£XXX.XX";
             this.balance_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.balance_label.Click += new System.EventHandler(this.balance_label_Click);
             // 
             // balance_heading_label
             // 
@@ -89,7 +89,7 @@ namespace ATM_forms
             this.done_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.done_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
-            // balance_form
+            // BalanceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

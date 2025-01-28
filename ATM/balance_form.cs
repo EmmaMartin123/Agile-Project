@@ -48,6 +48,9 @@ namespace ATM_forms
             this.Close();  // terminates this form
         }
 
-        
+        private void balance_label_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

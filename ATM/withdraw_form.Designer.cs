@@ -352,7 +352,6 @@ namespace ATM_forms
             this.Name = "WithdrawForm";
             this.Text = "Withdraw";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.WithdrawForm_Load);
             this.withdraw_panel.ResumeLayout(false);
             this.withdraw_panel.PerformLayout();
             this.ResumeLayout(false);

@@ -104,9 +104,5 @@ namespace ATM_forms
 
         }
 
-        private void WithdrawForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
