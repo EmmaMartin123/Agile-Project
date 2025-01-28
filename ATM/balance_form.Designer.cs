@@ -39,6 +39,7 @@ namespace ATM_forms
             // 
             // balance_panel
             // 
+            this.balance_panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.balance_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.balance_panel.Controls.Add(this.balance_label);
             this.balance_panel.Controls.Add(this.balance_heading_label);
@@ -47,7 +48,6 @@ namespace ATM_forms
             this.balance_panel.Name = "balance_panel";
             this.balance_panel.Size = new System.Drawing.Size(886, 535);
             this.balance_panel.TabIndex = 0;
-            //this.balance_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.balance_panel_Paint);
             // 
             // balance_label
             // 
@@ -89,7 +89,7 @@ namespace ATM_forms
             this.done_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.done_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
-            // balance_form
+            // BalanceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

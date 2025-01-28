@@ -38,6 +38,7 @@ namespace ATM_forms
             // 
             // insert_card_picture_box
             // 
+            this.insert_card_picture_box.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.insert_card_picture_box.Image = ((System.Drawing.Image)(resources.GetObject("insert_card_picture_box.Image")));
             this.insert_card_picture_box.InitialImage = ((System.Drawing.Image)(resources.GetObject("insert_card_picture_box.InitialImage")));
             this.insert_card_picture_box.Location = new System.Drawing.Point(606, 365);
@@ -60,7 +61,7 @@ namespace ATM_forms
             this.insert_card_label.TabIndex = 1;
             this.insert_card_label.Text = "Insert Card";
             // 
-            // insert_card_form
+            // InsertCardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

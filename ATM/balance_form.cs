@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,14 +25,15 @@ namespace ATM_forms
             try
             {
                 // connect and send response in json format
-                NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
-                NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
-                string response = NetworkClient.ReceiveResponse();
-                Console.WriteLine($"Response: {response}");
-                NetworkClient.CloseConnection();
+                /* NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                 NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
+                 string response = NetworkClient.ReceiveResponse();
+                 Console.WriteLine($"Response: {response}");
+                 NetworkClient.CloseConnection();
 
-                dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                int transaction_value = parsedResponse.transaction_value;
+                 dynamic parsedResponse = JsonConvert.DeserializeObject(response);
+                 int transaction_value = parsedResponse.transaction_value;*/
+                int transaction_value = 100;
 
                 balance_label.Text = $"£{transaction_value:F2}"; // F2 for two decimal places
             }
