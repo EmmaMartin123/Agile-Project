@@ -198,8 +198,13 @@ void handleSimulatorResponse(int atm_fd) {
     }
 }
 
-// for all the sockets we are working with, check if they have received inputs
-void pollingFunction(){
+// for any sims we have, check for responses to send back to ATMs
+void SimToAtmComms(){
+
+}
+
+// for all the ATM sockets we are working with, check if they have received inputs and pass them to sims
+void AtmToSimComms(){
     char buff[512];
 
     // check all ports regularly
@@ -237,12 +242,7 @@ void pollingFunction(){
                             // forwarding request to simulator
                             int responseReachedNetwork = forwardToSimulator(request);
 
-                            if (responseReachedNetwork == 0)
-                            { // response made it
-                                // proceed as normal
-                                // handling simulator response & forward to ATM 
-                                handleSimulatorResponse(ATMs[i].fd);
-                            }else
+                            if (responseReachedNetwork != 0)
                             { // connection to network broken, send ATM error response
                                 request["transaction_outcome"] = 10;
                                 request["reason"] = "connection terminated";
@@ -376,7 +376,10 @@ int main(int argc, char *argv[])
     networkSim_fd = connectToNetwork();
 
     // set up a thread to handle clients
-    std::thread pollingThread(pollingFunction);
+    std::thread AtmPollingThread(AtmToSimComms);
+    // create another thread to handle simulators responding
+    //std::thread responseThread();
+
     // start accepting clients
     bindSocketForClientsAndListen();
 
