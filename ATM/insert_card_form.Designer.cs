@@ -65,7 +65,6 @@ namespace ATM_forms
             this.insert_card_label.Size = new System.Drawing.Size(787, 74);
             this.insert_card_label.TabIndex = 1;
             this.insert_card_label.Text = "Please select your card type: ";
-            this.insert_card_label.Click += new System.EventHandler(this.insert_card_label_Click);
             // 
             // mastercardbtn
             // 
@@ -81,7 +80,7 @@ namespace ATM_forms
             this.mastercardbtn.TabIndex = 0;
             this.mastercardbtn.Text = "Mastercard";
             this.mastercardbtn.UseVisualStyleBackColor = true;
-            this.mastercardbtn.Click += new System.EventHandler(this.mastercardbtn_Click);
+            this.mastercardbtn.Click += new System.EventHandler(this.MastercardbtnClick);
             this.mastercardbtn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.mastercardbtn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
@@ -99,7 +98,7 @@ namespace ATM_forms
             this.visabtn.TabIndex = 0;
             this.visabtn.Text = "Visa";
             this.visabtn.UseVisualStyleBackColor = true;
-            this.visabtn.Click += new System.EventHandler(this.visabtn_Click);
+            this.visabtn.Click += new System.EventHandler(this.VisabtnClick);
             this.visabtn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.visabtn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
@@ -117,7 +116,7 @@ namespace ATM_forms
             this.unionpaybtn.TabIndex = 0;
             this.unionpaybtn.Text = "Union Pay";
             this.unionpaybtn.UseVisualStyleBackColor = true;
-            this.unionpaybtn.Click += new System.EventHandler(this.unionpaybtn_Click);
+            this.unionpaybtn.Click += new System.EventHandler(this.UnionpaybtnClick);
             this.unionpaybtn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.unionpaybtn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
@@ -135,7 +134,7 @@ namespace ATM_forms
             this.amexbtn.TabIndex = 0;
             this.amexbtn.Text = "American Express";
             this.amexbtn.UseVisualStyleBackColor = true;
-            this.amexbtn.Click += new System.EventHandler(this.amexbtn_Click);
+            this.amexbtn.Click += new System.EventHandler(this.AmexbtnClick);
             this.amexbtn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.amexbtn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 

@@ -58,7 +58,7 @@ namespace ATM_forms
             this.balance_label.TabIndex = 5;
             this.balance_label.Text = "£XXX.XX";
             this.balance_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.balance_label.Click += new System.EventHandler(this.balance_label_Click);
+            //this.balance_label.Click += new System.EventHandler(this.balance_label_Click);
             // 
             // balance_heading_label
             // 

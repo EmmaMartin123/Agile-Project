@@ -83,7 +83,7 @@ namespace ATM_forms
             this.cash_withdrawal_btn.TabIndex = 2;
             this.cash_withdrawal_btn.Text = "CASH WITHDRAWAL";
             this.cash_withdrawal_btn.UseVisualStyleBackColor = true;
-            this.cash_withdrawal_btn.Click += new System.EventHandler(this.cash_withdrawal_btn_Click);
+            this.cash_withdrawal_btn.Click += new System.EventHandler(this.CashWithdrawalbtnClick);
             this.cash_withdrawal_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.cash_withdrawal_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
@@ -112,7 +112,7 @@ namespace ATM_forms
             this.check_balance_btn.TabIndex = 0;
             this.check_balance_btn.Text = "CHECK BALANCE";
             this.check_balance_btn.UseVisualStyleBackColor = true;
-            this.check_balance_btn.Click += new System.EventHandler(this.check_balance_btn_Click);
+            this.check_balance_btn.Click += new System.EventHandler(this.CheckBalancebtnClick);
             this.check_balance_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.check_balance_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
