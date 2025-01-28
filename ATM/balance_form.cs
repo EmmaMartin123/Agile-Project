@@ -24,8 +24,9 @@ namespace ATM_forms
             try
             {
                 // connect and send response in json format
+                TransactionData.transactionType = 1;
                 NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
-                NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
+                NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
                 string response = NetworkClient.ReceiveResponse();
                 Console.WriteLine($"Response: {response}");
                 NetworkClient.CloseConnection();
