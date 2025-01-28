@@ -17,3 +17,6 @@
 
 obj/
 /.vs/ATM_forms/FileContentIndex/6f682639-10d3-4c8d-bd87-7a7f2f29c0af.vsidx
+
+# Ignore Visual Studio-specific files
+.vs/
