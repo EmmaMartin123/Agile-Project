@@ -90,8 +90,12 @@ namespace ATM_forms
 
         private static void HandleDroppedConnection()
         {
+
             // notifies the user of the connection problem with a dialog box
-            MessageBox.Show("Problem with transaction, returning card...", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //MessageBox.Show("Problem with transaction, returning card...", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            AlertMessageForm alertMessageForm = new AlertMessageForm("Problem with transaction, returning card...");
+            alertMessageForm.ShowDialog();
                
             // gets the current form - which is the form where the connection failed so we can close it
             Form currentForm = Application.OpenForms[Application.OpenForms.Count - 1];

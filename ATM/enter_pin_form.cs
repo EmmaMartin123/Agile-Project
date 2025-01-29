@@ -35,7 +35,9 @@ namespace ATM_forms
             // the text is only digits and has a maximum length of 4
             if (!int.TryParse(pin_txt_box.Text, out _) || pin_txt_box.Text.Length > 4)
             {
-                MessageBox.Show("Please enter a valid 4-digit PIN.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid Input. Please enter a 4-digit PIN.");
+                alertMessageForm.Show(this);
+                //MessageBox.Show("Please enter a valid 4-digit PIN.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pin_txt_box.Text = pin_txt_box.Text.Substring(0, Math.Min(4, pin_txt_box.Text.Length));
                 pin_txt_box.SelectionStart = pin_txt_box.Text.Length; // moves the cursor to the end
             }
@@ -142,7 +144,9 @@ namespace ATM_forms
                         {
                             // if the PIN does not match
                             string reason = parsedResponse.reason;
-                            MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please try again.");
+                            alertMessageForm.Show(this);
+                            //MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             pin_txt_box.Clear();
                         }
 
@@ -155,13 +159,17 @@ namespace ATM_forms
                 else
                 {
                     // if the entered PIN is not a valid integer
-                    MessageBox.Show("Please enter a valid 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
+                    alertMessageForm.Show(this);
+                    //MessageBox.Show("Please enter a valid 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
                 // if the PIN is not exactly 4 digits
-                MessageBox.Show("Please enter a 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
+                alertMessageForm.Show(this);
+                //MessageBox.Show("Please enter a 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
