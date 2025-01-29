@@ -64,7 +64,7 @@ namespace ATM_forms
                     string message;
 
                     AlertMessageForm alertMessageForm;
-                    int transaction_outcome = 0;
+                    int transaction_outcome = 100;
                     // handles transaction outcomes
                     switch (transaction_outcome)
                     {
@@ -83,7 +83,7 @@ namespace ATM_forms
                             message = $"Transaction failed: {reason}";
 
                             //send balance request
-                            TransactionData.transactionType = 1;
+                            /*TransactionData.transactionType = 1;
                             NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                             NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
                             string balanceResponse = NetworkClient.ReceiveResponse();
@@ -95,25 +95,21 @@ namespace ATM_forms
                             Console.WriteLine(available_balance);
 
                             // calculate closest multiple of 5 to the available balance
-                            decimal closest_amount = Math.Floor(available_balance / 5) * 5;
-
+                            decimal closest_amount = Math.Floor(available_balance / 5) * 5;*/
+                            decimal closest_amount = 100;
                             // display the message with closest value
                             if (GlobalVariables.language == "french")
                             {
-                                message = "Échec de la transaction: {reason}. Le maximum que vous pouvez retirer est £{closest_amount}\".";
+                                message = $"Échec de la transaction: {reason}. \nLe maximum que vous pouvez retirer est £{closest_amount}";
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
                             else if (GlobalVariables.language == "english")
                             {
-                                message = "Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}\"";
+                                message = $"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}";
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
-                            alertMessageForm = new AlertMessageForm($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}");
-                            alertMessageForm.Show(this);
-                            //MessageBox.Show($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                             // update the amount text box with the suggested withdrawal amount
                             amount_txtbox.Text = "£" + closest_amount.ToString();
                             break;
@@ -121,7 +117,7 @@ namespace ATM_forms
                         case 10: // general error
                             if (GlobalVariables.language == "french")
                             {
-                                message = "Une erreur s'est produite lors de la transaction. Veuillez réessayer plus tard.";
+                                message = "Une erreur s'est produite lors de la transaction. \nVeuillez réessayer plus tard.";
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }

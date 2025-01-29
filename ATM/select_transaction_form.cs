@@ -78,6 +78,7 @@ namespace ATM_forms
                 select_transaction_label.Left = (this.select_transaction_panel.Width - select_transaction_label.Width) / 2;
 
                 check_balance_btn.Text = "SITUATION DE VOS COMPTES";
+                check_balance_btn.Font = new Font("Segoe UI", 22, FontStyle.Bold);
 
                 cash_withdrawal_btn.Text = "RETRAIT D'ARGENT";
 
@@ -90,6 +91,7 @@ namespace ATM_forms
                 select_transaction_label.Left = (this.select_transaction_panel.Width - select_transaction_label.Width) / 2;
 
                 check_balance_btn.Text = "CHECK BALANCE";
+                check_balance_btn.Font = new Font("Segoe UI", 26, FontStyle.Bold);
 
                 cash_withdrawal_btn.Text = "CASH WITHDRAWAL";
 
