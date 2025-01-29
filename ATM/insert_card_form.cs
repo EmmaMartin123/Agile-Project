@@ -28,10 +28,12 @@ namespace ATM_forms
             this.Visible = true; // make form visible again
             if (GlobalVariables.language == "french")
             {
+                this.Text = "Insérer la Carte";
                 insert_card_label.Text = "Insérer la Carte";
             }
             else if (GlobalVariables.language == "english")
             {
+                this.Text = "Insert Card";
                 insert_card_label.Text = "Insert Card";
             }
             

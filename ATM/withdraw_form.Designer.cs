@@ -68,7 +68,7 @@ namespace ATM_forms
             this.withdraw_panel.Controls.Add(this.btnN);
             this.withdraw_panel.Controls.Add(this.btnExit);
             this.withdraw_panel.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.withdraw_panel.Location = new System.Drawing.Point(285, 76);
+            this.withdraw_panel.Location = new System.Drawing.Point(25, 1);
             this.withdraw_panel.Name = "withdraw_panel";
             this.withdraw_panel.Size = new System.Drawing.Size(1300, 900);
             this.withdraw_panel.TabIndex = 0;

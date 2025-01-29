@@ -104,6 +104,8 @@ namespace ATM_forms
             // change language of text, and resize, and dynamically move to fit 
             if (GlobalVariables.language == "french")
             {
+                this.Text = "Entrez Pin";
+
                 pin_prompt.Text = "Composez Votre Code Confidential";
                 pin_prompt.Left = (enter_pin_panel.Width - pin_prompt.Width) / 2;
 
@@ -112,6 +114,7 @@ namespace ATM_forms
 
                 delete_btn.Text = "Correction";
                 delete_btn.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
                 exit_btn.Text = "Annulation";
             }
             else if (GlobalVariables.language == "english")
