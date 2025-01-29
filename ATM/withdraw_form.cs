@@ -31,10 +31,10 @@ namespace ATM_forms
         // prevents keypress for amount_txtbox
         private void AmounttxtboxKeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true; 
+            e.Handled = true;
         }
 
-        private void  BtnYClick(object sender, EventArgs e)
+        private void BtnYClick(object sender, EventArgs e)
         {
 
             decimal amount;
@@ -58,6 +58,8 @@ namespace ATM_forms
                     dynamic parsedResponse = JsonConvert.DeserializeObject(response);
                     int transaction_outcome = parsedResponse.transaction_outcome;
 
+                    //int transaction_outcome = 0; test data
+
                     // checks if the balance is there to withdraw
                     if (transaction_outcome == 0)
                     {
@@ -76,7 +78,7 @@ namespace ATM_forms
                 {
                     Console.WriteLine($"error in network operations: {ex.Message}");
                 }
-                
+
             }
             else
             {
@@ -106,7 +108,24 @@ namespace ATM_forms
 
         private void WithdrawForm_Load(object sender, EventArgs e)
         {
-
+            // make the form invisible while loading so that it doesn't lag 
+            this.Visible = false;
+            // center the main panel
+            withdraw_panel.Left = (this.ClientSize.Width - withdraw_panel.Width) / 2;
+            withdraw_panel.Top = (this.ClientSize.Height - withdraw_panel.Height) / 2;
+            // add an event handler to handle resizing
+            this.SizeChanged += new EventHandler(this.Withdraw_SizeChanged);
+            this.Visible = true; // make form visible again
         }
+
+        /*
+        * Event handler to continue to center the panel even if the size changes
+        */
+        private void Withdraw_SizeChanged(object sender, System.EventArgs e)
+        {
+            withdraw_panel.Left = (this.ClientSize.Width - withdraw_panel.Width) / 2;
+            withdraw_panel.Top = (this.ClientSize.Height - withdraw_panel.Height) / 2;
+        }
+
     }
 }

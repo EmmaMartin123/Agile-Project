@@ -12,9 +12,22 @@ namespace ATM_forms
 {
     public partial class AlertMessageForm : Form
     {
-        public AlertMessageForm()
+        public AlertMessageForm(string errorMessage)
         {
             InitializeComponent();
+            alert_label.Text = errorMessage;
+            // position text dynamically based on length
+            alert_label.Left = (this.ClientSize.Width - alert_label.Width) / 2;
+        }
+
+        private void AlertMessageForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void alert_ok_button_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

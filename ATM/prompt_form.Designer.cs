@@ -40,6 +40,7 @@ namespace ATM_forms
             // 
             // prompt_panel
             // 
+            this.prompt_panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.prompt_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.prompt_panel.Controls.Add(this.prompt_label1);
             this.prompt_panel.Controls.Add(this.no_btn);
@@ -60,10 +61,10 @@ namespace ATM_forms
             this.prompt_label1.TabIndex = 0;
             this.prompt_label1.Text = "Prompt....";
             this.prompt_label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //this.prompt_label1.Click += new System.EventHandler(this.prompt_label1_Click);
             // 
             // no_btn
             // 
+            this.no_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
             this.no_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.no_btn.FlatAppearance.BorderSize = 3;
             this.no_btn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(219)))));
@@ -75,14 +76,14 @@ namespace ATM_forms
             this.no_btn.Size = new System.Drawing.Size(420, 123);
             this.no_btn.TabIndex = 4;
             this.no_btn.Text = "NO";
-            this.no_btn.UseVisualStyleBackColor = true;
-            this.no_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
+            this.no_btn.UseVisualStyleBackColor = false;
             this.no_btn.Click += new System.EventHandler(this.NobtnClick);
-            this.no_btn.MouseEnter += new EventHandler(this.BtnMouseEnter);
-            this.no_btn.MouseLeave += new EventHandler(this.BtnMouseLeave);
+            this.no_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.no_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // yes_btn
             // 
+            this.yes_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
             this.yes_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.yes_btn.FlatAppearance.BorderSize = 3;
             this.yes_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -93,11 +94,10 @@ namespace ATM_forms
             this.yes_btn.Size = new System.Drawing.Size(420, 123);
             this.yes_btn.TabIndex = 4;
             this.yes_btn.Text = "YES";
-            this.yes_btn.UseVisualStyleBackColor = true;
-            this.yes_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
+            this.yes_btn.UseVisualStyleBackColor = false;
             this.yes_btn.Click += new System.EventHandler(this.YesbtnClick);
-            this.yes_btn.MouseEnter += new EventHandler(this.BtnMouseEnter);
-            this.yes_btn.MouseLeave += new EventHandler(this.BtnMouseLeave);
+            this.yes_btn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
+            this.yes_btn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
             // prompt_label2
             // 
@@ -109,7 +109,7 @@ namespace ATM_forms
             this.prompt_label2.Text = "Prompt2...";
             this.prompt_label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // prompt_form
+            // PromptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -118,7 +118,6 @@ namespace ATM_forms
             this.Name = "PromptForm";
             this.Text = "prompts";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            //this.Load += new System.EventHandler(this.prompt_form_Load);
             this.prompt_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
