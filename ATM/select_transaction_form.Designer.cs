@@ -48,7 +48,7 @@ namespace ATM_forms
             this.select_transaction_panel.Controls.Add(this.check_balance_btn);
             this.select_transaction_panel.Location = new System.Drawing.Point(508, 215);
             this.select_transaction_panel.Name = "select_transaction_panel";
-            this.select_transaction_panel.Size = new System.Drawing.Size(886, 535);
+            this.select_transaction_panel.Size = new System.Drawing.Size(1300, 900);
             this.select_transaction_panel.TabIndex = 0;
             // 
             // exit_btn
@@ -57,11 +57,11 @@ namespace ATM_forms
             this.exit_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.exit_btn.FlatAppearance.BorderSize = 3;
             this.exit_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exit_btn.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exit_btn.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exit_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.exit_btn.Location = new System.Drawing.Point(286, 423);
+            this.exit_btn.Location = new System.Drawing.Point(475, 670);
             this.exit_btn.Name = "exit_btn";
-            this.exit_btn.Size = new System.Drawing.Size(315, 92);
+            this.exit_btn.Size = new System.Drawing.Size(350, 110);
             this.exit_btn.TabIndex = 4;
             this.exit_btn.Text = "EXIT";
             this.exit_btn.UseVisualStyleBackColor = true;
@@ -75,11 +75,11 @@ namespace ATM_forms
             this.cash_withdrawal_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.cash_withdrawal_btn.FlatAppearance.BorderSize = 3;
             this.cash_withdrawal_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cash_withdrawal_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cash_withdrawal_btn.Font = new System.Drawing.Font("Segoe UI", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cash_withdrawal_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.cash_withdrawal_btn.Location = new System.Drawing.Point(170, 266);
+            this.cash_withdrawal_btn.Location = new System.Drawing.Point(350, 440);
             this.cash_withdrawal_btn.Name = "cash_withdrawal_btn";
-            this.cash_withdrawal_btn.Size = new System.Drawing.Size(562, 123);
+            this.cash_withdrawal_btn.Size = new System.Drawing.Size(600, 150);
             this.cash_withdrawal_btn.TabIndex = 2;
             this.cash_withdrawal_btn.Text = "CASH WITHDRAWAL";
             this.cash_withdrawal_btn.UseVisualStyleBackColor = true;
@@ -90,11 +90,11 @@ namespace ATM_forms
             // select_transaction_label
             // 
             this.select_transaction_label.AutoSize = true;
-            this.select_transaction_label.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.select_transaction_label.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.select_transaction_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.select_transaction_label.Location = new System.Drawing.Point(183, 17);
+            this.select_transaction_label.Location = new System.Drawing.Point(294, 20);
             this.select_transaction_label.Name = "select_transaction_label";
-            this.select_transaction_label.Size = new System.Drawing.Size(551, 74);
+            this.select_transaction_label.Size = new System.Drawing.Size(711, 96);
             this.select_transaction_label.TabIndex = 1;
             this.select_transaction_label.Text = "Select a Transaction";
             // 
@@ -104,11 +104,11 @@ namespace ATM_forms
             this.check_balance_btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.check_balance_btn.FlatAppearance.BorderSize = 3;
             this.check_balance_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.check_balance_btn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.check_balance_btn.Font = new System.Drawing.Font("Segoe UI", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.check_balance_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.check_balance_btn.Location = new System.Drawing.Point(170, 120);
+            this.check_balance_btn.Location = new System.Drawing.Point(350, 270);
             this.check_balance_btn.Name = "check_balance_btn";
-            this.check_balance_btn.Size = new System.Drawing.Size(562, 123);
+            this.check_balance_btn.Size = new System.Drawing.Size(600, 150);
             this.check_balance_btn.TabIndex = 0;
             this.check_balance_btn.Text = "CHECK BALANCE";
             this.check_balance_btn.UseVisualStyleBackColor = true;

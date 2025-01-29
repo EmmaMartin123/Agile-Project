@@ -46,7 +46,25 @@ namespace ATM_forms
 
         private void SelectTransactionForm_Load_1(object sender, EventArgs e)
         {
-
+            // make the form invisible while loading so that it doesn't lag 
+            this.Visible = false;
+            // center the main panel
+            select_transaction_panel.Left = (this.ClientSize.Width - select_transaction_panel.Width) / 2;
+            select_transaction_panel.Top = (this.ClientSize.Height - select_transaction_panel.Height) / 2;
+            // add an event handler to handle resizing
+            this.SizeChanged += new EventHandler(this.SelectTransaction_SizeChanged);
+            this.Visible = true; // make form visible again
         }
+
+        /*
+         * Event handler to continue to center the panel even if the size changes
+         */
+        private void SelectTransaction_SizeChanged(object sender, System.EventArgs e)
+        {
+            select_transaction_panel.Left = (this.ClientSize.Width - select_transaction_panel.Width) / 2;
+            select_transaction_panel.Top = (this.ClientSize.Height - select_transaction_panel.Height) / 2;
+        }
+
+
     }
 }
