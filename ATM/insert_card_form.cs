@@ -26,10 +26,15 @@ namespace ATM_forms
             // add an event handler to handle resizing
             this.SizeChanged += new EventHandler(this.InsertCard_SizeChanged);
             this.Visible = true; // make form visible again
-
-            // this is just test data and an example of how to use the alert form
-            //AlertMessageForm alertMessageForm = new AlertMessageForm("this is a longer error for testing");
-            //alertMessageForm.Show(this);
+            if (TransactionData.language == "french")
+            {
+                insert_card_label.Text = "Insérer la Carte";
+            }
+            else if (TransactionData.language == "english")
+            {
+                insert_card_label.Text = "Insert Card";
+            }
+            
         }
 
         /*

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,7 +49,7 @@ namespace ATM_forms
                 {
 
                     // connect and send response in json format
-                    NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                    /*NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                     Console.WriteLine(amount);
                     NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\", \"transaction_value\": \""+amount+"\"}");
                     string response = NetworkClient.ReceiveResponse();
@@ -57,13 +58,13 @@ namespace ATM_forms
 
                     //parse the response
                     dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                    int transaction_outcome = parsedResponse.transaction_outcome;
+                    int transaction_outcome = parsedResponse.transaction_outcome;*/
 
                     //to store the message displayed to the user
                     string message;
 
-                    AlertMessageForm alertMessageForm; 
-
+                    AlertMessageForm alertMessageForm;
+                    int transaction_outcome = 0;
                     // handles transaction outcomes
                     switch (transaction_outcome)
                     {
@@ -77,7 +78,8 @@ namespace ATM_forms
                             break;
 
                         case 1: // insufficient funds
-                            string reason = parsedResponse.reason ?? "Insufficient funds.";
+                            //string reason = parsedResponse.reason ?? "Insufficient funds.";
+                            string reason = "test";
                             message = $"Transaction failed: {reason}";
 
                             //send balance request

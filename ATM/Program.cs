@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace ATM_forms
 {
-
     public static class NetworkClient
     {
         public static TcpClient client;
@@ -121,7 +120,6 @@ namespace ATM_forms
             // generate random number for the atm id
             Random rnd = new Random();
             TransactionData.ATMID = rnd.Next(1, 10000);
-
             //run the application
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -147,6 +145,7 @@ namespace ATM_forms
         public static int ATMID = 0;
         public static string PAN = "2234567890123456";
         public static int PIN = 1010;
+        public static string language = "english";
     }
 
 }
