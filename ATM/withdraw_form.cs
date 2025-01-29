@@ -59,16 +59,6 @@ namespace ATM_forms
                 // send amount to switch to deal with
                 try
                 {
-                    // check cash can be withdrawn before sending to switch
-                    if(!ATMContents.CanWithdrawCash(amount))
-                    {
-                        MessageBox.Show("ATM has insufficient funds", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        // clear what was in the withdraw box
-                        amount_txtbox.Text = "£";
-                        return;
-                    }
-
                     // connect and send response in json format
                     NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                     Console.WriteLine(amount);
