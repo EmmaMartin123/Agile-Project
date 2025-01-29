@@ -34,7 +34,8 @@ namespace ATM_forms
 
         private void MastercardbtnClick(object sender, EventArgs e)
         {
-            TransactionData.cardType = "mastercard";
+            TransactionData.currentCardType = "mastercard";
+            TransactionData.currentPAN = TransactionData.mastercardPAN;
             EnterPinForm enterPinForm = new EnterPinForm();  // instance of the enter_pin_form
             enterPinForm.Show();
             this.Hide();
@@ -42,7 +43,8 @@ namespace ATM_forms
 
         private void VisabtnClick(object sender, EventArgs e)
         {
-            TransactionData.cardType = "visa";
+            TransactionData.currentCardType = "visa";
+            TransactionData.currentPAN = TransactionData.visaPAN;
             EnterPinForm enterPinForm = new EnterPinForm();  // instance of the enter_pin_form
             enterPinForm.Show();
             this.Hide();
@@ -50,7 +52,8 @@ namespace ATM_forms
 
         private void UnionpaybtnClick(object sender, EventArgs e)
         {
-            TransactionData.cardType = "unionpay";
+            TransactionData.currentCardType = "unionpay";
+            TransactionData.currentPAN = TransactionData.unionpayPAN;
             EnterPinForm enterPinForm = new EnterPinForm();  // instance of the enter_pin_form
             enterPinForm.Show();
             this.Hide();
@@ -58,7 +61,8 @@ namespace ATM_forms
 
         private void AmexbtnClick(object sender, EventArgs e)
         {
-            TransactionData.cardType = "amex";
+            TransactionData.currentCardType = "amex";
+            TransactionData.currentPAN = TransactionData.amexPAN;
             EnterPinForm enterPinForm = new EnterPinForm();  // instance of the enter_pin_form
             enterPinForm.Show();
             this.Hide();

@@ -80,6 +80,8 @@ namespace ATM_forms
         {
             //int correctPin = TransactionData.PIN;
 
+            
+
             // checks if the PIN is exactly 4 digits 
             if (pin_txt_box.Text.Length == 4)
             {
@@ -87,6 +89,7 @@ namespace ATM_forms
                 {
                     TransactionData.PIN = enteredPin;
                     TransactionData.transactionType = 0;
+
                     // send the pin to the switch to deal with
                     try
                     {
@@ -94,7 +97,7 @@ namespace ATM_forms
                         // connect and send response in json format
                         NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                         //NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
-                        NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\", \"card_type\":\"" + TransactionData.cardType + "\"}");
+                        NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.currentPAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
                         string response = NetworkClient.ReceiveResponse();
                         Console.WriteLine($"Response: {response}");
                         NetworkClient.CloseConnection();

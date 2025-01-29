@@ -25,7 +25,7 @@ namespace ATM_forms
             {
                 // connect and send response in json format
                 NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
-                NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
+                NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.currentPAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
                 string response = NetworkClient.ReceiveResponse();
                 Console.WriteLine($"Response: {response}");
                 NetworkClient.CloseConnection();
@@ -48,5 +48,9 @@ namespace ATM_forms
             this.Close();  // terminates this form
         }
 
+        private void balance_label_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

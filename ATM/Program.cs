@@ -123,7 +123,7 @@ namespace ATM_forms
         public static int ATMID = 0;
         public static string PAN = "2234567890123456";
         public static int PIN = 1010;
-        public static string cardType;
+        
         /* 
          Card Types:
         Mastercard - starts with a 5
@@ -131,6 +131,12 @@ namespace ATM_forms
         UnionPay - starts with 62
         Amex - starts with 34 or 37
          */
+        public static string mastercardPAN = "5809567890123456";
+        public static string visaPAN = "4412567890123456";
+        public static string unionpayPAN = "6224567890123456";
+        public static string amexPAN = "3477567890123456";
+        public static string currentPAN = "";
+        public static string currentCardType = "";
 
     }
 
