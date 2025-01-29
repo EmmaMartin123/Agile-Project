@@ -36,7 +36,7 @@ namespace ATM_forms
         public static void WithdrawCash(decimal amountToDispense)
         {
             // withdraw as many 50s as possible
-            while(amountToDispense >= 50 && fiftyPoundNotes > 0)
+            while (amountToDispense >= 50 && fiftyPoundNotes > 0)
             {
                 --fiftyPoundNotes;
                 amountToDispense -= 50;

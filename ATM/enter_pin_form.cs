@@ -19,8 +19,8 @@ namespace ATM_forms
         public EnterPinForm()
         {
             InitializeComponent();
-
         }
+
 
         private void PintxtboxKeyPress(object sender, KeyPressEventArgs e)
         {
@@ -35,7 +35,9 @@ namespace ATM_forms
             // the text is only digits and has a maximum length of 4
             if (!int.TryParse(pin_txt_box.Text, out _) || pin_txt_box.Text.Length > 4)
             {
-                MessageBox.Show("Please enter a valid 4-digit PIN.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid Input. Please enter a 4-digit PIN.");
+                alertMessageForm.Show(this);
+                //MessageBox.Show("Please enter a valid 4-digit PIN.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pin_txt_box.Text = pin_txt_box.Text.Substring(0, Math.Min(4, pin_txt_box.Text.Length));
                 pin_txt_box.SelectionStart = pin_txt_box.Text.Length; // moves the cursor to the end
             }
@@ -53,7 +55,6 @@ namespace ATM_forms
 
         private void DeletebtnClick(object sender, EventArgs e)
         {
-
             if (pin_txt_box.Text.Length > 0)
             {
                 // removes the last character from the pin_txt_box
@@ -78,7 +79,33 @@ namespace ATM_forms
 
         private void ContinuebtnClick(object sender, EventArgs e)
         {
-            //int correctPin = TransactionData.PIN;
+            
+        }
+
+        private void EnterPinForm_Load(object sender, EventArgs e)
+        {
+            // make the form invisible while loading so that it doesn't lag 
+            this.Visible = false;
+            // center the main panel
+            enter_pin_panel.Left = (this.ClientSize.Width - enter_pin_panel.Width) / 2;
+            enter_pin_panel.Top = (this.ClientSize.Height - enter_pin_panel.Height) / 2;
+            // add an event handler to handle resizing
+            this.SizeChanged += new EventHandler(this.EnterPin_SizeChanged);
+            this.Visible = true; // make form visible again
+        }
+
+        /*
+         * Event handler to continue to center the panel even if the size changes
+         */
+        private void EnterPin_SizeChanged(object sender, System.EventArgs e)
+        {
+            enter_pin_panel.Left = (this.ClientSize.Width - enter_pin_panel.Width) / 2;
+            enter_pin_panel.Top = (this.ClientSize.Height - enter_pin_panel.Height) / 2;
+        }
+
+        private void EnterButtonClick(object sender, EventArgs e)
+        {
+            Console.WriteLine("continuing");
 
             // checks if the PIN is exactly 4 digits 
             if (pin_txt_box.Text.Length == 4)
@@ -103,10 +130,11 @@ namespace ATM_forms
 
                         // assume the response is true for now and set it manually
 
-                        //transaction_outcome en= 0; // for testing only as we can't currently get a response
+                        //int transaction_outcome = 0; // for testing only
 
                         if (transaction_outcome == 0)
                         {
+                            Console.WriteLine("transaction was successful");
                             // if the PIN matches then proceed
                             SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
                             cardForm.Show();
@@ -116,7 +144,9 @@ namespace ATM_forms
                         {
                             // if the PIN does not match
                             string reason = parsedResponse.reason;
-                            MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please try again.");
+                            alertMessageForm.Show(this);
+                            //MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             pin_txt_box.Clear();
                         }
 
@@ -129,17 +159,21 @@ namespace ATM_forms
                 else
                 {
                     // if the entered PIN is not a valid integer
-                    MessageBox.Show("Please enter a valid 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
+                    alertMessageForm.Show(this);
+                    //MessageBox.Show("Please enter a valid 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
                 // if the PIN is not exactly 4 digits
-                MessageBox.Show("Please enter a 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
+                alertMessageForm.Show(this);
+                //MessageBox.Show("Please enter a 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void EnterPinForm_Load(object sender, EventArgs e)
+        private void enter_pin_panel_Paint(object sender, PaintEventArgs e)
         {
 
         }

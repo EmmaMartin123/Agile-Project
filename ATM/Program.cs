@@ -16,6 +16,7 @@ namespace ATM_forms
         public static TcpClient client;
         public static NetworkStream stream;
 
+
         //used this for info - https://www.geeksforgeeks.org/socket-programming-in-c-sharp/
         public static void ConnectToSwitch(string ip, int port)
         {
@@ -28,6 +29,7 @@ namespace ATM_forms
             catch (Exception ex)
             {
                 Console.WriteLine($"error connecting to switch: {ex.Message}");
+                HandleDroppedConnection();
             }
         }
 
@@ -85,6 +87,28 @@ namespace ATM_forms
                 Console.WriteLine($"Error closing connection: {ex.Message}");
             }
         }
+
+        private static void HandleDroppedConnection()
+        {
+
+            // notifies the user of the connection problem with a dialog box
+            //MessageBox.Show("Problem with transaction, returning card...", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            AlertMessageForm alertMessageForm = new AlertMessageForm("Problem with transaction, returning card...");
+            alertMessageForm.ShowDialog();
+               
+            // gets the current form - which is the form where the connection failed so we can close it
+            Form currentForm = Application.OpenForms[Application.OpenForms.Count - 1];
+
+            currentForm.Close();
+
+            //takes the user back to the insert card form
+            InsertCardForm cardForm = new InsertCardForm();
+
+            cardForm.Show();
+        }
+
+
     }
     internal static class Program
     {
@@ -117,7 +141,7 @@ namespace ATM_forms
     public static class TransactionData
     {
         // transaction variables (dummy data for now)
-        public static string connectionAddress = "ec2-54-159-182-132.compute-1.amazonaws.com";
+        public static string connectionAddress = "ec2-35-175-247-166.compute-1.amazonaws.com";
         public static decimal CurrentBalance = 500;
         public static int transactionType = -1;
         public static int ATMID = 0;
