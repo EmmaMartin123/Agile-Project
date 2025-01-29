@@ -145,7 +145,13 @@ namespace ATM_forms
         public static int ATMID = 0;
         public static string PAN = "2234567890123456";
         public static int PIN = 1010;
-        public static string language = "english";
+        
     }
+
+    public static class GlobalVariables
+    {
+        public static string language = "french";
+    }
+
 
 }

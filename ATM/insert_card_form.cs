@@ -26,11 +26,11 @@ namespace ATM_forms
             // add an event handler to handle resizing
             this.SizeChanged += new EventHandler(this.InsertCard_SizeChanged);
             this.Visible = true; // make form visible again
-            if (TransactionData.language == "french")
+            if (GlobalVariables.language == "french")
             {
                 insert_card_label.Text = "Insérer la Carte";
             }
-            else if (TransactionData.language == "english")
+            else if (GlobalVariables.language == "english")
             {
                 insert_card_label.Text = "Insert Card";
             }

@@ -18,6 +18,7 @@ namespace ATM_forms
             alert_label.Text = errorMessage;
             // position text dynamically based on length
             alert_label.Left = (this.ClientSize.Width - alert_label.Width) / 2;
+            // ok can just stay Ok in french
         }
 
         private void AlertMessageForm_Load(object sender, EventArgs e)
