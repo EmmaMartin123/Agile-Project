@@ -27,9 +27,12 @@ namespace ATM_forms
 
         private void YesbtnClick(object sender, EventArgs e)
         {
+            // generate a unique ID for the receipt using guid
+            string uniqueId = Guid.NewGuid().ToString();
+
             // get the path to the user's documents folder
             string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string filePath = Path.Combine(documentsFolder, "receipt.txt");
+            string filePath = Path.Combine(documentsFolder, $"receipt_{uniqueId}.txt");
 
             // use streamWriter to write text to the file
             using (StreamWriter writer = new StreamWriter(filePath, true)) 
