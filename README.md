@@ -71,7 +71,7 @@ A key point here is that there is no such thing as “perfect” code—there is
 
 - ?could be cool if on hover buttons set their background colour to primary and their text colour to tertiary. Also should be relatively easy to implement
 
-## Meeting Recording
+## Meeting Recordings
 
-https://youtu.be/e6jpi1J9lqg 
-
+https://youtu.be/e6jpi1J9lqg {sprint 1}
+https://youtu.be/LB2wnWZWp5Y {sprint 2}
