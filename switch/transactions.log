@@ -1,1 +1,8 @@
-[2025-01-21 10:09:40] ATM ID: ATM001, Transaction ID: TXN12345, Card: 1234567890123456, Expiry: 12/25, PIN: 1234, Type: withdraw, Amount: $100, Status: Success
+[2025-01-29 17:31:36]  card 5432109876543210 is at ATM: Mastercard making request: Validate Pin with PIN: "1234"
+[2025-01-29 17:31:36]  card 4123456789012345 is at ATM: Visa making request: Validate Pin with PIN: "5678"
+[2025-01-29 17:31:36]  card 6123456789012345 is at ATM: UnionPay making request: Validate Pin with PIN: "9876"
+[2025-01-29 17:31:36]  card 312345678901234 is at ATM: AmericanExpress making request: Validate Pin with PIN: "2468"
+[2025-01-29 17:55:47]  card 5432109876543210 is at ATM: Mastercard making request: Validate Pin with PIN: "1234"
+[2025-01-29 17:55:47]  card 4123456789012345 is at ATM: Visa making request: Validate Pin with PIN: "5678"
+[2025-01-29 17:55:47]  card 6123456789012345 is at ATM: UnionPay making request: Validate Pin with PIN: "9876"
+[2025-01-29 17:55:47]  card 312345678901234 is at ATM: AmericanExpress making request: Validate Pin with PIN: "2468"
