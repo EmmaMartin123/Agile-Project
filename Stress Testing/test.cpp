@@ -91,6 +91,8 @@ void simulateATM(int atmID, int numTransactions, int transactionInterval) {
         send(sock, requestStr.c_str(), requestStr.size(), 0);
 
         int bytesReceived = recv(sock, buffer, sizeof(buffer) - 1, 0);
+
+        //feedback
         if (bytesReceived > 0) {
             
             buffer[bytesReceived] = '\0';
@@ -100,7 +102,7 @@ void simulateATM(int atmID, int numTransactions, int transactionInterval) {
             std::cerr << "[ERROR] ATM " << atmID << ": No response from switch.\n";
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(transactionInterval));
+        std::this_thread::sleep_for(std::chrono::seconds(transactionInterval));  
     }
 
     close(sock);
@@ -108,9 +110,18 @@ void simulateATM(int atmID, int numTransactions, int transactionInterval) {
 
 int main() {
 
-    int numATMs = 100;           //  ATM Num
-    int transactionsPerATM = 10; // total transactions per ATM - 2 per min for 5 min
-    int transactionInterval = 30000; // interval between transactions - 30 seconds
+    int numATMs;  
+    int transactionsPerATM;  
+    int transactionInterval;  
+
+    std::cout << "Enter number of ATMs: ";
+    std::cin >> numATMs;  // UI for number of ATMs
+
+    std::cout << "Enter transactions per ATM: ";
+    std::cin >> transactionsPerATM;  // UI for transactions per ATM
+
+    std::cout << "Enter interval between transactions (in seconds): ";
+    std::cin >> transactionInterval;  // UI for transaction interval (now in seconds)
 
     std::vector<std::thread> threads;
 
