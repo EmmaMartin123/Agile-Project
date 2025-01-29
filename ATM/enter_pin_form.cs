@@ -104,8 +104,7 @@ namespace ATM_forms
             // change language of text, and resize, and dynamically move to fit 
             if (GlobalVariables.language == "french")
             {
-                pin_prompt.Text = "Entrez le code PIN et appuyez sur la touche Validation";
-                pin_prompt.Font = new Font("Segoe UI", 25, FontStyle.Bold);
+                pin_prompt.Text = "Composez Votre Code Confidential";
                 pin_prompt.Left = (enter_pin_panel.Width - pin_prompt.Width) / 2;
 
                 EnterButton.Text = "Validation";
@@ -117,6 +116,8 @@ namespace ATM_forms
             }
             else if (GlobalVariables.language == "english")
             {
+                this.Text = "Enter Pin";
+
                 pin_prompt.Text = "Enter PIN and Press ENTER Key";
                 pin_prompt.Font = new Font("Segoe UI", 36, FontStyle.Bold);
                 pin_prompt.Left = (enter_pin_panel.Width - pin_prompt.Width) / 2;

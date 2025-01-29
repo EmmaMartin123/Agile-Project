@@ -73,15 +73,15 @@ namespace ATM_forms
             // translate text and reposition if necessary
             if (GlobalVariables.language == "french")
             {
-                this.Text = "Sélectionnez une transaction";
-                select_transaction_label.Text = "Sélectionnez une transaction";
+                this.Text = "Choisissez votre Opération";
+                select_transaction_label.Text = "Choisissez votre Opération";
                 select_transaction_label.Left = (this.select_transaction_panel.Width - select_transaction_label.Width) / 2;
 
-                check_balance_btn.Text = "VÉRIFIER LE SOLDE";
+                check_balance_btn.Text = "SITUATION DE VOS COMPTES";
 
                 cash_withdrawal_btn.Text = "RETRAIT D'ARGENT";
 
-                exit_btn.Text = "QUITTER";
+                exit_btn.Text = "FIN";
             }
             else if (GlobalVariables.language == "english")
             {
