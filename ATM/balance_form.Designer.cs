@@ -43,7 +43,7 @@ namespace ATM_forms
             this.balance_panel.Controls.Add(this.balance_label);
             this.balance_panel.Controls.Add(this.balance_heading_label);
             this.balance_panel.Controls.Add(this.done_btn);
-            this.balance_panel.Location = new System.Drawing.Point(508, 215);
+            this.balance_panel.Location = new System.Drawing.Point(235, 52);
             this.balance_panel.Name = "balance_panel";
             this.balance_panel.Size = new System.Drawing.Size(1300, 900);
             this.balance_panel.TabIndex = 0;

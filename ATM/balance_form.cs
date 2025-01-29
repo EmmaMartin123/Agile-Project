@@ -30,12 +30,28 @@ namespace ATM_forms
             this.SizeChanged += new EventHandler(this.Balance_SizeChanged);
             this.Visible = true; // make form visible again
 
+            if (GlobalVariables.language == "french")
+            {
+                this.Text = " Vérifier le Solde";
+                balance_heading_label.Text = "Solde";
+
+                done_btn.Text = "Fin";
+            }
+            else if (GlobalVariables.language == "english")
+            {
+                this.Text = "Check Balance";
+                balance_heading_label.Text = "Balance";
+
+                done_btn.Text = "Done";
+            }
+           
+
             // send the balance request to the switch to deal with
             try
             {
                 // connect and send response in json format
 
-                TransactionData.transactionType = 1;
+                /*TransactionData.transactionType = 1;
                 NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                 NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
                 string response = NetworkClient.ReceiveResponse();
@@ -43,8 +59,8 @@ namespace ATM_forms
                 NetworkClient.CloseConnection();
 
                  dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                 int transaction_value = parsedResponse.transaction_value;
-                //int transaction_value = 100; //test data
+                 int transaction_value = parsedResponse.transaction_value;*/
+                int transaction_value = 100; //test data
 
                 balance_label.Text = $"£{transaction_value:F2}"; // F2 for two decimal places
             }

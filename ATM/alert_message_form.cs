@@ -17,7 +17,15 @@ namespace ATM_forms
             InitializeComponent();
             alert_label.Text = errorMessage;
             // position text dynamically based on length
+            if (alert_label.Width > this.Width)
+            {
+                alert_label.Font = new Font("Segoe UI", 8, FontStyle.Bold);
+            }
+
             alert_label.Left = (this.ClientSize.Width - alert_label.Width) / 2;
+
+            
+            // ok can just stay Ok in french
         }
 
         private void AlertMessageForm_Load(object sender, EventArgs e)
