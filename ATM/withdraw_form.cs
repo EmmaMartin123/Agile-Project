@@ -48,16 +48,16 @@ namespace ATM_forms
                 {
 
                     // connect and send response in json format
-                    NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
-                    Console.WriteLine(amount);
-                    NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\", \"transaction_value\": \""+amount+"\"}");
-                    string response = NetworkClient.ReceiveResponse();
-                    Console.WriteLine($"Response: {response}");
-                    NetworkClient.CloseConnection();
+                    //NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                    //Console.WriteLine(amount);
+                    //NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\", \"transaction_value\": \""+amount+"\"}");
+                    //string response = NetworkClient.ReceiveResponse();
+                    //Console.WriteLine($"Response: {response}");
+                    //NetworkClient.CloseConnection();
 
                     //parse the response
-                    dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                    int transaction_outcome = parsedResponse.transaction_outcome;
+                    //dynamic parsedResponse = JsonConvert.DeserializeObject(response);
+                    //int transaction_outcome = parsedResponse.transaction_outcome;
 
                     //to store the message displayed to the user
                     string message;
@@ -66,7 +66,7 @@ namespace ATM_forms
 
                     // handles transaction outcomes
 
-                    //int transaction_outcome = 0; //for testing
+                    int transaction_outcome = 0; //for testing
 
                     switch (transaction_outcome)
                     {
@@ -81,8 +81,8 @@ namespace ATM_forms
                             break;
 
                         case 1: // insufficient funds
-                            string reason = parsedResponse.reason ?? "Insufficient funds.";
-                            message = $"Transaction failed: {reason}";
+                            //string reason = parsedResponse.reason ?? "Insufficient funds.";
+                            //message = $"Transaction failed: {reason}";
 
                             //send balance request
                             TransactionData.transactionType = 1;
@@ -100,8 +100,8 @@ namespace ATM_forms
                             decimal closest_amount = Math.Floor(available_balance / 5) * 5;
 
                             // display the message with closest value
-                            alertMessageForm = new AlertMessageForm($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}");
-                            alertMessageForm.Show(this);
+                            //alertMessageForm = new AlertMessageForm($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}");
+                            //alertMessageForm.Show(this);
                             //MessageBox.Show($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                             // update the amount text box with the suggested withdrawal amount

@@ -110,18 +110,18 @@ namespace ATM_forms
                     {
 
                         // connect and send response in json format
-                        NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
-                        NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
-                        string response = NetworkClient.ReceiveResponse();
-                        Console.WriteLine($"Response: {response}");
-                        NetworkClient.CloseConnection();
+                        //NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                        //NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
+                        //string response = NetworkClient.ReceiveResponse();
+                        //Console.WriteLine($"Response: {response}");
+                        //NetworkClient.CloseConnection();
 
-                        dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                        int transaction_outcome = parsedResponse.transaction_outcome;
+                        //dynamic parsedResponse = JsonConvert.DeserializeObject(response);
+                        //int transaction_outcome = parsedResponse.transaction_outcome;
 
                         // assume the response is true for now and set it manually
 
-                        //int transaction_outcome = 0; // for testing only
+                        int transaction_outcome = 0; // for testing only
 
                         if (transaction_outcome == 0)
                         {

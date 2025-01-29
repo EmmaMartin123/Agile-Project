@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,16 @@ namespace ATM_forms
 
         private void YesbtnClick(object sender, EventArgs e)
         {
+            // get the path to the user's documents folder
+            string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string filePath = Path.Combine(documentsFolder, "receipt.txt");
+
+            // use streamWriter to write text to the file
+            using (StreamWriter writer = new StreamWriter(filePath, true)) 
+            {
+                writer.WriteLine(prompt_label1.Text); // write the text message to the file
+            }
+
             this.Close(); 
         }
 
