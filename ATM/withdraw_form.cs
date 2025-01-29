@@ -31,7 +31,7 @@ namespace ATM_forms
         // prevents keypress for amount_txtbox
         private void AmounttxtboxKeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true; 
+            e.Handled = true;
         }
 
         private void BtnYClick(object sender, EventArgs e)
@@ -39,27 +39,22 @@ namespace ATM_forms
 
             decimal amount;
             string amountText = amount_txtbox.Text.Replace("£", "").Trim(); // removes the pound sign
-            // parse input string to decimal
-            decimal.TryParse(amountText, out amount);
-
-
-            // check cash can be withdrawn before sending to switch
-            if(!ATMContents.CanWithdrawCash(amount))
-            {
-                MessageBox.Show("ATM has insufficient funds", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                // clear what was in the withdraw box
-                amount_txtbox.Text = "£";
-
-                return;
-            }
 
             // checks the amount entered is valid - must be a multiple of 5 and a valid number
-            if (amount > 0 && amount % 5 == 0)
+            if (decimal.TryParse(amountText, out amount) && amount > 0 && amount % 5 == 0)
             {
                 // send amount to switch to deal with
                 try
                 {
+                    // check cash can be withdrawn before sending to switch
+                    if(!ATMContents.CanWithdrawCash(amount))
+                    {
+                        MessageBox.Show("ATM has insufficient funds", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        // clear what was in the withdraw box
+                        amount_txtbox.Text = "£";
+                        return;
+                    }
 
                     // connect and send response in json format
                     NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
@@ -69,37 +64,85 @@ namespace ATM_forms
                     Console.WriteLine($"Response: {response}");
                     NetworkClient.CloseConnection();
 
+                    //parse the response
                     dynamic parsedResponse = JsonConvert.DeserializeObject(response);
                     int transaction_outcome = parsedResponse.transaction_outcome;
 
-                    // checks if the balance is there to withdraw
-                    if (transaction_outcome == 0)
-                    {
-                        // remove the cash from ATM stores after confirmation from user bank
-                        ATMContents.WithdrawCash(amount);
+                    //to store the message displayed to the user
+                    string message;
 
-                        MessageBox.Show($"You have successfully withdrawn £{amount}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    AlertMessageForm alertMessageForm; 
 
-                        SelectTransactionForm cardForm = new SelectTransactionForm(); // instance of select_transaction_form
-                        cardForm.Show();
-                        this.Close();  // terminates this form
-                    }
-                    else
+                    // handles transaction outcomes
+                    switch (transaction_outcome)
                     {
-                        // if not enough funds
-                        MessageBox.Show("An error occurred!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        case 0: // success
+                            // remove the cash from ATM stores after confirmation from user bank
+                            ATMContents.WithdrawCash(amount);
+                            message = $"You have successfully withdrawn £{amount}.";
+                            MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            SelectTransactionForm cardForm = new SelectTransactionForm();
+                            cardForm.Show();
+                            this.Close();
+                            break;
+
+                        case 1: // insufficient funds
+                            string reason = parsedResponse.reason ?? "Insufficient funds.";
+                            message = $"Transaction failed: {reason}";
+
+                            //send balance request
+                            TransactionData.transactionType = 1;
+                            NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                            NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
+                            string balanceResponse = NetworkClient.ReceiveResponse();
+                            Console.WriteLine($"Balance Response: {balanceResponse}");
+                            NetworkClient.CloseConnection();
+
+                            dynamic balanceParsedResponse = JsonConvert.DeserializeObject(balanceResponse);
+                            decimal available_balance = balanceParsedResponse.transaction_value;
+                            Console.WriteLine(available_balance);
+
+                            // calculate closest multiple of 5 to the available balance
+                            decimal closest_amount = Math.Floor(available_balance / 5) * 5;
+
+                            // display the message with closest value
+                            alertMessageForm = new AlertMessageForm($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}");
+                            alertMessageForm.Show(this);
+                            //MessageBox.Show($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            // update the amount text box with the suggested withdrawal amount
+                            amount_txtbox.Text = "£" + closest_amount.ToString();
+                            break;
+
+                        case 10: // general error
+                            message = "An error occurred during the transaction. Please try again later.";
+                            alertMessageForm = new AlertMessageForm(message);
+                            alertMessageForm.Show(this);
+                            //MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+
+                        default: // unknown outcome
+                            message = "Unexpected response from the server.";
+                            alertMessageForm = new AlertMessageForm(message);
+                            alertMessageForm.Show(this);
+                            //MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
                     }
+
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"error in network operations: {ex.Message}");
                 }
-                
+
             }
             else
             {
                 // must be a valid number and a multiple of 5
-                MessageBox.Show("Please enter a valid withdrawal amount (multiple of 5).", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid Amount. Please enter a valid withdrawal amount\n(multiple of 5).");
+                alertMessageForm.Show(this);
+                //MessageBox.Show("Please enter a valid withdrawal amount (multiple of 5).", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 amount_txtbox.Text = "£";
             }
 
@@ -123,6 +166,27 @@ namespace ATM_forms
         }
 
         private void WithdrawForm_Load(object sender, EventArgs e)
+        {
+            // make the form invisible while loading so that it doesn't lag 
+            this.Visible = false;
+            // center the main panel
+            withdraw_panel.Left = (this.ClientSize.Width - withdraw_panel.Width) / 2;
+            withdraw_panel.Top = (this.ClientSize.Height - withdraw_panel.Height) / 2;
+            // add an event handler to handle resizing
+            this.SizeChanged += new EventHandler(this.Withdraw_SizeChanged);
+            this.Visible = true; // make form visible again
+        }
+
+        /*
+        * Event handler to continue to center the panel even if the size changes
+        */
+        private void Withdraw_SizeChanged(object sender, System.EventArgs e)
+        {
+            withdraw_panel.Left = (this.ClientSize.Width - withdraw_panel.Width) / 2;
+            withdraw_panel.Top = (this.ClientSize.Height - withdraw_panel.Height) / 2;
+        }
+
+        private void withdraw_panel_Paint(object sender, PaintEventArgs e)
         {
 
         }
