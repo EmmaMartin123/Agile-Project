@@ -1,15 +1,3 @@
-/*
-
-switch.cpp, switch server and client program
-
-This program bridges the network simulation and the client ATMs
-it needs to have a server threadd open to accept connections from ATMs and queue the
-requests it will receive from them and a collection of connections to the ATMs
-
-// data is handled in the polling functions
-
-*/
-
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,20 +20,53 @@ requests it will receive from them and a collection of connections to the ATMs
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-#define SIMULATOR_PORT "8884" // the port the switch will be connecting to 
 #define SWITCH_PORT "8885" // the port ATMs will be connecting to
+#define BACKLOG 10         // how many pending connections queue will hold
 
-#define BACKLOG 10   // how many pending connections queue will hold
-//#define SIMULATOR_HOSTNAME ""
+// Sim network types
+enum NetworkType {
+    NETWORK_VISA = 0,
+    NETWORK_MASTERCARD = 1,
+    NETWORK_UNIONPAY = 2,
+    NETWORK_AMEX = 3,
+    NETWORK_UNKNOWN = 4
+};
 
-int networkSim_fd; // file descriptor for the connection to the network simulator
+// Map PAN first digit to network type
+NetworkType getNetworkType(const std::string& pan) {
+    if (pan.empty()) return NETWORK_UNKNOWN;
 
+    char firstDigit = pan[0];
+    switch (firstDigit) {
+        case '4': return NETWORK_VISA;
+        case '5': return NETWORK_MASTERCARD;
+        case '6': return NETWORK_UNIONPAY;
+        case '3': return NETWORK_AMEX;
+        default: return NETWORK_UNKNOWN;
+    }
+}
+
+// Map network type to simulator port
+std::string getSimulatorPort(NetworkType network) {
+    switch (network) { 
+        case NETWORK_VISA: return "8886"; // visa sim port
+        case NETWORK_MASTERCARD: return "8884"; // mastercard sim port
+        case NETWORK_UNIONPAY: return "8887"; // unionPay sim port
+        case NETWORK_AMEX: return "8888"; // american express sim port
+        default: return ""; // for a unknown network
+    }
+}
+
+// simulator connections
+std::unordered_map<NetworkType, int> simulator_fds; // mapping network type to simulator file descriptor
 std::vector<int> queuedSockets;
 std::vector<struct pollfd> ATMs;
 
 std::mutex queuedSocketsMutex;
+std::mutex simulatorFdsMutex;
 
-// logging function 
+
+// Logging function 
 void logTransaction(int transactionType, const json &request) {
     std::ofstream logFile("transactions.log", std::ios_base::app); // opening in append mode
 
@@ -62,24 +83,19 @@ void logTransaction(int transactionType, const json &request) {
     std::string atmID = request["atm_id"];
     std::string panNumber = request["pan_number"];
 
-    logFile << " card " << panNumber << " is at ATM: " << atmID << "making request: ";
+    logFile << " card " << panNumber << " is at ATM: " << atmID << " making request: ";
 
     switch (transactionType)
     {
     case 0: // Validate Pin
-        // expecting pin
         logFile << "Validate Pin with PIN: " << request["pin"];
         break;
     case 1: // Display Balance
-        // expecting nothing from ATM
         logFile << "Display Balance ";
         break;
     case 2: // Withdraw
-        // expecting transaction_value (amount to be withdrawn)
         logFile << "Withdraw Cash of amount: " << request["transaction_value"];
-        /* code */
         break;
-    
     default:
         logFile << "Invalid request: " << request.dump();
         break;
@@ -98,104 +114,122 @@ void *getInAddr(struct sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-int connectToNetwork(){
+// connect to a specific simulator based on port
+int connectToSimulator(const std::string& port) {
 
     int sockfd;
     struct addrinfo hints, *servinfo, *p;
     int rv;
     char s[INET6_ADDRSTRLEN];
 
-    while (1)
-    {
-        memset(&hints, 0, sizeof hints);
-        hints.ai_family = AF_UNSPEC;
-        hints.ai_socktype = SOCK_STREAM;
+    memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
 
-        std::string hostname = "127.0.0.1";
-        #ifdef SIMULATOR_HOSTNAME
-            hostname = SIMULATOR_HOSTNAME;
-        #endif
+    std::string hostname = "127.0.0.1"; // Simulator is on localhost
 
-        // set up data for connection
-        if ((rv = getaddrinfo(hostname.c_str(), SIMULATOR_PORT, &hints, &servinfo)) != 0) {
-            fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
-            std::cout << "failed to resolve data" << std::endl;
-            exit(1);
-        }
+    // set up data for connection
+    if ((rv = getaddrinfo(hostname.c_str(), port.c_str(), &hints, &servinfo)) != 0) {
+        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
+        return -1;
+    }
 
-        // loop through all the results and connect to the first we can
-        for(p = servinfo; p != NULL; p = p->ai_next) {
-            if ((sockfd = socket(p->ai_family, p->ai_socktype,
-                    p->ai_protocol)) == -1) {
-                perror("client: socket");
-                continue;
-            }
-
-            if (connect(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
-                close(sockfd);
-                perror("client: connect");
-                continue;
-            }
-
-            break;
-        }
-
-        if (p == NULL) {
-            fprintf(stderr, "client: failed to connect\n");
-            sleep(10);
+    // loop through all the results and connect to the first we can
+    for(p = servinfo; p != NULL; p = p->ai_next) {
+        if ((sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
+            perrorS("client: socket");
             continue;
         }
 
-        inet_ntop(p->ai_family, getInAddr((struct sockaddr *)p->ai_addr), s, sizeof s);
-        printf("client: connecting to %s\n", s);
+        if (connect(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
+            close(sockfd);
+            perror("client: connect");
+            continue;
+        }
 
-        freeaddrinfo(servinfo); // all done with this structure
-
-        return sockfd;
+        break;
     }
+
+    if (p == NULL) {
+        fprintf(stderr, "client: failed to connect to simulator on port %s\n", port.c_str());
+        freeaddrinfo(servinfo);
+        return -1;
+    }
+
+    inet_ntop(p->ai_family, getInAddr((struct sockaddr *)p->ai_addr), s, sizeof s);
+    printf("client: connecting to simulator on port %s\n", port.c_str());
+
+    freeaddrinfo(servinfo); // all done with this structure
+
+    return sockfd;
 }
 
-// forward request to simulator 
-// adding return value to allow telling the ATMs cabout network issues
-int forwardToSimulator(const json &request) {
-
+// forward request to appropriate simulator based on pan
+int forwardToSimulator(const json &request, int atm_fd) {
     std::string requestStr = request.dump(); // serializing JSON
 
-    if (send(networkSim_fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
+    // pull pan from request
+    std::string panNumber = request["pan_number"];
+    NetworkType network = getNetworkType(panNumber);
+    std::string port = getSimulatorPort(network);
+
+    if (port.empty()) {
+        std::cerr << "Unknown network type for PAN: " << panNumber << "\n";
+        return -1;
+    }
+
+    // a check to see if we already have a connection to this simulator
+    simulatorFdsMutex.lock();
+    if (simulator_fds.find(network) == simulator_fds.end()) {
+        // connect to the simulator
+        int sockfd = connectToSimulator(port);
+        if (sockfd == -1) {
+            simulatorFdsMutex.unlock();
+            return -1;
+        }
+        simulator_fds[network] = sockfd;
+    }
+    int simulator_fd = simulator_fds[network];
+    simulatorFdsMutex.unlock();
+
+    // sending request to the simulator
+    if (send(simulator_fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
         perror("Error sending request to simulator");
         return -1;
     }
 
-    return 0;
-}
-
-// Handle simulator response 
-void handleSimulatorResponse(int atm_fd) {
+    // handle simulator response
     char responseBuffer[512];
-    int bytesReceived = recv(networkSim_fd, responseBuffer, sizeof(responseBuffer) - 1, 0);
+    int bytesReceived = recv(simulator_fd, responseBuffer, sizeof(responseBuffer) - 1, 0);
     if (bytesReceived > 0) {
         responseBuffer[bytesReceived] = '\0';
         std::string response(responseBuffer);
 
-        // forwarding the simulator's response to the ATM
+        // forward simulator's response to the ATM
         if (send(atm_fd, response.c_str(), response.size(), 0) == -1) {
             perror("Error sending response to ATM");
         }
     } else if (bytesReceived == 0) {
+
         std::cerr << "Simulator connection closed unexpectedly.\n";
-        json request;
-        request["transaction_outcome"] = 10;
-        request["reason"] = "connection terminated";
-        std::string response = request.dump();
-        send(atm_fd, response.c_str(), response.length(), 0);
+        json response;
+        response["transaction_outcome"] = 10;
+        response["reason"] = "connection terminated";
+        std::string responseStr = response.dump();
+
+        send(atm_fd, responseStr.c_str(), responseStr.length(), 0);
     } else {
+
         perror("Error receiving response from simulator");
-        json request;
-        request["transaction_outcome"] = 10;    
-        request["reason"] = "error with response";
-        std::string response = request.dump();
-        send(atm_fd, response.c_str(), response.length(), 0);
+        json response;
+        response["transaction_outcome"] = 10;    
+        response["reason"] = "error with response";
+        std::string responseStr = response.dump();
+        
+        send(atm_fd, responseStr.c_str(), responseStr.length(), 0);
     }
+
+    return 0;
 }
 
 // for all the sockets we are working with, check if they have received inputs
@@ -207,7 +241,7 @@ void pollingFunction(){
     {
         int num_events = poll(&(*(ATMs.begin())), ATMs.size(), 150);
 
-        // only scan the ports for data if and event has happened
+        // only scan the ports for data if an event has happened
         if (num_events > 0)
         {
             // check for something in the event that poll doesn't timeout
@@ -235,14 +269,9 @@ void pollingFunction(){
                             logTransaction(transactionType, request);
 
                             // forwarding request to simulator
-                            int responseReachedNetwork = forwardToSimulator(request);
+                            int responseReachedNetwork = forwardToSimulator(request, ATMs[i].fd);
 
-                            if (responseReachedNetwork == 0)
-                            { // response made it
-                                // proceed as normal
-                                // handling simulator response & forward to ATM 
-                                handleSimulatorResponse(ATMs[i].fd);
-                            }else
+                            if (responseReachedNetwork != 0)
                             { // connection to network broken, send ATM error response
                                 request["transaction_outcome"] = 10;
                                 request["reason"] = "connection terminated";
@@ -372,14 +401,10 @@ int bindSocketForClientsAndListen(){
 
 int main(int argc, char *argv[])
 {
-    // connect to the simulator
-    networkSim_fd = connectToNetwork();
-
     // set up a thread to handle clients
     std::thread pollingThread(pollingFunction);
     // start accepting clients
     bindSocketForClientsAndListen();
 
-    close(networkSim_fd);
     return 0;
 }
