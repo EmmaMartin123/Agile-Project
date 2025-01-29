@@ -62,6 +62,8 @@ namespace ATM_forms
                     //to store the message displayed to the user
                     string message;
 
+                    AlertMessageForm alertMessageForm; 
+
                     // handles transaction outcomes
                     switch (transaction_outcome)
                     {
@@ -94,7 +96,9 @@ namespace ATM_forms
                             decimal closest_amount = Math.Floor(available_balance / 5) * 5;
 
                             // display the message with closest value
-                            MessageBox.Show($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            alertMessageForm = new AlertMessageForm($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}");
+                            alertMessageForm.Show(this);
+                            //MessageBox.Show($"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                             // update the amount text box with the suggested withdrawal amount
                             amount_txtbox.Text = "£" + closest_amount.ToString();
@@ -102,12 +106,16 @@ namespace ATM_forms
 
                         case 10: // general error
                             message = "An error occurred during the transaction. Please try again later.";
-                            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            alertMessageForm = new AlertMessageForm(message);
+                            alertMessageForm.Show(this);
+                            //MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
 
                         default: // unknown outcome
                             message = "Unexpected response from the server.";
-                            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            alertMessageForm = new AlertMessageForm(message);
+                            alertMessageForm.Show(this);
+                            //MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
 
@@ -121,7 +129,9 @@ namespace ATM_forms
             else
             {
                 // must be a valid number and a multiple of 5
-                MessageBox.Show("Please enter a valid withdrawal amount (multiple of 5).", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid Amount. Please enter a valid withdrawal amount\n(multiple of 5).");
+                alertMessageForm.Show(this);
+                //MessageBox.Show("Please enter a valid withdrawal amount (multiple of 5).", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 amount_txtbox.Text = "£";
             }
 
@@ -165,5 +175,9 @@ namespace ATM_forms
             withdraw_panel.Top = (this.ClientSize.Height - withdraw_panel.Height) / 2;
         }
 
+        private void withdraw_panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
