@@ -12,6 +12,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
+
 namespace ATM_forms
 {
     public partial class EnterPinForm : Form
@@ -108,11 +109,10 @@ namespace ATM_forms
                 pin_prompt.Left = (enter_pin_panel.Width - pin_prompt.Width) / 2;
 
                 EnterButton.Text = "Validation";
-                EnterButton.Font = new Font("Segoe UI", 8, FontStyle.Bold);
+                EnterButton.Font = new Font("Segoe UI", 9, FontStyle.Bold);
 
                 delete_btn.Text = "Correction";
-                delete_btn.Font = new Font("Segoe UI", 8, FontStyle.Bold);
-
+                delete_btn.Font = new Font("Segoe UI", 9, FontStyle.Bold);
                 exit_btn.Text = "Annulation";
             }
             else if (GlobalVariables.language == "english")
@@ -165,7 +165,7 @@ namespace ATM_forms
 
                         // assume the response is true for now and set it manually
 
-                        int transaction_outcome = 1; // for testing only
+                        int transaction_outcome = 0; // for testing only
 
                         if (transaction_outcome == 0)
                         {

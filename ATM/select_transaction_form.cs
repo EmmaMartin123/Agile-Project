@@ -69,6 +69,32 @@ namespace ATM_forms
             // add an event handler to handle resizing
             this.SizeChanged += new EventHandler(this.SelectTransaction_SizeChanged);
             this.Visible = true; // make form visible again
+
+            // translate text and reposition if necessary
+            if (GlobalVariables.language == "french")
+            {
+                this.Text = "Sélectionnez une transaction";
+                select_transaction_label.Text = "Sélectionnez une transaction";
+                select_transaction_label.Left = (this.select_transaction_panel.Width - select_transaction_label.Width) / 2;
+
+                check_balance_btn.Text = "VÉRIFIER LE SOLDE";
+
+                cash_withdrawal_btn.Text = "RETRAIT D'ARGENT";
+
+                exit_btn.Text = "QUITTER";
+            }
+            else if (GlobalVariables.language == "english")
+            {
+                this.Text = "Select Transaction";
+                select_transaction_label.Text = "Select a Transaction";
+                select_transaction_label.Left = (this.select_transaction_panel.Width - select_transaction_label.Width) / 2;
+
+                check_balance_btn.Text = "CHECK BALANCE";
+
+                cash_withdrawal_btn.Text = "CASH WITHDRAWAL";
+
+                exit_btn.Text = "EXIT";
+            }
         }
 
         /*
