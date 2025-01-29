@@ -14,7 +14,10 @@ namespace ATM_forms
 {
     public partial class PromptForm : Form
     {
-        public PromptForm(string title, string message)
+
+        private decimal withdrawal_amount; // field to store the withdrawal amount
+
+        public PromptForm(string title, string message, decimal amount)
         {
             InitializeComponent();
             this.Text = title;
@@ -22,6 +25,7 @@ namespace ATM_forms
             prompt_label1.Text = message;
             // position text dynamically based on length
             prompt_label1.Left = (this.ClientSize.Width - prompt_label1.Width) / 2;
+            withdrawal_amount = amount;
         }
 
 
@@ -30,14 +34,26 @@ namespace ATM_forms
             // generate a unique ID for the receipt using guid
             string uniqueId = Guid.NewGuid().ToString();
 
+            // get the current date and time 
+            string currentDate = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+
+            string withdrawalAmount = $"Withdrawal Amount: {withdrawal_amount:C}"; // this will format it as currency ( eg £100.00)
+
             // get the path to the user's documents folder
             string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string filePath = Path.Combine(documentsFolder, $"receipt_{uniqueId}.txt");
 
             // use streamWriter to write text to the file
-            using (StreamWriter writer = new StreamWriter(filePath, true)) 
+            using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                writer.WriteLine(prompt_label1.Text); // write the text message to the file
+                // Write the structured receipt content to the file
+                writer.WriteLine("Transaction Receipt");
+                writer.WriteLine("-----------------------");
+                writer.WriteLine($"Date: {currentDate}");
+                writer.WriteLine($"Receipt ID: {uniqueId}");
+                writer.WriteLine(withdrawalAmount);  // Use the transaction data here
+                writer.WriteLine("-----------------------");
+                writer.WriteLine("Thank you for your transaction.");
             }
 
             this.Close(); 
