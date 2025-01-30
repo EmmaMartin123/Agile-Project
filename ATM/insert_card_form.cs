@@ -34,18 +34,37 @@ namespace ATM_forms
                 this.Text = "Insérer la Carte";
                 insert_card_label.Text = "Insérer la Carte";
                 insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+
+                language1_button.Text = "English";
+                language1_button.Image = ATM_forms.Properties.Resources.british;
+
+                language2_button.Text = "Español";
+                language2_button.Image = ATM_forms.Properties.Resources.spain;
+
             }
             else if (GlobalVariables.language == "english")
             {
                 this.Text = "Insert Card";
                 insert_card_label.Text = "Insert Card";
                 insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+
+                language1_button.Text = "Español";
+                language1_button.Image = ATM_forms.Properties.Resources.spain;
+
+                language2_button.Text = "Français";
+                language2_button.Image = ATM_forms.Properties.Resources.frenchflag;
             }
             else if (GlobalVariables.language == "spanish")
             {
                 this.Text = "Introduzca su tarjeta";
                 insert_card_label.Text = "Introduzca su tarjeta";
                 insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+
+                language1_button.Text = "English";
+                language1_button.Image = ATM_forms.Properties.Resources.british;
+
+                language2_button.Text = "Français";
+                language2_button.Image = ATM_forms.Properties.Resources.frenchflag;
             }
             
         }
@@ -164,5 +183,9 @@ namespace ATM_forms
 
         }
 
+        private void insert_card_panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
