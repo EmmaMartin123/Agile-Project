@@ -138,11 +138,11 @@ namespace ATM_forms
                         else
                         {
                             // if the PIN does not match
-<<<<<<< HEAD
+
                             string reason = parsedResponse.reason;
-=======
+
                             //string reason = parsedResponse.reason;
->>>>>>> origin/Sprint-2
+
                             AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please try again.");
                             alertMessageForm.Show(this);
                             //MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
