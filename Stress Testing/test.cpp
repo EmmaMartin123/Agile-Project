@@ -6,14 +6,17 @@
 #include <random>
 #include <nlohmann/json.hpp>
 #include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 
 using json = nlohmann::json;
 
-#define SWITCH_PORT 8885
-#define SWITCH_IP "127.0.0.1"
+#define SWITCH_PORT "8885"
+#define SWITCH_IP "ec2-52-71-77-78.compute-1.amazonaws.com"
 
+std::string hostname = SWITCH_IP;
 
 // Dummy account details
 const std::vector<std::string> dummyAccounts = {
@@ -38,25 +41,44 @@ const std::vector<std::string> expiryDates = {
 
 // function to sim an ATM transaction
 void simulateATM(int atmID, int numTransactions, int transactionInterval) {
-    struct sockaddr_in serverAddr;
     char buffer[512];
-    int sock;
 
-    //  socket set up
-    sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock < 0) {
+    int sock;
+    struct addrinfo hints, *servinfo, *p;
+    int rv;
+    char s[INET6_ADDRSTRLEN];
+
+    memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
+
+    // connect to switch
+    if ((rv = getaddrinfo(hostname.c_str(), SWITCH_PORT, &hints, &servinfo)) != 0) {
+        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
+        std::cout << "failed to resolve data" << std::endl;
         std::cerr << "[ERROR] ATM " << atmID << ": Socket creation failed.\n";
-        return;
+        exit(1);
     }
 
-    serverAddr.sin_family = AF_INET;
-    serverAddr.sin_port = htons(SWITCH_PORT);
-    inet_pton(AF_INET, SWITCH_IP, &serverAddr.sin_addr);
+    for(p = servinfo; p != NULL; p = p->ai_next) {
+        if ((sock = socket(p->ai_family, p->ai_socktype,
+                p->ai_protocol)) == -1) {
+            perror("client: socket");
+            continue;
+        }
 
-    //  switch connection
-    if (connect(sock, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
-        std::cerr << "[ERROR] ATM " << atmID << ": Failed to connect to switch.\n";
-        close(sock);
+        if (connect(sock, p->ai_addr, p->ai_addrlen) == -1) {
+            close(sock);
+            perror("client: connect");
+            continue;
+        }
+
+        break;
+    }
+
+    if (p == NULL) {
+        fprintf(stderr, "client: failed to connect\n");
+        sleep(10);
         return;
     }
 
@@ -127,6 +149,7 @@ int main() {
 
     for (int i = 0; i < numATMs; ++i) {
         threads.emplace_back(simulateATM, i + 1, transactionsPerATM, transactionInterval);
+        std:usleep(5000);
     }
 
     for (auto& thread : threads) {
