@@ -72,7 +72,7 @@ namespace ATM_forms
                     {
                         case 0: // success
                             message = $"You have successfully withdrawn £{amount}.\nWould you like a receipt?";
-                            PromptForm successForm = new PromptForm("Success",message);
+                            PromptForm successForm = new PromptForm("Success",message, amount);
                             successForm.ShowDialog(); // blocks execution until the user closes it
 
                             SelectTransactionForm cardForm = new SelectTransactionForm();
