@@ -46,7 +46,7 @@ namespace ATM_forms
             this.prompt_panel.Controls.Add(this.no_btn);
             this.prompt_panel.Controls.Add(this.yes_btn);
             this.prompt_panel.Controls.Add(this.prompt_label2);
-            this.prompt_panel.Location = new System.Drawing.Point(508, 215);
+            this.prompt_panel.Location = new System.Drawing.Point(-18, -71);
             this.prompt_panel.Name = "prompt_panel";
             this.prompt_panel.Size = new System.Drawing.Size(886, 535);
             this.prompt_panel.TabIndex = 0;
@@ -61,6 +61,7 @@ namespace ATM_forms
             this.prompt_label1.TabIndex = 0;
             this.prompt_label1.Text = "Prompt....";
             this.prompt_label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.prompt_label1.Click += new System.EventHandler(this.prompt_label1_Click);
             // 
             // no_btn
             // 
@@ -113,11 +114,12 @@ namespace ATM_forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1916, 1050);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
+            this.ClientSize = new System.Drawing.Size(864, 479);
             this.Controls.Add(this.prompt_panel);
             this.Name = "PromptForm";
             this.Text = "prompts";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.PromptForm_Load);
             this.prompt_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 

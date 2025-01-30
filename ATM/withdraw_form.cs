@@ -74,16 +74,18 @@ namespace ATM_forms
                     //to store the message displayed to the user
                     string message;
 
-                    AlertMessageForm alertMessageForm; 
+                    AlertMessageForm alertMessageForm;
 
                     // handles transaction outcomes
+
+                    //int transaction_outcome = 0; //for testing
+
                     switch (transaction_outcome)
                     {
                         case 0: // success
-                            // remove the cash from ATM stores after confirmation from user bank
-                            ATMContents.WithdrawCash(amount);
-                            message = $"You have successfully withdrawn £{amount}.";
-                            MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            message = $"You have successfully withdrawn £{amount}.\nWould you like a receipt?";
+                            PromptForm successForm = new PromptForm("Success",message, amount);
+                            successForm.ShowDialog(); // blocks execution until the user closes it
 
                             SelectTransactionForm cardForm = new SelectTransactionForm();
                             cardForm.Show();
