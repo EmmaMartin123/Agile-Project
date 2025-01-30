@@ -171,15 +171,13 @@ namespace ATM_forms
 
         /* 
          Card Types:
-        Mastercard - starts with a 5
-        Visa - starts with a 4
-        UnionPay - starts with 62
-        Amex - starts with 34 or 37
+        Mastercard - starts with 4/5/6
+        Visa - starts with 1/2/3
+        UnionPay - starts with 7/8/9
          */
         public static string mastercardPAN = "5809567890123456";
-        public static string visaPAN = "4412567890123456";
-        public static string unionpayPAN = "6224567890123456";
-        public static string amexPAN = "3477567890123456";
+        public static string visaPAN = "1412567890123456";
+        public static string unionpayPAN = "7224567890123456";
         public static string currentPAN = "";
         public static string currentCardType = "";
 
