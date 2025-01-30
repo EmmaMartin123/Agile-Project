@@ -30,10 +30,11 @@ using json = nlohmann::json;
 
 // Sim network types
 enum NetworkType {
-    NETWORK_VISA = 0,
-    NETWORK_MASTERCARD = 1,
-    NETWORK_UNIONPAY = 2,
-    NETWORK_UNKNOWN = 3
+    NETWORK_ERROR = -1,
+    NETWORK_ONE = 0,
+    NETWORK_TWO = 1,
+    NETWORK_THREE = 2,
+
 };
 
 // simulator connections
