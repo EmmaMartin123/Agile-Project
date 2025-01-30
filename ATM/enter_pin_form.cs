@@ -46,6 +46,11 @@ namespace ATM_forms
                     AlertMessageForm alertMessage = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
                     alertMessage.Show(this);
                 }
+                else if (GlobalVariables.language == "spanish")
+                {
+                    AlertMessageForm alertMessage = new AlertMessageForm("PIN no válido. Ingrese un PIN de 4 dígitos.");
+                    alertMessage.Show(this);
+                }
                 pin_txt_box.Text = pin_txt_box.Text.Substring(0, Math.Min(4, pin_txt_box.Text.Length));
                 pin_txt_box.SelectionStart = pin_txt_box.Text.Length; // moves the cursor to the end
             }
@@ -133,6 +138,21 @@ namespace ATM_forms
 
                 exit_btn.Text = "Cancel";
             }
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Teclee su número confidencial";
+                pin_prompt.Text = "Teclee su número confidencial";
+                pin_prompt.Font = new Font("Segoe UI", 36, FontStyle.Bold);
+                pin_prompt.Left = (enter_pin_panel.Width - pin_prompt.Width) / 2;
+
+                EnterButton.Text = "Continuar";
+                EnterButton.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+                delete_btn.Text = "Corregir";
+                delete_btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+                exit_btn.Text = "Cancelar";
+            }
         }
 
         /*
@@ -158,18 +178,18 @@ namespace ATM_forms
                     {
 
                         // connect and send response in json format
-                        /*NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                        NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                         NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
                         string response = NetworkClient.ReceiveResponse();
                         Console.WriteLine($"Response: {response}");
                         NetworkClient.CloseConnection();
 
                         dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                        int transaction_outcome = parsedResponse.transaction_outcome;*/
+                        int transaction_outcome = parsedResponse.transaction_outcome;
 
                         // assume the response is true for now and set it manually
 
-                        int transaction_outcome = 0; // for testing only
+                        //int transaction_outcome = 0; // for testing only
 
                         if (transaction_outcome == 0)
                         {
@@ -182,7 +202,7 @@ namespace ATM_forms
                         else
                         {
                             // if the PIN does not match
-                            //string reason = parsedResponse.reason;
+                            string reason = parsedResponse.reason;
                             if (GlobalVariables.language == "french")
                             {
                                 AlertMessageForm alertMessageForm = new AlertMessageForm("Code PIN invalide. Veuillez réessayer.");
@@ -191,6 +211,11 @@ namespace ATM_forms
                             else if (GlobalVariables.language == "english")
                             {
                                 AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please try again.");
+                                alertMessageForm.Show(this);
+                            }
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                AlertMessageForm alertMessageForm = new AlertMessageForm("PIN no válido. Por favor inténtalo de nuevo.");
                                 alertMessageForm.Show(this);
                             }
                            
@@ -217,6 +242,11 @@ namespace ATM_forms
                         AlertMessageForm alertMessage = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
                         alertMessage.Show(this);
                     }
+                    else if (GlobalVariables.language == "spanish")
+                    {
+                        AlertMessageForm alertMessage = new AlertMessageForm("PIN no válido. Ingrese un PIN de 4 dígitos.");
+                        alertMessage.Show(this);
+                    }
                 }
             }
             else
@@ -230,6 +260,11 @@ namespace ATM_forms
                 else if (GlobalVariables.language == "english")
                 {
                     AlertMessageForm alertMessage = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
+                    alertMessage.Show(this);
+                }
+                else if (GlobalVariables.language == "spanish")
+                {
+                    AlertMessageForm alertMessage = new AlertMessageForm("PIN no válido. Ingrese un PIN de 4 dígitos.");
                     alertMessage.Show(this);
                 }
             }

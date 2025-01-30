@@ -49,7 +49,7 @@ namespace ATM_forms
                 {
 
                     // connect and send response in json format
-                    /*NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                    NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                     Console.WriteLine(amount);
                     NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\", \"transaction_value\": \""+amount+"\"}");
                     string response = NetworkClient.ReceiveResponse();
@@ -58,19 +58,32 @@ namespace ATM_forms
 
                     //parse the response
                     dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                    int transaction_outcome = parsedResponse.transaction_outcome;*/
+                    int transaction_outcome = parsedResponse.transaction_outcome;
 
                     //to store the message displayed to the user
                     string message;
 
                     AlertMessageForm alertMessageForm;
-                    int transaction_outcome = 100;
+                    //int transaction_outcome = 1;
                     // handles transaction outcomes
                     switch (transaction_outcome)
                     {
                         case 0: // success
-                            message = $"You have successfully withdrawn £{amount}.";
-                            MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (GlobalVariables.language == "english")
+                            {
+                                message = $"You have successfully withdrawn £{amount}.";
+                                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else if (GlobalVariables.language == "french")
+                            {
+                                message = $"Vous avez réussi votre retrait £{amount}.";
+                                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                message = $"Has retirado con éxito £{amount}.";
+                                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
 
                             SelectTransactionForm cardForm = new SelectTransactionForm();
                             cardForm.Show();
@@ -78,12 +91,19 @@ namespace ATM_forms
                             break;
 
                         case 1: // insufficient funds
-                            //string reason = parsedResponse.reason ?? "Insufficient funds.";
-                            string reason = "test";
+                            string reason = parsedResponse.reason ?? "Insufficient funds.";
+                            if (reason == "Insufficient funds." && GlobalVariables.language == "french")
+                            {
+                                reason = "Fonds insuffisants";
+                            }
+                            else if (reason == "Insufficient funds." && GlobalVariables.language == "spanish")
+                            {
+                                reason = "Fondos insuficientes";
+                            }
                             message = $"Transaction failed: {reason}";
 
                             //send balance request
-                            /*TransactionData.transactionType = 1;
+                            TransactionData.transactionType = 1;
                             NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                             NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
                             string balanceResponse = NetworkClient.ReceiveResponse();
@@ -95,8 +115,8 @@ namespace ATM_forms
                             Console.WriteLine(available_balance);
 
                             // calculate closest multiple of 5 to the available balance
-                            decimal closest_amount = Math.Floor(available_balance / 5) * 5;*/
-                            decimal closest_amount = 100;
+                            decimal closest_amount = Math.Floor(available_balance / 5) * 5;
+                            //decimal closest_amount = 100; // test data
                             // display the message with closest value
                             if (GlobalVariables.language == "french")
                             {
@@ -106,7 +126,13 @@ namespace ATM_forms
                             }
                             else if (GlobalVariables.language == "english")
                             {
-                                message = $"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}";
+                                message = $"Transaction failed: {reason}. \nThe maximum you can withdraw is £{closest_amount}";
+                                alertMessageForm = new AlertMessageForm(message);
+                                alertMessageForm.Show(this);
+                            }
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                message = $"La transacción falló: {reason}. \nLo máximo que puedes retirar es £{closest_amount}";
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
@@ -127,6 +153,12 @@ namespace ATM_forms
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                message = "Se produjo un error durante la transacción. \nInténtelo de nuevo más tarde.";
+                                alertMessageForm = new AlertMessageForm(message);
+                                alertMessageForm.Show(this);
+                            }
                             break;
 
                         default: // unknown outcome
@@ -142,7 +174,13 @@ namespace ATM_forms
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
-                           
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                message = "Respuesta inesperada del servidor.";
+                                alertMessageForm = new AlertMessageForm(message);
+                                alertMessageForm.Show(this);
+                            }
+
                             //MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
@@ -167,7 +205,11 @@ namespace ATM_forms
                     AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid Amount. Please enter a valid withdrawal amount\n(multiple of 5).");
                     alertMessageForm.Show(this);
                 }
-                
+                else if (GlobalVariables.language == "spanish")
+                {
+                    AlertMessageForm alertMessageForm = new AlertMessageForm("Monto no válido. Ingrese un monto de retiro válido\n(múltiplo de 5).");
+                    alertMessageForm.Show(this);
+                }
                 //MessageBox.Show("Please enter a valid withdrawal amount (multiple of 5).", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 amount_txtbox.Text = "£";
             }
@@ -223,7 +265,7 @@ namespace ATM_forms
             {
                 this.Text = "Withdraw";
                 amount_label.Text = "Enter the amount you wish to withdraw: ";
-                amount_label.Left = (this.withdraw_panel.Width - withdraw_panel.Width) / 2;
+                amount_label.Left = (this.withdraw_panel.Width - amount_label.Width) / 2;
 
                 btnY.Text = "Enter";
                 btnY.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -232,6 +274,20 @@ namespace ATM_forms
                 btnN.Font = new Font("Segoe UI", 14, FontStyle.Bold);
                 
                 btnExit.Text = "Cancel";
+            }
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Retiro en efectivo";
+                amount_label.Text = "Ingresa el monto que deseas retirar: ";
+                amount_label.Left = (this.withdraw_panel.Width - amount_label.Width) / 2;
+
+                btnY.Text = "Continuar";
+                btnY.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+                btnN.Text = "Corregir";
+                btnN.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+                btnExit.Text = "Cancelar";
             }
         }
 

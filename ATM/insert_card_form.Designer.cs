@@ -76,6 +76,7 @@ namespace ATM_forms
             this.insert_card_panel.Name = "insert_card_panel";
             this.insert_card_panel.Size = new System.Drawing.Size(1300, 900);
             this.insert_card_panel.TabIndex = 2;
+            this.insert_card_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.insert_card_panel_Paint);
             // 
             // language2_button
             // 

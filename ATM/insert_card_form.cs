@@ -27,17 +27,44 @@ namespace ATM_forms
             // add an event handler to handle resizing
             this.SizeChanged += new EventHandler(this.InsertCard_SizeChanged);
             this.Visible = true; // make form visible again
+
+            // change language if langauge change is set
             if (GlobalVariables.language == "french")
             {
                 this.Text = "Insérer la Carte";
                 insert_card_label.Text = "Insérer la Carte";
                 insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+
+                language1_button.Text = "English";
+                language1_button.Image = ATM_forms.Properties.Resources.british;
+
+                language2_button.Text = "Español";
+                language2_button.Image = ATM_forms.Properties.Resources.spain;
+
             }
             else if (GlobalVariables.language == "english")
             {
                 this.Text = "Insert Card";
                 insert_card_label.Text = "Insert Card";
                 insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+
+                language1_button.Text = "Español";
+                language1_button.Image = ATM_forms.Properties.Resources.spain;
+
+                language2_button.Text = "Français";
+                language2_button.Image = ATM_forms.Properties.Resources.frenchflag;
+            }
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Introduzca su tarjeta";
+                insert_card_label.Text = "Introduzca su tarjeta";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+
+                language1_button.Text = "English";
+                language1_button.Image = ATM_forms.Properties.Resources.british;
+
+                language2_button.Text = "Français";
+                language2_button.Image = ATM_forms.Properties.Resources.frenchflag;
             }
             
         }
@@ -100,8 +127,10 @@ namespace ATM_forms
             }
             else if (newLanguage == "Español")
             {
-                // spanish stuff to be added later
                 GlobalVariables.language = "spanish";
+                this.Text = "Introduzca su tarjeta";
+                insert_card_label.Text = "Introduzca su tarjeta";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
             }
         }
 
@@ -146,11 +175,17 @@ namespace ATM_forms
             }
             else if (newLanguage == "Español")
             {
-                // spanish stuff to be added later
                 GlobalVariables.language = "spanish";
+                this.Text = "Introduzca su tarjeta";
+                insert_card_label.Text = "Introduzca su tarjeta";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
             }
 
         }
 
+        private void insert_card_panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
