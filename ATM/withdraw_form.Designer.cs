@@ -68,7 +68,7 @@ namespace ATM_forms
             this.withdraw_panel.Controls.Add(this.btnN);
             this.withdraw_panel.Controls.Add(this.btnExit);
             this.withdraw_panel.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.withdraw_panel.Location = new System.Drawing.Point(285, 76);
+            this.withdraw_panel.Location = new System.Drawing.Point(25, 1);
             this.withdraw_panel.Name = "withdraw_panel";
             this.withdraw_panel.Size = new System.Drawing.Size(1300, 900);
             this.withdraw_panel.TabIndex = 0;
@@ -77,11 +77,11 @@ namespace ATM_forms
             // amount_label
             // 
             this.amount_label.AutoSize = true;
-            this.amount_label.Font = new System.Drawing.Font("Segoe UI", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.amount_label.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.amount_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.amount_label.Location = new System.Drawing.Point(140, 20);
             this.amount_label.Name = "amount_label";
-            this.amount_label.Size = new System.Drawing.Size(1020, 70);
+            this.amount_label.Size = new System.Drawing.Size(1103, 74);
             this.amount_label.TabIndex = 0;
             this.amount_label.Text = "Enter the amount you wish to withdraw: ";
             this.amount_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -355,7 +355,6 @@ namespace ATM_forms
             this.Name = "WithdrawForm";
             this.Text = "Withdraw";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.WithdrawForm_Load);
             this.withdraw_panel.ResumeLayout(false);
             this.withdraw_panel.PerformLayout();
             this.ResumeLayout(false);

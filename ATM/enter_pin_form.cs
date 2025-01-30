@@ -12,6 +12,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
+
 namespace ATM_forms
 {
     public partial class EnterPinForm : Form
@@ -30,9 +31,29 @@ namespace ATM_forms
         private void PinTxtboxTextChanged(object sender, EventArgs e)
         {
             pin_txt_box.PasswordChar = '*';   // hides input 
-            pin_txt_box.Text = pin_txt_box.Text.Substring(0, Math.Min(4, pin_txt_box.Text.Length)); //ensures text does not exeed 4 digits
-            pin_txt_box.SelectionStart = pin_txt_box.Text.Length; // moves the cursor to the end
-        
+
+            // the text is only digits and has a maximum length of 4
+            if (!int.TryParse(pin_txt_box.Text, out _) || pin_txt_box.Text.Length > 4)
+            {
+                if (GlobalVariables.language == "french")
+                {
+                    AlertMessageForm alertMessage = new AlertMessageForm("Code PIN invalide. Veuillez saisir un code PIN à 4 chiffres.");
+                    alertMessage.Show(this);
+                }
+                else if (GlobalVariables.language == "english")
+                {
+                    AlertMessageForm alertMessage = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
+                    alertMessage.Show(this);
+                }
+                else if (GlobalVariables.language == "spanish")
+                {
+                    AlertMessageForm alertMessage = new AlertMessageForm("PIN no válido. Ingrese un PIN de 4 dígitos.");
+                    alertMessage.Show(this);
+                }
+                pin_txt_box.Text = pin_txt_box.Text.Substring(0, Math.Min(4, pin_txt_box.Text.Length));
+                pin_txt_box.SelectionStart = pin_txt_box.Text.Length; // moves the cursor to the end
+            }
+
         }
 
         /*private void pin_txt_box_KeyPress(object sender, KeyPressEventArgs e)
@@ -70,7 +91,7 @@ namespace ATM_forms
 
         private void ContinuebtnClick(object sender, EventArgs e)
         {
-            
+
         }
 
         private void EnterPinForm_Load(object sender, EventArgs e)
@@ -83,6 +104,54 @@ namespace ATM_forms
             // add an event handler to handle resizing
             this.SizeChanged += new EventHandler(this.EnterPin_SizeChanged);
             this.Visible = true; // make form visible again
+
+            // change language of text, and resize, and dynamically move to fit 
+            if (GlobalVariables.language == "french")
+            {
+                this.Text = "Entrez Pin";
+
+                pin_prompt.Text = "Composez Votre Code Confidential";
+                pin_prompt.Left = (enter_pin_panel.Width - pin_prompt.Width) / 2;
+
+                EnterButton.Text = "Validation";
+                EnterButton.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+                delete_btn.Text = "Correction";
+                delete_btn.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+                exit_btn.Text = "Annulation";
+            }
+            else if (GlobalVariables.language == "english")
+            {
+                this.Text = "Enter Pin";
+
+                pin_prompt.Text = "Enter PIN and Press ENTER Key";
+                pin_prompt.Font = new Font("Segoe UI", 36, FontStyle.Bold);
+                pin_prompt.Left = (enter_pin_panel.Width - pin_prompt.Width) / 2;
+
+                EnterButton.Text = "Enter";
+                EnterButton.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+
+                delete_btn.Text = "Clear";
+                delete_btn.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+
+                exit_btn.Text = "Cancel";
+            }
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Teclee su número confidencial";
+                pin_prompt.Text = "Teclee su número confidencial";
+                pin_prompt.Font = new Font("Segoe UI", 36, FontStyle.Bold);
+                pin_prompt.Left = (enter_pin_panel.Width - pin_prompt.Width) / 2;
+
+                EnterButton.Text = "Continuar";
+                EnterButton.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+                delete_btn.Text = "Corregir";
+                delete_btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+                exit_btn.Text = "Cancelar";
+            }
         }
 
         /*
@@ -96,6 +165,7 @@ namespace ATM_forms
 
         private void EnterButtonClick(object sender, EventArgs e)
         {
+
             Console.WriteLine("continuing");
 
             // checks if the PIN is exactly 4 digits 
@@ -105,13 +175,15 @@ namespace ATM_forms
                 {
                     TransactionData.PIN = enteredPin;
                     TransactionData.transactionType = 0;
+
                     // send the pin to the switch to deal with
                     try
                     {
 
                         // connect and send response in json format
                         NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
-                        NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
+                        //NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
+                        NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.currentPAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
                         string response = NetworkClient.ReceiveResponse();
                         Console.WriteLine($"Response: {response}");
                         NetworkClient.CloseConnection();
@@ -134,9 +206,26 @@ namespace ATM_forms
                         else
                         {
                             // if the PIN does not match
-                            //string reason = parsedResponse.reason;
-                            AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please try again.");
-                            alertMessageForm.Show(this);
+
+                            string reason = parsedResponse.reason;
+
+                            if (GlobalVariables.language == "french")
+                            {
+                                AlertMessageForm alertMessageForm = new AlertMessageForm("Code PIN invalide. Veuillez réessayer.");
+                                alertMessageForm.Show(this);
+                            }
+                            else if (GlobalVariables.language == "english")
+                            {
+                                AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please try again.");
+                                alertMessageForm.Show(this);
+                            }
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                AlertMessageForm alertMessageForm = new AlertMessageForm("PIN no válido. Por favor inténtalo de nuevo.");
+                                alertMessageForm.Show(this);
+                            }
+                           
+
                             //MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             pin_txt_box.Clear();
                         }
@@ -150,17 +239,41 @@ namespace ATM_forms
                 else
                 {
                     // if the entered PIN is not a valid integer
-                    AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
-                    alertMessageForm.Show(this);
-                    //MessageBox.Show("Please enter a valid 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (GlobalVariables.language == "french")
+                    {
+                        AlertMessageForm alertMessage = new AlertMessageForm("Code PIN invalide. Veuillez saisir un code PIN à 4 chiffres.");
+                        alertMessage.Show(this);
+                    }
+                    else if (GlobalVariables.language == "english")
+                    {
+                        AlertMessageForm alertMessage = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
+                        alertMessage.Show(this);
+                    }
+                    else if (GlobalVariables.language == "spanish")
+                    {
+                        AlertMessageForm alertMessage = new AlertMessageForm("PIN no válido. Ingrese un PIN de 4 dígitos.");
+                        alertMessage.Show(this);
+                    }
                 }
             }
             else
             {
                 // if the PIN is not exactly 4 digits
-                AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
-                alertMessageForm.Show(this);
-                //MessageBox.Show("Please enter a 4-digit PIN.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (GlobalVariables.language == "french")
+                {
+                    AlertMessageForm alertMessage = new AlertMessageForm("Code PIN invalide. Veuillez saisir un code PIN à 4 chiffres.");
+                    alertMessage.Show(this);
+                }
+                else if (GlobalVariables.language == "english")
+                {
+                    AlertMessageForm alertMessage = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
+                    alertMessage.Show(this);
+                }
+                else if (GlobalVariables.language == "spanish")
+                {
+                    AlertMessageForm alertMessage = new AlertMessageForm("PIN no válido. Ingrese un PIN de 4 dígitos.");
+                    alertMessage.Show(this);
+                }
             }
         }
 

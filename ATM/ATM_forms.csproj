@@ -86,6 +86,7 @@
     <Compile Include="alert_message_form.Designer.cs">
       <DependentUpon>alert_message_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="ATMContents.cs" />
     <Compile Include="balance_form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +148,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="select_transaction_form.resx">
       <DependentUpon>select_transaction_form.cs</DependentUpon>
@@ -167,6 +169,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Spain.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frenchflag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smaller flag3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

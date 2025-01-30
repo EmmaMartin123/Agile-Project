@@ -235,17 +235,65 @@ void SimToAtmComms(){
     }
 }
 
-// for all the sockets we are working with, check if they have received inputs
+// for any sims we have, check for responses to send back to ATMs
+void SimToAtmComms(){
+    char buff[512];
+    std::string response = "";
+
+    while (1)
+    {
+        int numEvents = poll(&(*(Sims.begin())), Sims.size(), 60);
+
+        // received response from sims
+        if (numEvents < 0) continue;
+
+        // check for something in the event that poll doesn't timeout
+        for (int i = 0; i < Sims.size(); i++)
+        {
+            if (!(Sims[i].revents & POLLIN)) continue;
+
+            int bytesReceived = recv(Sims[i].fd, buff, 512, 0);
+            if (bytesReceived > 0)
+            {
+                buff[bytesReceived] = '\0'; // Null-terminate the received data 
+                std::string data(buff);
+
+                json request;
+
+                try {
+                    // parsing JSON data 
+                    request = json::parse(data);
+
+                    std::string s_AtmID = request["atm_id"];
+                    int AtmID = std::stoi(s_AtmID);
+
+                    int ATM_fd = AtmIdToFileDescriptorMap[AtmID];
+
+                    // send response back to correct socket
+                    response = request.dump();
+                    send(ATM_fd, response.c_str(), response.length(), 0);
+
+                } catch (const std::exception &e) {
+                    std::cerr << "Error parsing simulator response " << e.what() << std::endl;
+                    std::cerr << "request is: " << request.dump() << "\n";
+                }
+            }
+            Sims[i].revents = 0;
+        }
+    }
+}
+
+// for all the ATM sockets we are working with, check if they have received inputs and pass them to sims
 void AtmToSimComms(){
     char buff[512];
 
     // check all ports regularly
     while (1)
     {
-        int num_events = poll(&(*(ATMs.begin())), ATMs.size(), 150);
+        int numEvents = poll(&(*(ATMs.begin())), ATMs.size(), 150);
 
-        // only scan the ports for data if an event has happened
-        if (num_events > 0)
+        // only scan the ports for data if and event has happened
+        if (numEvents > 0)
         {
             // check for something in the event that poll doesn't timeout
             for (int i = 0; i < ATMs.size(); i++)

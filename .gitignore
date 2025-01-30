@@ -30,7 +30,9 @@ obj/
 /ATM/.vs/ATM_forms/v17/.suo
 /ATM/bin/Debug/ATM_forms.exe
 /ATM/bin/Debug/ATM_forms.pdb
-/.vs/Agile-Project/FileContentIndex/5d796467-04dc-4007-845a-20376eccea30.vsidx
-/.vs/Agile-Project/FileContentIndex/6a53c7a6-4356-4cd5-aaa3-d8991c119f0a.vsidx
-/.vs/slnx.sqlite
-/ATM/.vs/ATM_forms/FileContentIndex/0fdb4174-d220-4815-b04e-6bb59aacdf53.vsidx
+
+# Ignore Visual Studio-specific files
+.vs/
+
+/ATM/bin/Debug/ATM_forms.exe
+/ATM/bin/Debug/ATM_forms.pdb

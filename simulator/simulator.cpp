@@ -33,6 +33,11 @@ using json = nlohmann::json;
 
 #define BACKLOG 10 // how many pending connections queue will hold
 
+#define USDTOGBPRATE 0.81 // exchange rate us dollar to pound sterling
+#define EURTOGBPRATE 0.84 // exchange rate euro to pound sterling
+#define GBPTOUSDRATE 1.24 // exchange rate pound sterling to us dollar
+#define GBPTOEURRATE 1.19 // exchange rate pound sterling to euro
+
 std::unordered_map<std::string, json> accounts; // updating fro dynamic loading
 
 // load accounts from file
@@ -48,18 +53,20 @@ void loadAccountsFromFile()
     while (std::getline(file, line))
     {
         std::istringstream stream(line);
-        std::string cardNumber, pin, expiryDate;
+        std::string cardNumber, pin, expiryDate, currency;
         double balance;
 
         std::getline(stream, cardNumber, ',');
         std::getline(stream, pin, ',');
         std::getline(stream, expiryDate, ',');
+        std::getline(stream, currency, ',');
         stream >> balance;
 
         pin.erase(std::remove(pin.begin(), pin.end(), '"'), pin.end());  // remove quotes
         expiryDate.erase(std::remove(expiryDate.begin(), expiryDate.end(), '"'), expiryDate.end());
+        currency.erase(std::remove(currency.begin(), currency.end(), '"'), currency.end());
 
-        accounts[cardNumber] = {{"pin", pin}, {"expiry_date", expiryDate}, {"balance", balance}};
+        accounts[cardNumber] = {{"pin", pin}, {"expiry_date", expiryDate}, {"currency", currency}, {"balance", balance}};
     }
     file.close();
 }
@@ -77,7 +84,7 @@ void saveAccountsToFile()
     for (const auto &[cardNumber, accountDetails] : accounts)
     {
         file << cardNumber << "," << accountDetails["pin"] << ","
-             << accountDetails["expiry_date"] << "," << accountDetails["balance"].get<double>() << "\n";
+             << accountDetails["expiry_date"] << "," << accountDetails["currency"] << "," << accountDetails["balance"].get<double>() << "\n";
     }
     file.close();
 }
@@ -230,7 +237,19 @@ void handleNewConnection(int socket) {
                     }
                     break;
                 case 1: // display balance
-                        responseJson["transaction_value"] = account["balance"];
+                        // if differing currency to ATM then multiply acct balance by exchange rate
+                        if(account["currency"]=="GBP")
+                        {
+                            responseJson["transaction_value"] = account["balance"];
+                        }
+                        if(account["currency"]=="USD")
+                        {
+                            responseJson["transaction_value"] = USDTOGBPRATE*(account["balance"].get<double>());
+                        }
+                        if(account["currency"]=="EUR")
+                        {
+                            responseJson["transaction_value"] = EURTOGBPRATE*(account["balance"].get<double>());
+                        }
                     break;
                 case 2: // withdraw cash
                     // check the provided pin against the dummy accounts and 
@@ -240,19 +259,38 @@ void handleNewConnection(int socket) {
                     std::string s_transactionValue = request["transaction_value"];
                     double transactionValue = std::stod(s_transactionValue);
 
-                    if (transactionValue <= account["balance"].get<double>())
-                    {
-                        
-                        account["balance"] = account["balance"].get<double>() - transactionValue;
-                        responseJson["transaction_outcome"] = 0;
-                        responseJson["remaining_balance"] = account["balance"];
-                        saveAccountsToFile(); // save updated account data
-                    }
-                    else
-                    {
-                        responseJson["transaction_outcome"] = 1;
-                        responseJson["reason"] = "Insufficient funds";
-                    }
+                    // make sure account can afford transaction in gbp
+                        if (account["currency"]=="GBP" && transactionValue <= account["balance"].get<double>())
+                        {
+                            account["balance"] = account["balance"].get<double>() - transactionValue;
+                            responseJson["transaction_outcome"] = 0;
+                            responseJson["remaining_balance"] = account["balance"];
+                            saveAccountsToFile(); // save updated account data
+                        }
+                        // make sure account has enough usd balance to afford gbp transaction
+                        else if(account["currency"]=="USD" && (GBPTOUSDRATE*transactionValue) <= account["balance"].get<double>())
+                        {
+                            transactionValue = GBPTOUSDRATE*transactionValue;
+                            account["balance"] = account["balance"].get<double>() - transactionValue;
+                            responseJson["transaction_outcome"] = 0;
+                            responseJson["remaining_balance"] = account["balance"];
+                            saveAccountsToFile(); // save updated account data
+                        }
+                        // make sure account has enough euros balance to afford gbp transaction
+                        else if(account["currency"]=="EUR" && (GBPTOEURRATE*transactionValue) <= account["balance"].get<double>())
+                        {
+                            transactionValue = GBPTOEURRATE*transactionValue;
+                            account["balance"] = account["balance"].get<double>() - transactionValue;
+                            responseJson["transaction_outcome"] = 0;
+                            responseJson["remaining_balance"] = account["balance"];
+                            saveAccountsToFile(); // save updated account data
+                        }
+                        // insufficient funds case
+                        else
+                        {
+                            responseJson["transaction_outcome"] = 1;
+                            responseJson["reason"] = "Insufficient funds";
+                        }
                     }
                     break;
                 default:
