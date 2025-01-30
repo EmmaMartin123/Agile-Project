@@ -12,6 +12,10 @@ namespace ATM_forms
 {
     public partial class AlertMessageForm : Form
     {
+        /*
+         * error message is the error message the form will display
+         * type is the type of form that sent the alert
+         */
         public AlertMessageForm(string errorMessage)
         {
             InitializeComponent();
@@ -36,6 +40,7 @@ namespace ATM_forms
         private void alert_ok_button_Click(object sender, EventArgs e)
         {
             this.Close();
+            
         }
     }
 }

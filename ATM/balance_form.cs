@@ -58,7 +58,7 @@ namespace ATM_forms
             {
                 // connect and send response in json format
 
-                /*TransactionData.transactionType = 1;
+                TransactionData.transactionType = 1;
                 NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                 NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
                 string response = NetworkClient.ReceiveResponse();
@@ -66,8 +66,8 @@ namespace ATM_forms
                 NetworkClient.CloseConnection();
 
                  dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                 int transaction_value = parsedResponse.transaction_value;*/
-                int transaction_value = 100; //test data
+                 int transaction_value = parsedResponse.transaction_value;
+                //int transaction_value = 100; //test data
 
                 balance_label.Text = $"£{transaction_value:F2}"; // F2 for two decimal places
             }

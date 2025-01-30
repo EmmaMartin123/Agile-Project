@@ -49,7 +49,7 @@ namespace ATM_forms
                 {
 
                     // connect and send response in json format
-                    /*NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
+                    NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                     Console.WriteLine(amount);
                     NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType+"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\", \"transaction_value\": \""+amount+"\"}");
                     string response = NetworkClient.ReceiveResponse();
@@ -58,19 +58,32 @@ namespace ATM_forms
 
                     //parse the response
                     dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                    int transaction_outcome = parsedResponse.transaction_outcome;*/
+                    int transaction_outcome = parsedResponse.transaction_outcome;
 
                     //to store the message displayed to the user
                     string message;
 
                     AlertMessageForm alertMessageForm;
-                    int transaction_outcome = 1;
+                    //int transaction_outcome = 1;
                     // handles transaction outcomes
                     switch (transaction_outcome)
                     {
                         case 0: // success
-                            message = $"You have successfully withdrawn £{amount}.";
-                            MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (GlobalVariables.language == "english")
+                            {
+                                message = $"You have successfully withdrawn £{amount}.";
+                                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else if (GlobalVariables.language == "french")
+                            {
+                                message = $"Vous avez réussi votre retrait £{amount}.";
+                                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                message = $"Has retirado con éxito £{amount}.";
+                                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
 
                             SelectTransactionForm cardForm = new SelectTransactionForm();
                             cardForm.Show();
@@ -78,12 +91,19 @@ namespace ATM_forms
                             break;
 
                         case 1: // insufficient funds
-                            //string reason = parsedResponse.reason ?? "Insufficient funds.";
-                            string reason = "test";
+                            string reason = parsedResponse.reason ?? "Insufficient funds.";
+                            if (reason == "Insufficient funds." && GlobalVariables.language == "french")
+                            {
+                                reason = "Fonds insuffisants";
+                            }
+                            else if (reason == "Insufficient funds." && GlobalVariables.language == "spanish")
+                            {
+                                reason = "Fondos insuficientes";
+                            }
                             message = $"Transaction failed: {reason}";
 
                             //send balance request
-                            /*TransactionData.transactionType = 1;
+                            TransactionData.transactionType = 1;
                             NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                             NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
                             string balanceResponse = NetworkClient.ReceiveResponse();
@@ -95,8 +115,8 @@ namespace ATM_forms
                             Console.WriteLine(available_balance);
 
                             // calculate closest multiple of 5 to the available balance
-                            decimal closest_amount = Math.Floor(available_balance / 5) * 5;*/
-                            decimal closest_amount = 100;
+                            decimal closest_amount = Math.Floor(available_balance / 5) * 5;
+                            //decimal closest_amount = 100; // test data
                             // display the message with closest value
                             if (GlobalVariables.language == "french")
                             {
@@ -106,13 +126,13 @@ namespace ATM_forms
                             }
                             else if (GlobalVariables.language == "english")
                             {
-                                message = $"Transaction failed: {reason}. The maximum you can withdraw is £{closest_amount}";
+                                message = $"Transaction failed: {reason}. \nThe maximum you can withdraw is £{closest_amount}";
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
                             else if (GlobalVariables.language == "spanish")
                             {
-                                message = $"La transacción falló: {reason}. Lo máximo que puedes retirar es £{closest_amount}";
+                                message = $"La transacción falló: {reason}. \nLo máximo que puedes retirar es £{closest_amount}";
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
