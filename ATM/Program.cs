@@ -22,13 +22,34 @@ namespace ATM_forms
         {
             try
             {
-                client = new TcpClient(ip, port);
+                client = new TcpClient(); //creates a new TCP client instance
+
+                // begins an asynchronous connection attempt to the specified IP and port
+                var result = client.BeginConnect(ip, port, null, null);
+
+                // waits for the connection attempt to complete by the given timeout (3 seconds)
+                //prevents indefinite blocking if the server is unresponsive
+                bool success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(3)); // 3s timeout
+
+
+                // if the connection did not complete within the timeout, throw a timeout exception
+                if (!success)
+                {
+                    throw new SocketException((int)SocketError.TimedOut);
+                }
+
+                client.EndConnect(result); // finish connection attempt
+
+                //prevents network operations from getting stuck by setting a time limit
+                client.ReceiveTimeout = 5000;
+                client.SendTimeout = 5000;
                 stream = client.GetStream();
-                Console.WriteLine("connected to switch.");
+
+                Console.WriteLine("Connected to switch.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"error connecting to switch: {ex.Message}");
+                Console.WriteLine($"Error connecting to switch: {ex.Message}");
                 HandleDroppedConnection();
             }
         }
