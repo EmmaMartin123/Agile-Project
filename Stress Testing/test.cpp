@@ -149,7 +149,7 @@ int main() {
 
     for (int i = 0; i < numATMs; ++i) {
         threads.emplace_back(simulateATM, i + 1, transactionsPerATM, transactionInterval);
-        std:usleep(5000);
+        std:usleep(500000);
     }
 
     for (auto& thread : threads) {
