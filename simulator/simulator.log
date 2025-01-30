@@ -1,4 +1,2 @@
 
-[2025-01-29 17:00:42] {"atm_id":"Mastercard","expiry_date":"12/26","pan_number":"5432109876543210","pin":"1234","request_type":"0","transaction_outcome":0}
-[2025-01-29 17:31:36] {"atm_id":"Mastercard","expiry_date":"12/26","pan_number":"5432109876543210","pin":"1234","request_type":"0","transaction_outcome":0}
-[2025-01-29 17:55:47] {"atm_id":"Mastercard","expiry_date":"12/26","pan_number":"5432109876543210","pin":"1234","request_type":"0","transaction_outcome":0}
+[2025-01-30 10:16:48] {"atm_id":"Mastercard","expiry_date":"12/26","pan_number":"4432109876543210","pin":"1234","request_type":"0","transaction_outcome":0}
