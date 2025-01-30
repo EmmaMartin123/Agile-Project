@@ -99,7 +99,7 @@ void simulateATM(int atmID, int numTransactions, int transactionInterval) {
         std::string expiry = expiryDates[accountIndex];
 
         json request;
-        request["atm_id"] = "ATM" + std::to_string(atmID);
+        request["atm_id"] = std::to_string(atmID);
         request["transaction_id"] = "TXN" + std::to_string(atmID * 1000 + i);
         request["pan_number"] = pan;
         request["expiry_date"] = expiry;
