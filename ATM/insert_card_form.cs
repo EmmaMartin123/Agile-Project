@@ -77,14 +77,5 @@ namespace ATM_forms
             enterPinForm.Show();
             this.Hide();
         }
-
-        private void AmexbtnClick(object sender, EventArgs e)
-        {
-            TransactionData.currentCardType = "amex";
-            TransactionData.currentPAN = TransactionData.amexPAN;
-            EnterPinForm enterPinForm = new EnterPinForm();  // instance of the enter_pin_form
-            enterPinForm.Show();
-            this.Hide();
-        }
     }
 }
