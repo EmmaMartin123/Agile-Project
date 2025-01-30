@@ -33,7 +33,6 @@ namespace ATM_forms
         {
             this.insert_card_panel = new System.Windows.Forms.Panel();
             this.insert_card_label = new System.Windows.Forms.Label();
-
             this.mastercardbtn = new System.Windows.Forms.Button();
             this.visabtn = new System.Windows.Forms.Button();
             this.unionpaybtn = new System.Windows.Forms.Button();
@@ -43,7 +42,6 @@ namespace ATM_forms
             // 
             // insert_card_panel
             // 
-
             this.insert_card_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
             this.insert_card_panel.Controls.Add(this.insert_card_label);
             this.insert_card_panel.Controls.Add(this.mastercardbtn);
@@ -55,17 +53,16 @@ namespace ATM_forms
             this.insert_card_panel.Name = "insert_card_panel";
             this.insert_card_panel.Size = new System.Drawing.Size(886, 535);
             this.insert_card_panel.TabIndex = 0;
-
             // 
             // insert_card_label
             // 
             this.insert_card_label.AutoSize = true;
-            this.insert_card_label.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.insert_card_label.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.insert_card_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.insert_card_label.Location = new System.Drawing.Point(67, 23);
+            this.insert_card_label.Location = new System.Drawing.Point(37, 25);
             this.insert_card_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.insert_card_label.Name = "insert_card_label";
-            this.insert_card_label.Size = new System.Drawing.Size(787, 74);
+            this.insert_card_label.Size = new System.Drawing.Size(845, 81);
             this.insert_card_label.TabIndex = 1;
             this.insert_card_label.Text = "Please select your card type: ";
             // 
