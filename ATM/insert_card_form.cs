@@ -27,6 +27,8 @@ namespace ATM_forms
             // add an event handler to handle resizing
             this.SizeChanged += new EventHandler(this.InsertCard_SizeChanged);
             this.Visible = true; // make form visible again
+
+            // change language if langauge change is set
             if (GlobalVariables.language == "french")
             {
                 this.Text = "Insérer la Carte";
@@ -37,6 +39,12 @@ namespace ATM_forms
             {
                 this.Text = "Insert Card";
                 insert_card_label.Text = "Insert Card";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+            }
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Introduzca su tarjeta";
+                insert_card_label.Text = "Introduzca su tarjeta";
                 insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
             }
             
@@ -100,8 +108,10 @@ namespace ATM_forms
             }
             else if (newLanguage == "Español")
             {
-                // spanish stuff to be added later
                 GlobalVariables.language = "spanish";
+                this.Text = "Introduzca su tarjeta";
+                insert_card_label.Text = "Introduzca su tarjeta";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
             }
         }
 
@@ -146,8 +156,10 @@ namespace ATM_forms
             }
             else if (newLanguage == "Español")
             {
-                // spanish stuff to be added later
                 GlobalVariables.language = "spanish";
+                this.Text = "Introduzca su tarjeta";
+                insert_card_label.Text = "Introduzca su tarjeta";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
             }
 
         }

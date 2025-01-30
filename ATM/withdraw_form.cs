@@ -64,7 +64,7 @@ namespace ATM_forms
                     string message;
 
                     AlertMessageForm alertMessageForm;
-                    int transaction_outcome = 100;
+                    int transaction_outcome = 1;
                     // handles transaction outcomes
                     switch (transaction_outcome)
                     {
