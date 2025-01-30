@@ -30,11 +30,13 @@ namespace ATM_forms
             {
                 this.Text = "Insérer la Carte";
                 insert_card_label.Text = "Insérer la Carte";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
             }
             else if (GlobalVariables.language == "english")
             {
                 this.Text = "Insert Card";
                 insert_card_label.Text = "Insert Card";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
             }
             
         }
@@ -63,7 +65,7 @@ namespace ATM_forms
             GlobalVariables.language = "french";
             spanish_button.Visible = false;
             english_button.Visible = false; 
-            // move position of english button
+            // move position of english button`
             english_button.Top = insert_card_panel.Top - 20;
             spanish_button.Top = english_button.Bottom + 10;
 
@@ -74,8 +76,9 @@ namespace ATM_forms
             // change things actually on this form
             this.Text = "Insérer la Carte";
             insert_card_label.Text = "Insérer la Carte";
+            insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
 
-           
+
         }
 
         private void spanish_button_Click(object sender, EventArgs e)
@@ -106,8 +109,9 @@ namespace ATM_forms
             // change things actually on this form
             this.Text = "Insert Card";
             insert_card_label.Text = "Insert Card";
+            insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
 
-            
+
         }
 
     }
