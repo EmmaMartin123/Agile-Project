@@ -60,11 +60,11 @@ if __name__ == "__main__":
     print("\n🚀 Testing transactions on the switch...\n")
     time.sleep(1)
 
-    send_transaction("5432109876543210", request_type=0, atm_id="Mastercard", pin="1234", expiry_date="12/26")
-    send_transaction("4123456789012345", request_type=0, atm_id="Visa", pin="5678", expiry_date="11/25")
-    send_transaction("6123456789012345", request_type=0, atm_id="UnionPay", pin="9876", expiry_date="10/27")
-    send_transaction("312345678901234", request_type=0, atm_id="AmericanExpress", pin="2468", expiry_date="09/28")
+    send_transaction("4432109876543210", request_type=0, atm_id="Mastercard", pin="1234", expiry_date="12/26")
+    send_transaction("1123456789012345", request_type=0, atm_id="Visa", pin="5678", expiry_date="11/25")
+    send_transaction("7123456789012345", request_type=0, atm_id="UnionPay", pin="9876", expiry_date="10/27")
 
 
 
 
+   
