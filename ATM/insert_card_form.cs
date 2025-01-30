@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace ATM_forms
 {
@@ -30,11 +31,13 @@ namespace ATM_forms
             {
                 this.Text = "Insérer la Carte";
                 insert_card_label.Text = "Insérer la Carte";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
             }
             else if (GlobalVariables.language == "english")
             {
                 this.Text = "Insert Card";
                 insert_card_label.Text = "Insert Card";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
             }
             
         }
@@ -56,5 +59,98 @@ namespace ATM_forms
 
 
         }
+
+        private void language1_button_Click(object sender, EventArgs e)
+        {
+            // get the language that is currently being used
+            string currentLanguage = GlobalVariables.language;
+            string newLanguage = language1_button.Text;
+
+            // change the buttons based on what the previous language was
+            if (currentLanguage == "english")
+            {
+                language1_button.Text = "English";
+                language1_button.Image = ATM_forms.Properties.Resources.british;
+            }
+            else if (currentLanguage == "french")
+            {
+                language1_button.Text = "Français";
+                language1_button.Image = ATM_forms.Properties.Resources.frenchflag;
+            }
+            else if (currentLanguage == "spanish")
+            {
+                language1_button.Text = "Español";
+                language1_button.Image = ATM_forms.Properties.Resources.spain;
+            }
+
+            // change everything based on the new chosen language
+            if (newLanguage == "English")
+            {
+                GlobalVariables.language = "english";
+                this.Text = "Insert Card";
+                insert_card_label.Text = "Insert Card";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+            }
+            else if (newLanguage == "Français")
+            {
+                GlobalVariables.language = "french";
+                this.Text = "Insérer la Carte";
+                insert_card_label.Text = "Insérer la Carte";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+            }
+            else if (newLanguage == "Español")
+            {
+                // spanish stuff to be added later
+                GlobalVariables.language = "spanish";
+            }
+        }
+
+        private void language2_button_Click(object sender, EventArgs e)
+        {
+
+            // get the language that is currently being used
+            string currentLanguage = GlobalVariables.language;
+            string newLanguage = language2_button.Text;
+
+            // change the buttons based on what the previous language was
+            if (currentLanguage == "english")
+            {
+                language2_button.Text = "English";
+                language2_button.Image = ATM_forms.Properties.Resources.british;
+            }
+            else if (currentLanguage == "french")
+            {
+                language2_button.Text = "Français";
+                language2_button.Image = ATM_forms.Properties.Resources.frenchflag;
+            }
+            else if (currentLanguage == "spanish")
+            {
+                language2_button.Text = "Español";
+                language2_button.Image = ATM_forms.Properties.Resources.spain;
+            }
+
+            // change everything based on the new chosen language
+            if (newLanguage == "English")
+            {
+                GlobalVariables.language = "english";
+                this.Text = "Insert Card";
+                insert_card_label.Text = "Insert Card";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+            }
+            else if (newLanguage == "Français")
+            {
+                GlobalVariables.language = "french";
+                this.Text = "Insérer la Carte";
+                insert_card_label.Text = "Insérer la Carte";
+                insert_card_label.Left = (this.insert_card_panel.Width - insert_card_label.Width) / 2;
+            }
+            else if (newLanguage == "Español")
+            {
+                // spanish stuff to be added later
+                GlobalVariables.language = "spanish";
+            }
+
+        }
+
     }
 }
