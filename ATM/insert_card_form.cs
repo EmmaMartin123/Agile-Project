@@ -56,5 +56,59 @@ namespace ATM_forms
 
 
         }
+
+        private void french_button_Click(object sender, EventArgs e)
+        {
+            // set language to chosen language, remove chosen language button, add other language buttons
+            GlobalVariables.language = "french";
+            spanish_button.Visible = false;
+            english_button.Visible = false; 
+            // move position of english button
+            english_button.Top = insert_card_panel.Top - 20;
+            spanish_button.Top = english_button.Bottom + 10;
+
+            english_button.Visible = true;
+            spanish_button.Visible = true;
+            french_button.Visible = false;
+
+            // change things actually on this form
+            this.Text = "Insérer la Carte";
+            insert_card_label.Text = "Insérer la Carte";
+
+           
+        }
+
+        private void spanish_button_Click(object sender, EventArgs e)
+        {
+            // set language to chosen language, remove chosen language button, add other language buttons
+            GlobalVariables.language = "spanish";
+            english_button.Top = insert_card_panel.Top-20;
+            french_button.Top = english_button.Bottom +10;
+
+            english_button.Visible = true;
+            spanish_button.Visible = false;
+            french_button.Visible = true;
+
+           
+        }
+
+        private void english_button_Click(object sender, EventArgs e)
+        {
+            // set language to chosen language, remove chosen language button, add other language buttons
+            GlobalVariables.language = "english";
+            spanish_button.Top = insert_card_panel.Top - 20;
+            french_button.Top = spanish_button.Bottom +10;
+
+            english_button.Visible = false;
+            spanish_button.Visible = true;
+            french_button.Visible = true;
+
+            // change things actually on this form
+            this.Text = "Insert Card";
+            insert_card_label.Text = "Insert Card";
+
+            
+        }
+
     }
 }

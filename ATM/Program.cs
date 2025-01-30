@@ -150,7 +150,7 @@ namespace ATM_forms
 
     public static class GlobalVariables
     {
-        public static string language = "french";
+        public static string language = "english";
     }
 
 
