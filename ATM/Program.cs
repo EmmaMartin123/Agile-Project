@@ -115,7 +115,7 @@ namespace ATM_forms
             // notifies the user of the connection problem with a dialog box
             //MessageBox.Show("Problem with transaction, returning card...", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            AlertMessageForm alertMessageForm = new AlertMessageForm("Problem with transaction, returning card...");
+            AlertMessageForm alertMessageForm = new AlertMessageForm("Connection error, returning card...");
             alertMessageForm.ShowDialog();
 
             // gets the current form - which is the form where the connection failed so we can close it
