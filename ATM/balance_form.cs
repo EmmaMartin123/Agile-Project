@@ -30,6 +30,29 @@ namespace ATM_forms
             this.SizeChanged += new EventHandler(this.Balance_SizeChanged);
             this.Visible = true; // make form visible again
 
+            if (GlobalVariables.language == "french")
+            {
+                this.Text = " Vérifier le Solde";
+                balance_heading_label.Text = "Solde";
+
+                done_btn.Text = "Fin";
+            }
+            else if (GlobalVariables.language == "english")
+            {
+                this.Text = "Check Balance";
+                balance_heading_label.Text = "Balance";
+
+                done_btn.Text = "Done";
+            }
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Consultar Saldo";
+                balance_heading_label.Text = "Saldo";
+
+                done_btn.Text = "Hecho";
+            }
+
+
             // send the balance request to the switch to deal with
             try
             {

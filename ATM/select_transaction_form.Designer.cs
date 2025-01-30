@@ -46,7 +46,7 @@ namespace ATM_forms
             this.select_transaction_panel.Controls.Add(this.cash_withdrawal_btn);
             this.select_transaction_panel.Controls.Add(this.select_transaction_label);
             this.select_transaction_panel.Controls.Add(this.check_balance_btn);
-            this.select_transaction_panel.Location = new System.Drawing.Point(508, 215);
+            this.select_transaction_panel.Location = new System.Drawing.Point(445, 89);
             this.select_transaction_panel.Name = "select_transaction_panel";
             this.select_transaction_panel.Size = new System.Drawing.Size(1300, 900);
             this.select_transaction_panel.TabIndex = 0;

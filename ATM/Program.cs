@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace ATM_forms
 {
-
     public static class NetworkClient
     {
         public static TcpClient client;
@@ -142,7 +141,6 @@ namespace ATM_forms
             // generate random number for the atm id
             Random rnd = new Random();
             TransactionData.ATMID = rnd.Next(1, 10000);
-
             //run the application
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -162,14 +160,15 @@ namespace ATM_forms
     public static class TransactionData
     {
         // transaction variables (dummy data for now)
-        public static string connectionAddress = "ec2-52-91-1-195.compute-1.amazonaws.com";
+        public static string connectionAddress = "ec2-44-202-126-43.compute-1.amazonaws.com";
         public static decimal CurrentBalance = 500;
         public static int transactionType = -1;
         public static int ATMID = 0;
         public static string PAN = "2234567890123456";
         public static int PIN = 1010;
+        
 
-        /* 
+         /*
          Card Types:
         Mastercard - starts with 4/5/6
         Visa - starts with 1/2/3
@@ -180,7 +179,17 @@ namespace ATM_forms
         public static string unionpayPAN = "7224567890123456";
         public static string currentPAN = "";
         public static string currentCardType = "";
-
+        
     }
 
+    public static class GlobalVariables
+    {
+        public static string language = "english";
+    }
+
+
 }
+
+
+  
+

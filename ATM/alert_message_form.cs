@@ -12,12 +12,24 @@ namespace ATM_forms
 {
     public partial class AlertMessageForm : Form
     {
+        /*
+         * error message is the error message the form will display
+         * type is the type of form that sent the alert
+         */
         public AlertMessageForm(string errorMessage)
         {
             InitializeComponent();
             alert_label.Text = errorMessage;
             // position text dynamically based on length
+            if (alert_label.Width > this.Width)
+            {
+                alert_label.Font = new Font("Segoe UI", 8, FontStyle.Bold);
+            }
+
             alert_label.Left = (this.ClientSize.Width - alert_label.Width) / 2;
+
+            
+            // ok can just stay Ok in french
         }
 
         private void AlertMessageForm_Load(object sender, EventArgs e)
@@ -28,6 +40,7 @@ namespace ATM_forms
         private void alert_ok_button_Click(object sender, EventArgs e)
         {
             this.Close();
+            
         }
     }
 }

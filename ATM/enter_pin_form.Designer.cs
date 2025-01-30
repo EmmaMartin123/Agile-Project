@@ -83,7 +83,7 @@ namespace ATM_forms
             this.EnterButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EnterButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.EnterButton.Location = new System.Drawing.Point(460, 680);
-            this.EnterButton.Margin = new System.Windows.Forms.Padding(2);
+            this.EnterButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.EnterButton.Name = "EnterButton";
             this.EnterButton.Size = new System.Drawing.Size(120, 120);
             this.EnterButton.TabIndex = 10;
@@ -118,6 +118,7 @@ namespace ATM_forms
             this.delete_btn.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delete_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.delete_btn.Location = new System.Drawing.Point(720, 680);
+            this.delete_btn.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.delete_btn.Name = "delete_btn";
             this.delete_btn.Size = new System.Drawing.Size(120, 120);
             this.delete_btn.TabIndex = 2;
