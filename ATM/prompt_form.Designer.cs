@@ -50,6 +50,7 @@ namespace ATM_forms
             this.prompt_panel.Name = "prompt_panel";
             this.prompt_panel.Size = new System.Drawing.Size(886, 535);
             this.prompt_panel.TabIndex = 0;
+            this.prompt_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.prompt_panel_Paint);
             // 
             // prompt_label1
             // 

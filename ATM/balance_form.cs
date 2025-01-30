@@ -28,7 +28,7 @@ namespace ATM_forms
             balance_panel.Top = (this.ClientSize.Height - balance_panel.Height) / 2;
             // add an event handler to handle resizing
             this.SizeChanged += new EventHandler(this.Balance_SizeChanged);
-            this.Visible = true; // make form visible again
+            
 
             if (GlobalVariables.language == "french")
             {
@@ -73,6 +73,8 @@ namespace ATM_forms
                 //int transaction_value = 100; //test data
 
                 balance_label.Text = $"£{transaction_value:F2}"; // F2 for two decimal places
+
+                this.Visible = true; // make form visible again only after balance is got to avoid xxx flashing up
             }
             catch (Exception ex)
             {

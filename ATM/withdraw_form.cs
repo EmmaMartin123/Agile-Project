@@ -252,6 +252,7 @@ namespace ATM_forms
 
         private void WithdrawForm_Load(object sender, EventArgs e)
         {
+            Console.WriteLine("withdraw form centering");
             // make the form invisible while loading so that it doesn't lag 
             this.Visible = false;
             // center the main panel
