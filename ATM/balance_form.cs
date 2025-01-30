@@ -42,8 +42,8 @@ namespace ATM_forms
                 Console.WriteLine($"Response: {response}");
                 NetworkClient.CloseConnection();
 
-                 dynamic parsedResponse = JsonConvert.DeserializeObject(response);
-                 int transaction_value = parsedResponse.transaction_value;
+                dynamic parsedResponse = JsonConvert.DeserializeObject(response);
+                double transaction_value = parsedResponse.transaction_value;
                 //int transaction_value = 100; //test data
 
                 balance_label.Text = $"£{transaction_value:F2}"; // F2 for two decimal places
