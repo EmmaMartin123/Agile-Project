@@ -44,24 +44,12 @@ NetworkType getNetworkType(const std::string& pan) {
     }
 }
 
-// Map network type to simulator port
-std::string getSimulatorPort(NetworkType network) {
-    switch (network) { 
-        case NETWORK_VISA: return "8886"; // visa sim port
-        case NETWORK_MASTERCARD: return "8884"; // mastercard sim port
-        case NETWORK_UNIONPAY: return "8887"; // unionPay sim port
-        default: return ""; // for a unknown network
-    }
-}
-
 // simulator connections
 std::unordered_map<NetworkType, int> simulator_fds; // mapping network type to simulator file descriptor
 std::vector<int> queuedSockets;
 std::vector<struct pollfd> ATMs;
 
 std::mutex queuedSocketsMutex;
-std::mutex simulatorFdsMutex;
-
 
 // Logging function 
 void logTransaction(int transactionType, const json &request) {
@@ -176,7 +164,6 @@ int forwardToSimulator(const json &request, int atm_fd) {
     }
 
     // a check to see if we already have a connection to this simulator
-    simulatorFdsMutex.lock();
     if (simulator_fds.find(network) == simulator_fds.end()) {
         // connect to the simulator
         int sockfd = connectToSimulator(port);
@@ -187,7 +174,6 @@ int forwardToSimulator(const json &request, int atm_fd) {
         simulator_fds[network] = sockfd;
     }
     int simulator_fd = simulator_fds[network];
-    simulatorFdsMutex.unlock();
 
     // sending request to the simulator
     if (send(simulator_fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
