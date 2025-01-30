@@ -25,3 +25,14 @@ obj/
 /ATM/.vs/ATM_forms/FileContentIndex/8f1cce9c-79f5-4739-ab35-8c853a76cdc4.vsidx
 /.vs/ATM_forms/FileContentIndex/01e54da3-6c7f-41e7-9614-914c040d922b.vsidx
 /ATM/.vs/ATM_forms/FileContentIndex/453635db-c2bc-4280-93b6-2d65cd1413fd.vsidx
+/.vs/ATM_forms/FileContentIndex/c1246657-450f-47e4-8a72-8ce6e782a16a.vsidx
+/ATM/.vs/ATM_forms/FileContentIndex/c1dab467-69ef-417c-9d23-c98cb22dae97.vsidx
+/ATM/.vs/ATM_forms/v17/.suo
+/ATM/bin/Debug/ATM_forms.exe
+/ATM/bin/Debug/ATM_forms.pdb
+
+# Ignore Visual Studio-specific files
+.vs/
+
+/ATM/bin/Debug/ATM_forms.exe
+/ATM/bin/Debug/ATM_forms.pdb
