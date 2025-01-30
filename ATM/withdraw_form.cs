@@ -90,18 +90,21 @@ namespace ATM_forms
                             
                             if (GlobalVariables.language == "english")
                             {
-                                message = $"You have successfully withdrawn £{amount}.";
-                                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                message = $"You have successfully withdrawn £{amount}.\nWould you like a receipt?";
+                                PromptForm successForm = new PromptForm("Success", message, amount);
+                                successForm.ShowDialog();
                             }
                             else if (GlobalVariables.language == "french")
                             {
-                                message = $"Vous avez réussi votre retrait £{amount}.";
-                                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                message = $"Vous avez réussi votre retrait £{amount}.\nSouhaitez-vous un reçu?";
+                                PromptForm successForm = new PromptForm("Success", message, amount);
+                                successForm.ShowDialog(); 
                             }
                             else if (GlobalVariables.language == "spanish")
                             {
-                                message = $"Has retirado con éxito £{amount}.";
-                                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                message = $"Has retirado con éxito £{amount}.\n¿Quieres un recibo?";
+                                PromptForm successForm = new PromptForm("Success", message, amount);
+                                successForm.ShowDialog(); 
                             }
 
                             SelectTransactionForm cardForm = new SelectTransactionForm();
