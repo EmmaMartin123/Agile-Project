@@ -43,18 +43,20 @@ namespace ATM_forms
             this.balance_panel.Controls.Add(this.balance_label);
             this.balance_panel.Controls.Add(this.balance_heading_label);
             this.balance_panel.Controls.Add(this.done_btn);
-            this.balance_panel.Location = new System.Drawing.Point(235, 52);
+            this.balance_panel.Location = new System.Drawing.Point(339, 140);
+            this.balance_panel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.balance_panel.Name = "balance_panel";
-            this.balance_panel.Size = new System.Drawing.Size(1300, 900);
+            this.balance_panel.Size = new System.Drawing.Size(867, 585);
             this.balance_panel.TabIndex = 0;
             // 
             // balance_label
             // 
             this.balance_label.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.balance_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.balance_label.Location = new System.Drawing.Point(207, 300);
+            this.balance_label.Location = new System.Drawing.Point(138, 195);
+            this.balance_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.balance_label.Name = "balance_label";
-            this.balance_label.Size = new System.Drawing.Size(886, 108);
+            this.balance_label.Size = new System.Drawing.Size(591, 70);
             this.balance_label.TabIndex = 5;
             this.balance_label.Text = "£XXX.XX";
             this.balance_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -63,9 +65,10 @@ namespace ATM_forms
             // 
             this.balance_heading_label.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.balance_heading_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.balance_heading_label.Location = new System.Drawing.Point(207, 20);
+            this.balance_heading_label.Location = new System.Drawing.Point(138, 13);
+            this.balance_heading_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.balance_heading_label.Name = "balance_heading_label";
-            this.balance_heading_label.Size = new System.Drawing.Size(886, 108);
+            this.balance_heading_label.Size = new System.Drawing.Size(591, 70);
             this.balance_heading_label.TabIndex = 0;
             this.balance_heading_label.Text = "Balance";
             this.balance_heading_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -78,9 +81,10 @@ namespace ATM_forms
             this.done_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.done_btn.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.done_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.done_btn.Location = new System.Drawing.Point(390, 616);
+            this.done_btn.Location = new System.Drawing.Point(285, 418);
+            this.done_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.done_btn.Name = "done_btn";
-            this.done_btn.Size = new System.Drawing.Size(440, 130);
+            this.done_btn.Size = new System.Drawing.Size(293, 84);
             this.done_btn.TabIndex = 4;
             this.done_btn.Text = "DONE";
             this.done_btn.UseVisualStyleBackColor = true;
@@ -90,10 +94,11 @@ namespace ATM_forms
             // 
             // BalanceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 1050);
+            this.ClientSize = new System.Drawing.Size(1283, 682);
             this.Controls.Add(this.balance_panel);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "BalanceForm";
             this.Text = "Check balance";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

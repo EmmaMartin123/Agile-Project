@@ -42,6 +42,11 @@ int networkSim_fd; // file descriptor for the connection to the network simulato
 
 std::vector<int> queuedSockets;
 std::vector<struct pollfd> ATMs;
+std::vector<struct pollfd> Sims;
+
+// each message passed to simulators will containt a message id
+// so that the switch can recognize which ATM sent it,
+std::unordered_map<int, int> AtmIdToFileDescriptorMap;
 
 std::mutex queuedSocketsMutex;
 
@@ -198,17 +203,65 @@ void handleSimulatorResponse(int atm_fd) {
     }
 }
 
-// for all the sockets we are working with, check if they have received inputs
-void pollingFunction(){
+// for any sims we have, check for responses to send back to ATMs
+void SimToAtmComms(){
+    char buff[512];
+    std::string response = "";
+
+    while (1)
+    {
+        int numEvents = poll(&(*(Sims.begin())), Sims.size(), 60);
+
+        // received response from sims
+        if (numEvents < 0) continue;
+
+        // check for something in the event that poll doesn't timeout
+        for (int i = 0; i < Sims.size(); i++)
+        {
+            if (!(Sims[i].revents & POLLIN)) continue;
+
+            int bytesReceived = recv(Sims[i].fd, buff, 512, 0);
+            if (bytesReceived > 0)
+            {
+                buff[bytesReceived] = '\0'; // Null-terminate the received data 
+                std::string data(buff);
+
+                json request;
+
+                try {
+                    // parsing JSON data 
+                    request = json::parse(data);
+
+                    std::string s_AtmID = request["atm_id"];
+                    int AtmID = std::stoi(s_AtmID);
+
+                    int ATM_fd = AtmIdToFileDescriptorMap[AtmID];
+
+                    // send response back to correct socket
+                    response = request.dump();
+                    send(ATM_fd, response.c_str(), response.length(), 0);
+
+                } catch (const std::exception &e) {
+                    std::cerr << "Error parsing simulator response " << e.what() << std::endl;
+                    std::cerr << "request is: " << request.dump() << "\n";
+                }
+            }
+            Sims[i].revents = 0;
+        }
+    }
+}
+
+// for all the ATM sockets we are working with, check if they have received inputs and pass them to sims
+void AtmToSimComms(){
     char buff[512];
 
     // check all ports regularly
     while (1)
     {
-        int num_events = poll(&(*(ATMs.begin())), ATMs.size(), 150);
+        int numEvents = poll(&(*(ATMs.begin())), ATMs.size(), 150);
 
         // only scan the ports for data if and event has happened
-        if (num_events > 0)
+        if (numEvents > 0)
         {
             // check for something in the event that poll doesn't timeout
             for (int i = 0; i < ATMs.size(); i++)
@@ -231,18 +284,20 @@ void pollingFunction(){
                             std::string s_transactionType = request["request_type"];
                             int transactionType = std::stoi(s_transactionType);
 
+                            // ATM ID is always expected, in order to help with routing connections (think of it as a MAC address for an actual switch)
+                            std::string s_AtmID = request["atm_id"];
+                            int AtmID = std::stoi(s_AtmID);
+
+                            // map this id to a the corresponding connection
+                            AtmIdToFileDescriptorMap[AtmID] = ATMs[i].fd;
+
                             // logging the transaction 
                             logTransaction(transactionType, request);
 
                             // forwarding request to simulator
                             int responseReachedNetwork = forwardToSimulator(request);
 
-                            if (responseReachedNetwork == 0)
-                            { // response made it
-                                // proceed as normal
-                                // handling simulator response & forward to ATM 
-                                handleSimulatorResponse(ATMs[i].fd);
-                            }else
+                            if (responseReachedNetwork != 0)
                             { // connection to network broken, send ATM error response
                                 request["transaction_outcome"] = 10;
                                 request["reason"] = "connection terminated";
@@ -374,9 +429,13 @@ int main(int argc, char *argv[])
 {
     // connect to the simulator
     networkSim_fd = connectToNetwork();
+    Sims.push_back(pollfd{networkSim_fd, POLLIN, 0});
 
     // set up a thread to handle clients
-    std::thread pollingThread(pollingFunction);
+    std::thread AtmPollingThread(AtmToSimComms);
+    // create another thread to handle simulators responding
+    std::thread responseThread(SimToAtmComms);
+
     // start accepting clients
     bindSocketForClientsAndListen();
 

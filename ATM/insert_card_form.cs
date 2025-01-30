@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Newtonsoft.Json;
+
 
 namespace ATM_forms
 {
@@ -15,7 +17,7 @@ namespace ATM_forms
     {
         public InsertCardForm()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         private void InsertCardFormLoad(object sender, EventArgs e)
@@ -186,6 +188,32 @@ namespace ATM_forms
         private void insert_card_panel_Paint(object sender, PaintEventArgs e)
         {
 
+
+        private void MastercardbtnClick(object sender, EventArgs e)
+        {
+            TransactionData.currentCardType = "mastercard";
+            TransactionData.currentPAN = TransactionData.mastercardPAN;
+            EnterPinForm enterPinForm = new EnterPinForm();  // instance of the enter_pin_form
+            enterPinForm.Show();
+            this.Hide();
+        }
+
+        private void VisabtnClick(object sender, EventArgs e)
+        {
+            TransactionData.currentCardType = "visa";
+            TransactionData.currentPAN = TransactionData.visaPAN;
+            EnterPinForm enterPinForm = new EnterPinForm();  // instance of the enter_pin_form
+            enterPinForm.Show();
+            this.Hide();
+        }
+
+        private void UnionpaybtnClick(object sender, EventArgs e)
+        {
+            TransactionData.currentCardType = "unionpay";
+            TransactionData.currentPAN = TransactionData.unionpayPAN;
+            EnterPinForm enterPinForm = new EnterPinForm();  // instance of the enter_pin_form
+            enterPinForm.Show();
+            this.Hide();
         }
     }
 }

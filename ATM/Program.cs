@@ -21,13 +21,34 @@ namespace ATM_forms
         {
             try
             {
-                client = new TcpClient(ip, port);
+                client = new TcpClient(); //creates a new TCP client instance
+
+                // begins an asynchronous connection attempt to the specified IP and port
+                var result = client.BeginConnect(ip, port, null, null);
+
+                // waits for the connection attempt to complete by the given timeout (3 seconds)
+                //prevents indefinite blocking if the server is unresponsive
+                bool success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(3)); // 3s timeout
+
+
+                // if the connection did not complete within the timeout, throw a timeout exception
+                if (!success)
+                {
+                    throw new SocketException((int)SocketError.TimedOut);
+                }
+
+                client.EndConnect(result); // finish connection attempt
+
+                //prevents network operations from getting stuck by setting a time limit
+                client.ReceiveTimeout = 5000;
+                client.SendTimeout = 5000;
                 stream = client.GetStream();
-                Console.WriteLine("connected to switch.");
+
+                Console.WriteLine("Connected to switch.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"error connecting to switch: {ex.Message}");
+                Console.WriteLine($"Error connecting to switch: {ex.Message}");
                 HandleDroppedConnection();
             }
         }
@@ -93,9 +114,9 @@ namespace ATM_forms
             // notifies the user of the connection problem with a dialog box
             //MessageBox.Show("Problem with transaction, returning card...", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            AlertMessageForm alertMessageForm = new AlertMessageForm("Problem with transaction, returning card...");
+            AlertMessageForm alertMessageForm = new AlertMessageForm("Connection error, returning card...");
             alertMessageForm.ShowDialog();
-               
+
             // gets the current form - which is the form where the connection failed so we can close it
             Form currentForm = Application.OpenForms[Application.OpenForms.Count - 1];
 
@@ -146,6 +167,19 @@ namespace ATM_forms
         public static string PAN = "2234567890123456";
         public static int PIN = 1010;
         
+
+         /*
+         Card Types:
+        Mastercard - starts with 4/5/6
+        Visa - starts with 1/2/3
+        UnionPay - starts with 7/8/9
+         */
+        public static string mastercardPAN = "5809567890123456";
+        public static string visaPAN = "1412567890123456";
+        public static string unionpayPAN = "7224567890123456";
+        public static string currentPAN = "";
+        public static string currentCardType = "";
+        
     }
 
     public static class GlobalVariables
@@ -155,3 +189,7 @@ namespace ATM_forms
 
 
 }
+
+
+  
+
