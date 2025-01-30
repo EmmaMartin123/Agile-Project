@@ -28,8 +28,7 @@ enum NetworkType {
     NETWORK_VISA = 0,
     NETWORK_MASTERCARD = 1,
     NETWORK_UNIONPAY = 2,
-    NETWORK_AMEX = 3,
-    NETWORK_UNKNOWN = 4
+    NETWORK_UNKNOWN = 3
 };
 
 // Map PAN first digit to network type
@@ -38,10 +37,9 @@ NetworkType getNetworkType(const std::string& pan) {
 
     char firstDigit = pan[0];
     switch (firstDigit) {
-        case '4': return NETWORK_VISA;
-        case '5': return NETWORK_MASTERCARD;
-        case '6': return NETWORK_UNIONPAY;
-        case '3': return NETWORK_AMEX;
+        case '1': case '2': case '3': return NETWORK_VISA; // pan 1-3 
+        case '4': case '5': case '6': return NETWORK_MASTERCARD; // pan 4-6 
+        case '7': case '8': case '9': return NETWORK_UNIONPAY; // pans 7-9 
         default: return NETWORK_UNKNOWN;
     }
 }
@@ -52,7 +50,6 @@ std::string getSimulatorPort(NetworkType network) {
         case NETWORK_VISA: return "8886"; // visa sim port
         case NETWORK_MASTERCARD: return "8884"; // mastercard sim port
         case NETWORK_UNIONPAY: return "8887"; // unionPay sim port
-        case NETWORK_AMEX: return "8888"; // american express sim port
         default: return ""; // for a unknown network
     }
 }
@@ -137,7 +134,7 @@ int connectToSimulator(const std::string& port) {
     // loop through all the results and connect to the first we can
     for(p = servinfo; p != NULL; p = p->ai_next) {
         if ((sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
-            perrorS("client: socket");
+            perror("client: socket");
             continue;
         }
 
