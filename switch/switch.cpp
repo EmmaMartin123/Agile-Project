@@ -20,8 +20,13 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
+#define SIMULATOR_PORT "8884" // the port the switch will be connecting to 
 #define SWITCH_PORT "8885" // the port ATMs will be connecting to
 #define BACKLOG 10         // how many pending connections queue will hold
+
+#define NETWORK_ADDRESS_1 "127.0.0.1"
+#define NETWORK_ADDRESS_2 "127.0.0.1"
+#define NETWORK_ADDRESS_3 "127.0.0.1"
 
 // Sim network types
 enum NetworkType {
@@ -31,25 +36,38 @@ enum NetworkType {
     NETWORK_UNKNOWN = 3
 };
 
-// Map PAN first digit to network type
-NetworkType getNetworkType(const std::string& pan) {
-    if (pan.empty()) return NETWORK_UNKNOWN;
-
-    char firstDigit = pan[0];
-    switch (firstDigit) {
-        case '1': case '2': case '3': return NETWORK_VISA; // pan 1-3 
-        case '4': case '5': case '6': return NETWORK_MASTERCARD; // pan 4-6 
-        case '7': case '8': case '9': return NETWORK_UNIONPAY; // pans 7-9 
-        default: return NETWORK_UNKNOWN;
-    }
-}
-
 // simulator connections
 std::unordered_map<NetworkType, int> simulator_fds; // mapping network type to simulator file descriptor
 std::vector<int> queuedSockets;
 std::vector<struct pollfd> ATMs;
+std::vector<struct pollfd> Sims;
+
+// each message passed to simulators will containt a message id
+// so that the switch can recognize which ATM sent it,
+std::unordered_map<int, int> AtmIdToFileDescriptorMap;
 
 std::mutex queuedSocketsMutex;
+
+// Map PAN first digit to network type
+int getSimulatorFileDescriptor(const std::string& pan) {
+    char firstDigit = pan[0];
+    switch (firstDigit) {
+        case '1':
+        case '2':
+        case '3':
+            return Sims[NETWORK_ONE].fd;
+        case '4':
+        case '5':
+        case '6':
+            return Sims[NETWORK_TWO].fd;
+        case '7':
+        case '8':
+        case '9':
+            return Sims[NETWORK_THREE].fd;
+        default:
+            return NETWORK_ERROR;
+    }
+}
 
 // Logging function 
 void logTransaction(int transactionType, const json &request) {
@@ -99,54 +117,56 @@ void *getInAddr(struct sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-// connect to a specific simulator based on port
-int connectToSimulator(const std::string& port) {
+int connectToNetwork(std::string hostname = "127.0.0.1"){
 
     int sockfd;
     struct addrinfo hints, *servinfo, *p;
     int rv;
     char s[INET6_ADDRSTRLEN];
 
-    memset(&hints, 0, sizeof hints);
-    hints.ai_family = AF_UNSPEC;
-    hints.ai_socktype = SOCK_STREAM;
+    while (1)
+    {
+        memset(&hints, 0, sizeof hints);
+        hints.ai_family = AF_UNSPEC;
+        hints.ai_socktype = SOCK_STREAM;
 
-    std::string hostname = "127.0.0.1"; // Simulator is on localhost
+        // set up data for connection
+        if ((rv = getaddrinfo(hostname.c_str(), SIMULATOR_PORT, &hints, &servinfo)) != 0) {
+            fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
+            std::cout << "failed to resolve data" << std::endl;
+            exit(1);
+        }
 
-    // set up data for connection
-    if ((rv = getaddrinfo(hostname.c_str(), port.c_str(), &hints, &servinfo)) != 0) {
-        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
-        return -1;
-    }
+        // loop through all the results and connect to the first we can
+        for(p = servinfo; p != NULL; p = p->ai_next) {
+            if ((sockfd = socket(p->ai_family, p->ai_socktype,
+                    p->ai_protocol)) == -1) {
+                perror("client: socket");
+                continue;
+            }
 
-    // loop through all the results and connect to the first we can
-    for(p = servinfo; p != NULL; p = p->ai_next) {
-        if ((sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
-            perror("client: socket");
+            if (connect(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
+                close(sockfd);
+                perror("client: connect");
+                continue;
+            }
+
+            break;
+        }
+
+        if (p == NULL) {
+            fprintf(stderr, "client: failed to connect\n");
+            sleep(10);
             continue;
         }
 
-        if (connect(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
-            close(sockfd);
-            perror("client: connect");
-            continue;
-        }
+        inet_ntop(p->ai_family, getInAddr((struct sockaddr *)p->ai_addr), s, sizeof s);
+        printf("client: connecting to %s\n", s);
 
-        break;
+        freeaddrinfo(servinfo); // all done with this structure
+
+        return sockfd;
     }
-
-    if (p == NULL) {
-        fprintf(stderr, "client: failed to connect to simulator on port %s\n", port.c_str());
-        freeaddrinfo(servinfo);
-        return -1;
-    }
-
-    inet_ntop(p->ai_family, getInAddr((struct sockaddr *)p->ai_addr), s, sizeof s);
-    printf("client: connecting to simulator on port %s\n", port.c_str());
-
-    freeaddrinfo(servinfo); // all done with this structure
-
-    return sockfd;
 }
 
 // forward request to appropriate simulator based on pan
@@ -155,35 +175,17 @@ int forwardToSimulator(const json &request, int atm_fd) {
 
     // pull pan from request
     std::string panNumber = request["pan_number"];
-    NetworkType network = getNetworkType(panNumber);
-    std::string port = getSimulatorPort(network);
-
-    if (port.empty()) {
-        std::cerr << "Unknown network type for PAN: " << panNumber << "\n";
-        return -1;
-    }
-
-    // a check to see if we already have a connection to this simulator
-    if (simulator_fds.find(network) == simulator_fds.end()) {
-        // connect to the simulator
-        int sockfd = connectToSimulator(port);
-        if (sockfd == -1) {
-            simulatorFdsMutex.unlock();
-            return -1;
-        }
-        simulator_fds[network] = sockfd;
-    }
-    int simulator_fd = simulator_fds[network];
+    int fd = getSimulatorFileDescriptor(panNumber);
 
     // sending request to the simulator
-    if (send(simulator_fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
+    if (send(fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
         perror("Error sending request to simulator");
         return -1;
     }
 
     // handle simulator response
     char responseBuffer[512];
-    int bytesReceived = recv(simulator_fd, responseBuffer, sizeof(responseBuffer) - 1, 0);
+    int bytesReceived = recv(fd, responseBuffer, sizeof(responseBuffer) - 1, 0);
     if (bytesReceived > 0) {
         responseBuffer[bytesReceived] = '\0';
         std::string response(responseBuffer);
@@ -384,10 +386,24 @@ int bindSocketForClientsAndListen(){
 
 int main(int argc, char *argv[])
 {
+    // connect to the simulator
+    int networkSim_fd = connectToNetwork(NETWORK_ADDRESS_1);
+    Sims.push_back(pollfd{networkSim_fd, POLLIN, 0});
+
+    networkSim_fd = connectToNetwork(NETWORK_ADDRESS_2);
+    Sims.push_back(pollfd{networkSim_fd, POLLIN, 0});
+
+    networkSim_fd = connectToNetwork(NETWORK_ADDRESS_3);
+    Sims.push_back(pollfd{networkSim_fd, POLLIN, 0});
+
     // set up a thread to handle clients
-    std::thread pollingThread(pollingFunction);
+    std::thread AtmPollingThread(AtmToSimComms);
+    // create another thread to handle simulators responding
+    std::thread responseThread(SimToAtmComms);
+
     // start accepting clients
     bindSocketForClientsAndListen();
 
+    close(networkSim_fd);
     return 0;
 }
