@@ -97,6 +97,19 @@ namespace ATM_forms
 
                 exit_btn.Text = "EXIT";
             }
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Seleccionar transacción";
+                select_transaction_label.Text = "Seleccione una transacción";
+                select_transaction_label.Left = (this.select_transaction_panel.Width - select_transaction_label.Width) / 2;
+
+                check_balance_btn.Text = "CONSULTA DE SALDO";
+                check_balance_btn.Font = new Font("Segoe UI", 26, FontStyle.Bold);
+
+                cash_withdrawal_btn.Text = "RETIRO EN EFECTIVO";
+
+                exit_btn.Text = "SALIR";
+            }
         }
 
         /*
