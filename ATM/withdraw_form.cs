@@ -110,6 +110,12 @@ namespace ATM_forms
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                message = $"La transacción falló: {reason}. Lo máximo que puedes retirar es £{closest_amount}";
+                                alertMessageForm = new AlertMessageForm(message);
+                                alertMessageForm.Show(this);
+                            }
                             // update the amount text box with the suggested withdrawal amount
                             amount_txtbox.Text = "£" + closest_amount.ToString();
                             break;
@@ -124,6 +130,12 @@ namespace ATM_forms
                             else if (GlobalVariables.language == "english")
                             {
                                 message = "An error occurred during the transaction. Please try again later.";
+                                alertMessageForm = new AlertMessageForm(message);
+                                alertMessageForm.Show(this);
+                            }
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                message = "Se produjo un error durante la transacción. \nInténtelo de nuevo más tarde.";
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
@@ -142,7 +154,13 @@ namespace ATM_forms
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
-                           
+                            else if (GlobalVariables.language == "spanish")
+                            {
+                                message = "Respuesta inesperada del servidor.";
+                                alertMessageForm = new AlertMessageForm(message);
+                                alertMessageForm.Show(this);
+                            }
+
                             //MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
@@ -167,7 +185,11 @@ namespace ATM_forms
                     AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid Amount. Please enter a valid withdrawal amount\n(multiple of 5).");
                     alertMessageForm.Show(this);
                 }
-                
+                else if (GlobalVariables.language == "spanish")
+                {
+                    AlertMessageForm alertMessageForm = new AlertMessageForm("Monto no válido. Ingrese un monto de retiro válido\n(múltiplo de 5).");
+                    alertMessageForm.Show(this);
+                }
                 //MessageBox.Show("Please enter a valid withdrawal amount (multiple of 5).", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 amount_txtbox.Text = "£";
             }
@@ -223,7 +245,7 @@ namespace ATM_forms
             {
                 this.Text = "Withdraw";
                 amount_label.Text = "Enter the amount you wish to withdraw: ";
-                amount_label.Left = (this.withdraw_panel.Width - withdraw_panel.Width) / 2;
+                amount_label.Left = (this.withdraw_panel.Width - amount_label.Width) / 2;
 
                 btnY.Text = "Enter";
                 btnY.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -232,6 +254,20 @@ namespace ATM_forms
                 btnN.Font = new Font("Segoe UI", 14, FontStyle.Bold);
                 
                 btnExit.Text = "Cancel";
+            }
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Retiro en efectivo";
+                amount_label.Text = "Ingresa el monto que deseas retirar: ";
+                amount_label.Left = (this.withdraw_panel.Width - amount_label.Width) / 2;
+
+                btnY.Text = "Continuar";
+                btnY.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+                btnN.Text = "Corregir";
+                btnN.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+                btnExit.Text = "Cancelar";
             }
         }
 

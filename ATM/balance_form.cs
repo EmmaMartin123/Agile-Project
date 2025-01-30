@@ -44,7 +44,14 @@ namespace ATM_forms
 
                 done_btn.Text = "Done";
             }
-           
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Consultar Saldo";
+                balance_heading_label.Text = "Saldo";
+
+                done_btn.Text = "Hecho";
+            }
+
 
             // send the balance request to the switch to deal with
             try
