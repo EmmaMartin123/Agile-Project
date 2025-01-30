@@ -37,12 +37,15 @@ namespace ATM_forms
 
                 TransactionData.transactionType = 1;
                 NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
-                NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
+                NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.currentPAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
+
+
                 string response = NetworkClient.ReceiveResponse();
                 Console.WriteLine($"Response: {response}");
                 NetworkClient.CloseConnection();
 
                 dynamic parsedResponse = JsonConvert.DeserializeObject(response);
+
                 double transaction_value = parsedResponse.transaction_value;
                 //int transaction_value = 100; //test data
 
@@ -70,6 +73,9 @@ namespace ATM_forms
             this.Close();  // terminates this form
         }
 
-        
+        private void balance_label_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

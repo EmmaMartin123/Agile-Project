@@ -32,7 +32,7 @@ namespace ATM_forms
             pin_txt_box.PasswordChar = '*';   // hides input 
             pin_txt_box.Text = pin_txt_box.Text.Substring(0, Math.Min(4, pin_txt_box.Text.Length)); //ensures text does not exeed 4 digits
             pin_txt_box.SelectionStart = pin_txt_box.Text.Length; // moves the cursor to the end
-        
+
         }
 
         /*private void pin_txt_box_KeyPress(object sender, KeyPressEventArgs e)
@@ -70,7 +70,7 @@ namespace ATM_forms
 
         private void ContinuebtnClick(object sender, EventArgs e)
         {
-            
+
         }
 
         private void EnterPinForm_Load(object sender, EventArgs e)
@@ -98,6 +98,8 @@ namespace ATM_forms
         {
             Console.WriteLine("continuing");
 
+
+
             // checks if the PIN is exactly 4 digits 
             if (pin_txt_box.Text.Length == 4)
             {
@@ -105,13 +107,15 @@ namespace ATM_forms
                 {
                     TransactionData.PIN = enteredPin;
                     TransactionData.transactionType = 0;
+
                     // send the pin to the switch to deal with
                     try
                     {
 
                         // connect and send response in json format
                         NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
-                        NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
+                        //NetworkClient.SendRequest("{\"request_type\": \""+TransactionData.transactionType +"\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
+                        NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.currentPAN + "\",\"pin\":\"" + TransactionData.PIN + "\"}");
                         string response = NetworkClient.ReceiveResponse();
                         Console.WriteLine($"Response: {response}");
                         NetworkClient.CloseConnection();
@@ -134,7 +138,11 @@ namespace ATM_forms
                         else
                         {
                             // if the PIN does not match
+<<<<<<< HEAD
+                            string reason = parsedResponse.reason;
+=======
                             //string reason = parsedResponse.reason;
+>>>>>>> origin/Sprint-2
                             AlertMessageForm alertMessageForm = new AlertMessageForm("Invalid PIN. Please try again.");
                             alertMessageForm.Show(this);
                             //MessageBox.Show("Incorrect PIN. Please try again.", "Invalid PIN", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -117,7 +117,7 @@ namespace ATM_forms
 
             AlertMessageForm alertMessageForm = new AlertMessageForm("Problem with transaction, returning card...");
             alertMessageForm.ShowDialog();
-               
+
             // gets the current form - which is the form where the connection failed so we can close it
             Form currentForm = Application.OpenForms[Application.OpenForms.Count - 1];
 
@@ -168,6 +168,19 @@ namespace ATM_forms
         public static int ATMID = 0;
         public static string PAN = "2234567890123456";
         public static int PIN = 1010;
+
+        /* 
+         Card Types:
+        Mastercard - starts with 4/5/6
+        Visa - starts with 1/2/3
+        UnionPay - starts with 7/8/9
+         */
+        public static string mastercardPAN = "5809567890123456";
+        public static string visaPAN = "1412567890123456";
+        public static string unionpayPAN = "7224567890123456";
+        public static string currentPAN = "";
+        public static string currentCardType = "";
+
     }
 
 }
