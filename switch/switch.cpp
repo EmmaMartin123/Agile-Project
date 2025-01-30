@@ -170,6 +170,23 @@ int connectToNetwork(std::string hostname = "127.0.0.1"){
 }
 
 // forward request to appropriate simulator based on pan
+int forwardToSimulator(const json &request) {
+
+    std::string requestStr = request.dump(); // serializing JSON
+
+    // pull pan from request
+    std::string panNumber = request["pan_number"];
+    int fd = getSimulatorFileDescriptor(panNumber);
+
+    if (send(fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
+        perror("Error sending request to simulator");
+        return -1;
+    }
+
+    return 0;
+}
+
+// forward request to appropriate simulator based on pan
 int forwardToSimulator(const json &request, int atm_fd) {
     std::string requestStr = request.dump(); // serializing JSON
 
@@ -182,38 +199,6 @@ int forwardToSimulator(const json &request, int atm_fd) {
         perror("Error sending request to simulator");
         return -1;
     }
-
-    // handle simulator response
-    char responseBuffer[512];
-    int bytesReceived = recv(fd, responseBuffer, sizeof(responseBuffer) - 1, 0);
-    if (bytesReceived > 0) {
-        responseBuffer[bytesReceived] = '\0';
-        std::string response(responseBuffer);
-
-        // forward simulator's response to the ATM
-        if (send(atm_fd, response.c_str(), response.size(), 0) == -1) {
-            perror("Error sending response to ATM");
-        }
-    } else if (bytesReceived == 0) {
-
-        std::cerr << "Simulator connection closed unexpectedly.\n";
-        json response;
-        response["transaction_outcome"] = 10;
-        response["reason"] = "connection terminated";
-        std::string responseStr = response.dump();
-
-        send(atm_fd, responseStr.c_str(), responseStr.length(), 0);
-    } else {
-
-        perror("Error receiving response from simulator");
-        json response;
-        response["transaction_outcome"] = 10;    
-        response["reason"] = "error with response";
-        std::string responseStr = response.dump();
-        
-        send(atm_fd, responseStr.c_str(), responseStr.length(), 0);
-    }
-
     return 0;
 }
 
