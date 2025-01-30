@@ -37,7 +37,23 @@ namespace ATM_forms
             // get the current date and time 
             string currentDate = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
 
-            string withdrawalAmount = $"Withdrawal Amount: {withdrawal_amount:C}"; // this will format it as currency ( eg £100.00)
+            string withdrawalAmount = "";
+
+            if (GlobalVariables.language == "english")
+            {
+                withdrawalAmount = $"Withdrawal Amount: {withdrawal_amount:C}"; // this will format it as currency ( eg £100.00)
+
+            }
+            else if (GlobalVariables.language == "french")
+            {
+                withdrawalAmount = $"Montant du retrait: {withdrawal_amount:C}"; // this will format it as currency ( eg £100.00)
+
+            }
+            else if (GlobalVariables.language == "spanish")
+            {
+                withdrawalAmount = $"Monto del retiro: {withdrawal_amount:C}"; // this will format it as currency ( eg £100.00)
+
+            }
 
             // get the path to the user's documents folder
             string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -46,14 +62,39 @@ namespace ATM_forms
             // use streamWriter to write text to the file
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                // Write the structured receipt content to the file
-                writer.WriteLine("Transaction Receipt");
-                writer.WriteLine("-----------------------");
-                writer.WriteLine($"Date: {currentDate}");
-                writer.WriteLine($"Receipt ID: {uniqueId}");
-                writer.WriteLine(withdrawalAmount);  // Use the transaction data here
-                writer.WriteLine("-----------------------");
-                writer.WriteLine("Thank you for your transaction.");
+                if (GlobalVariables.language == "english")
+                {
+                    // Write the structured receipt content to the file
+                    writer.WriteLine("Transaction Receipt");
+                    writer.WriteLine("-----------------------");
+                    writer.WriteLine($"Date: {currentDate}");
+                    writer.WriteLine($"Receipt ID: {uniqueId}");
+                    writer.WriteLine(withdrawalAmount);  // Use the transaction data here
+                    writer.WriteLine("-----------------------");
+                    writer.WriteLine("Thank you for your transaction.");
+                }
+                else if (GlobalVariables.language == "french")
+                {
+                    // Write the structured receipt content to the file
+                    writer.WriteLine("Reçu de Transaction");
+                    writer.WriteLine("-----------------------");
+                    writer.WriteLine($"Date: {currentDate}");
+                    writer.WriteLine($"ID du reçu: {uniqueId}");
+                    writer.WriteLine(withdrawalAmount);  // Use the transaction data here
+                    writer.WriteLine("-----------------------");
+                    writer.WriteLine("Merci pour votre transaction.");
+                }
+                else if (GlobalVariables.language == "spanish")
+                {
+                    // Write the structured receipt content to the file
+                    writer.WriteLine("Recibo de Transacción");
+                    writer.WriteLine("-----------------------");
+                    writer.WriteLine($"Fecha: {currentDate}");
+                    writer.WriteLine($"ID de recibo: {uniqueId}");
+                    writer.WriteLine(withdrawalAmount);  // Use the transaction data here
+                    writer.WriteLine("-----------------------");
+                    writer.WriteLine("Gracias por su transacción.");
+                }
             }
 
             this.Close(); 
@@ -70,6 +111,11 @@ namespace ATM_forms
         }
 
         private void prompt_label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void prompt_panel_Paint(object sender, PaintEventArgs e)
         {
 
         }

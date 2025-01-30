@@ -64,6 +64,7 @@ namespace ATM_forms
                 }
 
                 byte[] data = Encoding.UTF8.GetBytes(jsonRequest);
+                Console.WriteLine(jsonRequest);
                 stream.Write(data, 0, data.Length);
                 Console.WriteLine("request sent to switch.");
             }
@@ -160,7 +161,7 @@ namespace ATM_forms
     public static class TransactionData
     {
         // transaction variables (dummy data for now)
-        public static string connectionAddress = "ec2-44-202-126-43.compute-1.amazonaws.com";
+        public static string connectionAddress = "ec2-52-71-77-78.compute-1.amazonaws.com";
         public static decimal CurrentBalance = 500;
         public static int transactionType = -1;
         public static int ATMID = 0;

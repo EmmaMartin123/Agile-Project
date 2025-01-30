@@ -34,12 +34,10 @@ namespace ATM_forms
             this.insert_card_panel = new System.Windows.Forms.Panel();
             this.language2_button = new System.Windows.Forms.Button();
             this.language1_button = new System.Windows.Forms.Button();
-            //((System.ComponentModel.ISupportInitialize)(this.insert_card_picture_box)).BeginInit();
             this.insert_card_label = new System.Windows.Forms.Label();
             this.mastercardbtn = new System.Windows.Forms.Button();
             this.visabtn = new System.Windows.Forms.Button();
             this.unionpaybtn = new System.Windows.Forms.Button();
-
             this.insert_card_panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,11 +59,12 @@ namespace ATM_forms
             // 
             // language2_button
             // 
+            this.language2_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
             this.language2_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.language2_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.language2_button.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.language2_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.language2_button.Image = ATM_forms.Properties.Resources.spain;
+            this.language2_button.Image = global::ATM_forms.Properties.Resources.spain;
             this.language2_button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.language2_button.Location = new System.Drawing.Point(1130, 90);
             this.language2_button.Name = "language2_button";
@@ -74,16 +73,17 @@ namespace ATM_forms
             this.language2_button.Text = "Español";
             this.language2_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.language2_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.language2_button.UseVisualStyleBackColor = true;
+            this.language2_button.UseVisualStyleBackColor = false;
             this.language2_button.Click += new System.EventHandler(this.language2_button_Click);
             // 
             // language1_button
             // 
+            this.language1_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
             this.language1_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.language1_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.language1_button.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.language1_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.language1_button.Image = ATM_forms.Properties.Resources.frenchflag;
+            this.language1_button.Image = global::ATM_forms.Properties.Resources.frenchflag;
             this.language1_button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.language1_button.Location = new System.Drawing.Point(1130, 20);
             this.language1_button.Name = "language1_button";
@@ -92,20 +92,20 @@ namespace ATM_forms
             this.language1_button.Text = "Français";
             this.language1_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.language1_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.language1_button.UseVisualStyleBackColor = true;
+            this.language1_button.UseVisualStyleBackColor = false;
             this.language1_button.Click += new System.EventHandler(this.language1_button_Click);
             // 
             // insert_card_label
             // 
             this.insert_card_label.AutoSize = true;
-            this.insert_card_label.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.insert_card_label.Font = new System.Drawing.Font("Segoe UI", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.insert_card_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.insert_card_label.Location = new System.Drawing.Point(37, 25);
+            this.insert_card_label.Location = new System.Drawing.Point(215, 20);
             this.insert_card_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.insert_card_label.Name = "insert_card_label";
-            this.insert_card_label.Size = new System.Drawing.Size(845, 81);
+            this.insert_card_label.Size = new System.Drawing.Size(870, 86);
             this.insert_card_label.TabIndex = 1;
-            this.insert_card_label.Text = "Please select your card type: ";
+            this.insert_card_label.Text = "Please select your card type";
             // 
             // mastercardbtn
             // 
@@ -113,11 +113,11 @@ namespace ATM_forms
             this.mastercardbtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.mastercardbtn.FlatAppearance.BorderSize = 3;
             this.mastercardbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mastercardbtn.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mastercardbtn.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mastercardbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.mastercardbtn.Location = new System.Drawing.Point(285, 125);
+            this.mastercardbtn.Location = new System.Drawing.Point(450, 190);
             this.mastercardbtn.Name = "mastercardbtn";
-            this.mastercardbtn.Size = new System.Drawing.Size(355, 89);
+            this.mastercardbtn.Size = new System.Drawing.Size(400, 150);
             this.mastercardbtn.TabIndex = 0;
             this.mastercardbtn.Text = "Mastercard";
             this.mastercardbtn.UseVisualStyleBackColor = true;
@@ -131,11 +131,11 @@ namespace ATM_forms
             this.visabtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.visabtn.FlatAppearance.BorderSize = 3;
             this.visabtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.visabtn.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.visabtn.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.visabtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.visabtn.Location = new System.Drawing.Point(285, 220);
+            this.visabtn.Location = new System.Drawing.Point(450, 360);
             this.visabtn.Name = "visabtn";
-            this.visabtn.Size = new System.Drawing.Size(355, 89);
+            this.visabtn.Size = new System.Drawing.Size(400, 150);
             this.visabtn.TabIndex = 0;
             this.visabtn.Text = "Visa";
             this.visabtn.UseVisualStyleBackColor = true;
@@ -149,11 +149,11 @@ namespace ATM_forms
             this.unionpaybtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
             this.unionpaybtn.FlatAppearance.BorderSize = 3;
             this.unionpaybtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.unionpaybtn.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unionpaybtn.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unionpaybtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.unionpaybtn.Location = new System.Drawing.Point(285, 315);
+            this.unionpaybtn.Location = new System.Drawing.Point(450, 530);
             this.unionpaybtn.Name = "unionpaybtn";
-            this.unionpaybtn.Size = new System.Drawing.Size(355, 89);
+            this.unionpaybtn.Size = new System.Drawing.Size(400, 150);
             this.unionpaybtn.TabIndex = 0;
             this.unionpaybtn.Text = "Union Pay";
             this.unionpaybtn.UseVisualStyleBackColor = true;
