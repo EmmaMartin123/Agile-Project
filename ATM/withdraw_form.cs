@@ -86,6 +86,8 @@ namespace ATM_forms
                     {
                         case 0: // success
 
+                            ATMContents.WithdrawCash(amount);
+                            
                             if (GlobalVariables.language == "english")
                             {
                                 message = $"You have successfully withdrawn £{amount}.";
@@ -153,6 +155,10 @@ namespace ATM_forms
                                 alertMessageForm = new AlertMessageForm(message);
                                 alertMessageForm.Show(this);
                             }
+
+                            // reset transaction to withdraw so it isn't checking balance like above
+                            TransactionData.transactionType = 2;
+                            
                             // update the amount text box with the suggested withdrawal amount
                             amount_txtbox.Text = "£" + closest_amount.ToString();
                             break;
