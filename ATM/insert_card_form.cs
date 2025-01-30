@@ -68,7 +68,7 @@ namespace ATM_forms
                 language2_button.Text = "Français";
                 language2_button.Image = ATM_forms.Properties.Resources.frenchflag;
             }
-            
+
         }
 
         /*
@@ -188,6 +188,9 @@ namespace ATM_forms
         private void insert_card_panel_Paint(object sender, PaintEventArgs e)
         {
 
+
+            
+        }
 
         private void MastercardbtnClick(object sender, EventArgs e)
         {
