@@ -34,7 +34,7 @@ namespace ATM_forms
             this.insert_card_panel = new System.Windows.Forms.Panel();
             this.language2_button = new System.Windows.Forms.Button();
             this.language1_button = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.insert_card_picture_box)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.insert_card_picture_box)).BeginInit();
             this.insert_card_label = new System.Windows.Forms.Label();
             this.mastercardbtn = new System.Windows.Forms.Button();
             this.visabtn = new System.Windows.Forms.Button();
@@ -65,7 +65,7 @@ namespace ATM_forms
             this.language2_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.language2_button.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.language2_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.language2_button.Image = ((System.Drawing.Image)(resources.GetObject("language2_button.Image")));
+            this.language2_button.Image = ATM_forms.Properties.Resources.spain;
             this.language2_button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.language2_button.Location = new System.Drawing.Point(1130, 90);
             this.language2_button.Name = "language2_button";
@@ -83,7 +83,7 @@ namespace ATM_forms
             this.language1_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.language1_button.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.language1_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.language1_button.Image = ((System.Drawing.Image)(resources.GetObject("language1_button.Image")));
+            this.language1_button.Image = ATM_forms.Properties.Resources.frenchflag;
             this.language1_button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.language1_button.Location = new System.Drawing.Point(1130, 20);
             this.language1_button.Name = "language1_button";
@@ -179,10 +179,10 @@ namespace ATM_forms
 
         #endregion
 
-        //private System.Windows.Forms.PictureBox insert_card_picture_box;
+        private System.Windows.Forms.PictureBox insert_card_picture_box;
         private System.Windows.Forms.Panel insert_card_panel;
         private System.Windows.Forms.Label insert_card_label;
-        private Panel insert_card_panel;
+        //private Panel insert_card_panel;
         private Button language2_button;
         private Button language1_button;
         private System.Windows.Forms.Button mastercardbtn;
