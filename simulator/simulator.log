@@ -1,2 +1,2 @@
-[2025-01-21 12:35:44] {"remaining_balance":735.3,"status":"approved","transaction_id":"TXN98765"}
-[2025-01-21 12:35:57] {"remaining_balance":685.3,"status":"approved","transaction_id":"TXN98765"}
+
+[2025-01-30 10:16:48] {"atm_id":"Mastercard","expiry_date":"12/26","pan_number":"4432109876543210","pin":"1234","request_type":"0","transaction_outcome":0}

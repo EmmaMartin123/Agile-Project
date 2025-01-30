@@ -171,6 +171,7 @@ void handleNewConnection(int socket) {
                 if (accounts.find(panNumber) == accounts.end()){
                     responseJson["transaction_outcome"] = 1; //failure
                     responseJson["reason"] = "Card Not Found in Data";
+                    response = responseJson.dump();
 
                     // send response and continue to next loop
                     logResponse(response);   
@@ -203,7 +204,8 @@ void handleNewConnection(int socket) {
                         responseJson["reason"] = "Card Expired";
 
                         // send response and continue to next loop
-                        logResponse(response);   
+                        response = responseJson.dump();
+                        logResponse(response);
                         send(socket, response.c_str(), response.length(), 0); // sending response
                         continue;
                     }
@@ -213,7 +215,11 @@ void handleNewConnection(int socket) {
                     responseJson["reason"] = e.what();
                     std::cerr << "Error parsing expiry date: " << e.what() << "\n";
 
+                    response = responseJson.dump();
+
                     // send response and continue to next loop
+                    logResponse(response);
+                    send(socket, response.c_str(), response.length(), 0); // sending response
                     continue;
                 }
 
