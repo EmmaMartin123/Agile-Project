@@ -34,9 +34,8 @@ namespace ATM_forms
             this.insert_card_picture_box = new System.Windows.Forms.PictureBox();
             this.insert_card_label = new System.Windows.Forms.Label();
             this.insert_card_panel = new System.Windows.Forms.Panel();
-            this.spanish_button = new System.Windows.Forms.Button();
-            this.french_button = new System.Windows.Forms.Button();
-            this.english_button = new System.Windows.Forms.Button();
+            this.language2_button = new System.Windows.Forms.Button();
+            this.language1_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.insert_card_picture_box)).BeginInit();
             this.insert_card_panel.SuspendLayout();
             this.SuspendLayout();
@@ -69,9 +68,8 @@ namespace ATM_forms
             // insert_card_panel
             // 
             this.insert_card_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(216)))), ((int)(((byte)(235)))));
-            this.insert_card_panel.Controls.Add(this.spanish_button);
-            this.insert_card_panel.Controls.Add(this.french_button);
-            this.insert_card_panel.Controls.Add(this.english_button);
+            this.insert_card_panel.Controls.Add(this.language2_button);
+            this.insert_card_panel.Controls.Add(this.language1_button);
             this.insert_card_panel.Controls.Add(this.insert_card_label);
             this.insert_card_panel.Controls.Add(this.insert_card_picture_box);
             this.insert_card_panel.Location = new System.Drawing.Point(335, 106);
@@ -79,60 +77,41 @@ namespace ATM_forms
             this.insert_card_panel.Size = new System.Drawing.Size(1300, 900);
             this.insert_card_panel.TabIndex = 2;
             // 
-            // spanish_button
+            // language2_button
             // 
-            this.spanish_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.spanish_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.spanish_button.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.spanish_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.spanish_button.Image = ((System.Drawing.Image)(resources.GetObject("spanish_button.Image")));
-            this.spanish_button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.spanish_button.Location = new System.Drawing.Point(1130, 90);
-            this.spanish_button.Name = "spanish_button";
-            this.spanish_button.Size = new System.Drawing.Size(160, 60);
-            this.spanish_button.TabIndex = 4;
-            this.spanish_button.Text = "Español";
-            this.spanish_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.spanish_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.spanish_button.UseVisualStyleBackColor = true;
-            this.spanish_button.Click += new System.EventHandler(this.spanish_button_Click);
+            this.language2_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.language2_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.language2_button.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.language2_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
+            this.language2_button.Image = ((System.Drawing.Image)(resources.GetObject("language2_button.Image")));
+            this.language2_button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.language2_button.Location = new System.Drawing.Point(1130, 90);
+            this.language2_button.Name = "language2_button";
+            this.language2_button.Size = new System.Drawing.Size(160, 60);
+            this.language2_button.TabIndex = 4;
+            this.language2_button.Text = "Español";
+            this.language2_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.language2_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.language2_button.UseVisualStyleBackColor = true;
+            this.language2_button.Click += new System.EventHandler(this.language2_button_Click);
             // 
-            // french_button
+            // language1_button
             // 
-            this.french_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.french_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.french_button.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.french_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.french_button.Image = ((System.Drawing.Image)(resources.GetObject("french_button.Image")));
-            this.french_button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.french_button.Location = new System.Drawing.Point(1130, 20);
-            this.french_button.Name = "french_button";
-            this.french_button.Size = new System.Drawing.Size(160, 60);
-            this.french_button.TabIndex = 3;
-            this.french_button.Text = "Français";
-            this.french_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.french_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.french_button.UseVisualStyleBackColor = true;
-            this.french_button.Click += new System.EventHandler(this.french_button_Click);
-            // 
-            // english_button
-            // 
-            this.english_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.english_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.english_button.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.english_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.english_button.Image = ((System.Drawing.Image)(resources.GetObject("english_button.Image")));
-            this.english_button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.english_button.Location = new System.Drawing.Point(1130, 160);
-            this.english_button.Name = "english_button";
-            this.english_button.Size = new System.Drawing.Size(160, 60);
-            this.english_button.TabIndex = 2;
-            this.english_button.Text = "English";
-            this.english_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.english_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.english_button.UseVisualStyleBackColor = true;
-            this.english_button.Visible = false;
-            this.english_button.Click += new System.EventHandler(this.english_button_Click);
+            this.language1_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.language1_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.language1_button.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.language1_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
+            this.language1_button.Image = ((System.Drawing.Image)(resources.GetObject("language1_button.Image")));
+            this.language1_button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.language1_button.Location = new System.Drawing.Point(1130, 20);
+            this.language1_button.Name = "language1_button";
+            this.language1_button.Size = new System.Drawing.Size(160, 60);
+            this.language1_button.TabIndex = 3;
+            this.language1_button.Text = "Français";
+            this.language1_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.language1_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.language1_button.UseVisualStyleBackColor = true;
+            this.language1_button.Click += new System.EventHandler(this.language1_button_Click);
             // 
             // InsertCardForm
             // 
@@ -156,8 +135,7 @@ namespace ATM_forms
         private System.Windows.Forms.PictureBox insert_card_picture_box;
         private System.Windows.Forms.Label insert_card_label;
         private Panel insert_card_panel;
-        private Button english_button;
-        private Button spanish_button;
-        private Button french_button;
+        private Button language2_button;
+        private Button language1_button;
     }
 }
