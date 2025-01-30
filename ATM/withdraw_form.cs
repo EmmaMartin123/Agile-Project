@@ -49,8 +49,22 @@ namespace ATM_forms
                 if (!ATMContents.CanWithdrawCash(amount))
                 {
                     AlertMessageForm alertMessageForm;
-                    alertMessageForm = new AlertMessageForm($"Transaction failed: ATM has insufficient funds");
-                    alertMessageForm.ShowDialog(this);
+                    if (GlobalVariables.language == "english")
+                    {
+                        alertMessageForm = new AlertMessageForm($"Transaction failed: ATM has insufficient funds");
+                        alertMessageForm.ShowDialog(this);
+                    }
+                    else if (GlobalVariables.language == "french")
+                    {
+                        alertMessageForm = new AlertMessageForm($"Échec de la transaction: \nle DAB n'a pas suffisamment de fonds");
+                        alertMessageForm.ShowDialog(this);
+                    }
+                    else if (GlobalVariables.language == "spanish")
+                    {
+                        alertMessageForm = new AlertMessageForm($"Transacción fallida:\n el cajero automático no tiene fondos suficientes");
+                        alertMessageForm.ShowDialog(this);
+                    }
+                    
 
                     amount_txtbox.Text = "£";
 
@@ -258,7 +272,7 @@ namespace ATM_forms
 
         private void WithdrawForm_Load(object sender, EventArgs e)
         {
-            Console.WriteLine("withdraw form centering");
+            //Console.WriteLine("withdraw form centering");
             // make the form invisible while loading so that it doesn't lag 
             this.Visible = false;
             // center the main panel
