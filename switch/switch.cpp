@@ -186,24 +186,56 @@ int forwardToSimulator(const json &request) {
     return 0;
 }
 
-// forward request to appropriate simulator based on pan
-int forwardToSimulator(const json &request, int atm_fd) {
-    std::string requestStr = request.dump(); // serializing JSON
+void SimToAtmComms(){
+    char buff[512];
+    std::string response = "";
 
-    // pull pan from request
-    std::string panNumber = request["pan_number"];
-    int fd = getSimulatorFileDescriptor(panNumber);
+    while (1)
+    {
+        // polling faster than ATMs since there are less of them
+        int numEvents = poll(&(*(Sims.begin())), Sims.size(), 60);
 
-    // sending request to the simulator
-    if (send(fd, requestStr.c_str(), requestStr.size(), 0) == -1) {
-        perror("Error sending request to simulator");
-        return -1;
+        // did we receive responses from sims?
+        if (numEvents < 0) continue;
+
+        // check for something in the event that poll doesn't timeout
+        for (int i = 0; i < Sims.size(); i++)
+        {
+            if (!(Sims[i].revents & POLLIN)) continue;
+
+            int bytesReceived = recv(Sims[i].fd, buff, 512, 0);
+            if (bytesReceived > 0)
+            {
+                buff[bytesReceived] = '\0'; // Null-terminate the received data 
+                std::string data(buff);
+
+                json request;
+
+                try {
+                    // parsing JSON data 
+                    request = json::parse(data);
+
+                    std::string s_AtmID = request["atm_id"];
+                    int AtmID = std::stoi(s_AtmID);
+
+                    int ATM_fd = AtmIdToFileDescriptorMap[AtmID];
+
+                    // send response back to correct socket
+                    response = request.dump();
+                    send(ATM_fd, response.c_str(), response.length(), 0);
+
+                } catch (const std::exception &e) {
+                    std::cerr << "Error parsing simulator response " << e.what() << std::endl;
+                    std::cerr << "request is: " << request.dump() << "\n";
+                }
+            }
+            Sims[i].revents = 0;
+        }
     }
-    return 0;
 }
 
 // for all the sockets we are working with, check if they have received inputs
-void pollingFunction(){
+void AtmToSimComms(){
     char buff[512];
 
     // check all ports regularly
@@ -235,11 +267,18 @@ void pollingFunction(){
                             std::string s_transactionType = request["request_type"];
                             int transactionType = std::stoi(s_transactionType);
 
+                            // ATM ID is always expected, in order to help with routing connections (think of it as a MAC address for an actual switch)
+                            std::string s_AtmID = request["atm_id"];
+                            int AtmID = std::stoi(s_AtmID);
+
+                            // map this id to a the corresponding connection
+                            AtmIdToFileDescriptorMap[AtmID] = ATMs[i].fd;
+
                             // logging the transaction 
                             logTransaction(transactionType, request);
 
                             // forwarding request to simulator
-                            int responseReachedNetwork = forwardToSimulator(request, ATMs[i].fd);
+                            int responseReachedNetwork = forwardToSimulator(request);
 
                             if (responseReachedNetwork != 0)
                             { // connection to network broken, send ATM error response
