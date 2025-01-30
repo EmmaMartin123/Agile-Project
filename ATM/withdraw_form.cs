@@ -43,10 +43,22 @@ namespace ATM_forms
             // checks the amount entered is valid - must be a multiple of 5 and a valid number
             if (decimal.TryParse(amountText, out amount) && amount > 0 && amount % 5 == 0)
             {
+
+                // check cash can be withdrawn before sending to switch
+                if (!ATMContents.CanWithdrawCash(amount))
+                {
+                    AlertMessageForm alertMessageForm;
+                    alertMessageForm = new AlertMessageForm($"Transaction failed: ATM has insufficient funds");
+                    alertMessageForm.ShowDialog(this);
+
+                    amount_txtbox.Text = "£";
+
+                    return;
+                }
+
                 // send amount to switch to deal with
                 try
                 {
-
                     // connect and send response in json format
                     NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
                     Console.WriteLine(amount);

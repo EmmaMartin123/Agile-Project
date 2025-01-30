@@ -86,6 +86,7 @@
     <Compile Include="alert_message_form.Designer.cs">
       <DependentUpon>alert_message_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="ATMContents.cs" />
     <Compile Include="balance_form.cs">
       <SubType>Form</SubType>
     </Compile>
