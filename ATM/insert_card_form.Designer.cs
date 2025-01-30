@@ -36,7 +36,6 @@ namespace ATM_forms
             this.mastercardbtn = new System.Windows.Forms.Button();
             this.visabtn = new System.Windows.Forms.Button();
             this.unionpaybtn = new System.Windows.Forms.Button();
-            this.amexbtn = new System.Windows.Forms.Button();
             this.insert_card_panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +46,6 @@ namespace ATM_forms
             this.insert_card_panel.Controls.Add(this.mastercardbtn);
             this.insert_card_panel.Controls.Add(this.visabtn);
             this.insert_card_panel.Controls.Add(this.unionpaybtn);
-            this.insert_card_panel.Controls.Add(this.amexbtn);
             this.insert_card_panel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.insert_card_panel.Location = new System.Drawing.Point(508, 215);
             this.insert_card_panel.Name = "insert_card_panel";
@@ -120,24 +118,6 @@ namespace ATM_forms
             this.unionpaybtn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
             this.unionpaybtn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
             // 
-            // amexbtn
-            // 
-            this.amexbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(179)))), ((int)(((byte)(201)))));
-            this.amexbtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.amexbtn.FlatAppearance.BorderSize = 3;
-            this.amexbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.amexbtn.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amexbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(7)))), ((int)(((byte)(93)))));
-            this.amexbtn.Location = new System.Drawing.Point(285, 410);
-            this.amexbtn.Name = "amexbtn";
-            this.amexbtn.Size = new System.Drawing.Size(355, 89);
-            this.amexbtn.TabIndex = 0;
-            this.amexbtn.Text = "American Express";
-            this.amexbtn.UseVisualStyleBackColor = true;
-            this.amexbtn.Click += new System.EventHandler(this.AmexbtnClick);
-            this.amexbtn.MouseEnter += new System.EventHandler(this.BtnMouseEnter);
-            this.amexbtn.MouseLeave += new System.EventHandler(this.BtnMouseLeave);
-            // 
             // InsertCardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -162,7 +142,6 @@ namespace ATM_forms
         private System.Windows.Forms.Button mastercardbtn;
         private System.Windows.Forms.Button visabtn;
         private System.Windows.Forms.Button unionpaybtn;
-        private System.Windows.Forms.Button amexbtn;
 
         void BtnMouseEnter(object sender, EventArgs e)
         {
