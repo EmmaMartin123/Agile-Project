@@ -1,2 +1,1 @@
-[2025-01-29 17:31:36] {"atm_id":"Visa","expiry_date":"11/25","pan_number":"4123456789012345","pin":"5678","request_type":"0","transaction_outcome":0}
-[2025-01-29 17:55:47] {"atm_id":"Visa","expiry_date":"11/25","pan_number":"4123456789012345","pin":"5678","request_type":"0","transaction_outcome":0}
+[2025-01-30 10:16:48] {"atm_id":"Visa","expiry_date":"11/25","pan_number":"1123456789012345","pin":"5678","request_type":"0","transaction_outcome":0}
