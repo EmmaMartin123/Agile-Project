@@ -90,9 +90,13 @@ namespace ATM_forms
 
         private static void HandleDroppedConnection()
         {
+
             // notifies the user of the connection problem with a dialog box
-            MessageBox.Show("Problem with transaction, returning card...", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-               
+            //MessageBox.Show("Problem with transaction, returning card...", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            AlertMessageForm alertMessageForm = new AlertMessageForm("Problem with transaction, returning card...");
+            alertMessageForm.ShowDialog();
+
             // gets the current form - which is the form where the connection failed so we can close it
             Form currentForm = Application.OpenForms[Application.OpenForms.Count - 1];
 
@@ -137,12 +141,27 @@ namespace ATM_forms
     public static class TransactionData
     {
         // transaction variables (dummy data for now)
-        public static string connectionAddress = "ec2-35-175-247-166.compute-1.amazonaws.com";
+        public static string connectionAddress = "ec2-52-91-1-195.compute-1.amazonaws.com";
         public static decimal CurrentBalance = 500;
         public static int transactionType = -1;
         public static int ATMID = 0;
         public static string PAN = "2234567890123456";
         public static int PIN = 1010;
+
+        /* 
+         Card Types:
+        Mastercard - starts with a 5
+        Visa - starts with a 4
+        UnionPay - starts with 62
+        Amex - starts with 34 or 37
+         */
+        public static string mastercardPAN = "5809567890123456";
+        public static string visaPAN = "4412567890123456";
+        public static string unionpayPAN = "6224567890123456";
+        public static string amexPAN = "3477567890123456";
+        public static string currentPAN = "";
+        public static string currentCardType = "";
+
     }
 
 }

@@ -50,10 +50,10 @@
             // alert_label
             // 
             this.alert_label.AutoSize = true;
-            this.alert_label.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.alert_label.Location = new System.Drawing.Point(178, 293);
+            this.alert_label.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alert_label.Location = new System.Drawing.Point(229, 293);
             this.alert_label.Name = "alert_label";
-            this.alert_label.Size = new System.Drawing.Size(233, 45);
+            this.alert_label.Size = new System.Drawing.Size(146, 28);
             this.alert_label.TabIndex = 1;
             this.alert_label.Text = "error message";
             // 
