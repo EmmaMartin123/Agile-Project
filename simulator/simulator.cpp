@@ -40,6 +40,24 @@ using json = nlohmann::json;
 
 std::unordered_map<std::string, json> accounts; // updating fro dynamic loading
 
+// function to round doubles to cash. Use bankers round for precision
+double bankersRound(double value)
+{
+    double factor = std::pow(10,2); 
+    double scaledValue = value * factor;
+    double roundedValue = std::round(scaledValue);
+
+    if(std::fabs(scaledValue - roundedValue)==0.5)
+    {
+        if(std::fmod(roundedValue, 2) !=0)
+        {
+            roundedValue = (roundedValue>0) ? roundedValue - 1 : roundedValue + 1;
+        }
+    }
+
+    return roundedValue/factor;
+}
+
 // load accounts from file
 void loadAccountsFromFile()
 {
@@ -240,15 +258,15 @@ void handleNewConnection(int socket) {
                         // if differing currency to ATM then multiply acct balance by exchange rate
                         if(account["currency"]=="GBP")
                         {
-                            responseJson["transaction_value"] = account["balance"];
+                            responseJson["transaction_value"] = bankersRound(account["balance"]);
                         }
                         if(account["currency"]=="USD")
                         {
-                            responseJson["transaction_value"] = USDTOGBPRATE*(account["balance"].get<double>());
+                            responseJson["transaction_value"] = bankersRound(USDTOGBPRATE*(bankersRound(account["balance"].get<double>())));
                         }
                         if(account["currency"]=="EUR")
                         {
-                            responseJson["transaction_value"] = EURTOGBPRATE*(account["balance"].get<double>());
+                            responseJson["transaction_value"] = bankersRound(EURTOGBPRATE*(bankersRound(account["balance"].get<double>())));
                         }
                     break;
                 case 2: // withdraw cash
@@ -260,27 +278,29 @@ void handleNewConnection(int socket) {
                     double transactionValue = std::stod(s_transactionValue);
 
                     // make sure account can afford transaction in gbp
-                        if (account["currency"]=="GBP" && transactionValue <= account["balance"].get<double>())
+                        if (account["currency"]=="GBP" && transactionValue <= bankersRound(account["balance"].get<double>()))
                         {
-                            account["balance"] = account["balance"].get<double>() - transactionValue;
+                            account["balance"] = bankersRound(account["balance"].get<double>()) - transactionValue;
                             responseJson["transaction_outcome"] = 0;
                             responseJson["remaining_balance"] = account["balance"];
                             saveAccountsToFile(); // save updated account data
                         }
                         // make sure account has enough usd balance to afford gbp transaction
-                        else if(account["currency"]=="USD" && (GBPTOUSDRATE*transactionValue) <= account["balance"].get<double>())
+                        else if(account["currency"]=="USD" && bankersRound((GBPTOUSDRATE*transactionValue)) <= bankersRound(account["balance"].get<double>()))
                         {
-                            transactionValue = GBPTOUSDRATE*transactionValue;
-                            account["balance"] = account["balance"].get<double>() - transactionValue;
+                            double temp = transactionValue;
+                            temp = bankersRound(GBPTOUSDRATE*transactionValue);
+                            account["balance"] = bankersRound(account["balance"].get<double>()) - bankersRound(temp);
                             responseJson["transaction_outcome"] = 0;
                             responseJson["remaining_balance"] = account["balance"];
                             saveAccountsToFile(); // save updated account data
                         }
                         // make sure account has enough euros balance to afford gbp transaction
-                        else if(account["currency"]=="EUR" && (GBPTOEURRATE*transactionValue) <= account["balance"].get<double>())
+                        else if(account["currency"]=="EUR" && bankersRound((GBPTOEURRATE*transactionValue)) <= bankersRound(account["balance"].get<double>()))
                         {
-                            transactionValue = GBPTOEURRATE*transactionValue;
-                            account["balance"] = account["balance"].get<double>() - transactionValue;
+                            double temp = transactionValue;
+                            temp = bankersRound(GBPTOEURRATE*transactionValue);
+                            account["balance"] = bankersRound(account["balance"].get<double>()) - bankersRound(temp);
                             responseJson["transaction_outcome"] = 0;
                             responseJson["remaining_balance"] = account["balance"];
                             saveAccountsToFile(); // save updated account data
