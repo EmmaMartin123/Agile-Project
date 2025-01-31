@@ -107,7 +107,24 @@ namespace ATM_forms
 
         private void PromptForm_Load(object sender, EventArgs e)
         {
-            
+            if (GlobalVariables.language == "english")
+            {
+                this.Text = "Success";
+                yes_btn.Text = "YES";
+                no_btn.Text= "NO";
+            }
+            else if (GlobalVariables.language == "french")
+            {
+                this.Text = "Succès";
+                yes_btn.Text = "OUI";
+                no_btn.Text = "NON";
+            }
+            else if (GlobalVariables.language == "spanish")
+            {
+                this.Text = "Éxito";
+                yes_btn.Text = "SÍ";
+                no_btn.Text = "NO";
+            }
         }
 
         private void prompt_label1_Click(object sender, EventArgs e)
