@@ -65,8 +65,13 @@ namespace ATM_forms
 
                 byte[] data = Encoding.UTF8.GetBytes(jsonRequest);
                 Console.WriteLine(jsonRequest);
-                stream.Write(data, 0, data.Length);
-                Console.WriteLine("request sent to switch.");
+                Console.WriteLine(data);
+                if (data != null && data.Length != null)
+                {
+                    stream.Write(data, 0, data.Length);
+                    Console.WriteLine("request sent to switch.");
+                }
+               
             }
             catch (Exception ex)
             {
