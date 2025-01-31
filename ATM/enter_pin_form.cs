@@ -31,28 +31,9 @@ namespace ATM_forms
         private void PinTxtboxTextChanged(object sender, EventArgs e)
         {
             pin_txt_box.PasswordChar = '*';   // hides input 
-
-            // the text is only digits and has a maximum length of 4
-            if (!int.TryParse(pin_txt_box.Text, out _) || pin_txt_box.Text.Length > 4)
-            {
-                if (GlobalVariables.language == "french")
-                {
-                    AlertMessageForm alertMessage = new AlertMessageForm("Code PIN invalide. Veuillez saisir un code PIN à 4 chiffres.");
-                    alertMessage.Show(this);
-                }
-                else if (GlobalVariables.language == "english")
-                {
-                    AlertMessageForm alertMessage = new AlertMessageForm("Invalid PIN. Please enter a 4-digit PIN.");
-                    alertMessage.Show(this);
-                }
-                else if (GlobalVariables.language == "spanish")
-                {
-                    AlertMessageForm alertMessage = new AlertMessageForm("PIN no válido. Ingrese un PIN de 4 dígitos.");
-                    alertMessage.Show(this);
-                }
                 pin_txt_box.Text = pin_txt_box.Text.Substring(0, Math.Min(4, pin_txt_box.Text.Length));
                 pin_txt_box.SelectionStart = pin_txt_box.Text.Length; // moves the cursor to the end
-            }
+            
 
         }
 
