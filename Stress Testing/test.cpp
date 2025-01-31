@@ -14,15 +14,15 @@
 using json = nlohmann::json;
 
 #define SWITCH_PORT "8885"
-#define SWITCH_IP "ec2-52-71-77-78.compute-1.amazonaws.com"
+#define SWITCH_IP "ec2-35-173-211-118.compute-1.amazonaws.com"
 
 std::string hostname = SWITCH_IP;
 
 // Dummy account details
 const std::vector<std::string> dummyAccounts = {
-    "4521478523695201",
-    "3698521478965412",
-    "2234567890123456"
+    "7224567890123456",
+    "1412567890123456",
+    "5809567890123456"
 };
 
 // and their PINs
