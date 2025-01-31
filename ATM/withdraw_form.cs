@@ -141,7 +141,7 @@ namespace ATM_forms
                             //send balance request
                             TransactionData.transactionType = 1;
                             NetworkClient.ConnectToSwitch(TransactionData.connectionAddress, 8885);
-                            NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.PAN + "\"}");
+                            NetworkClient.SendRequest("{\"request_type\": \"" + TransactionData.transactionType + "\", \"atm_id\":\"" + TransactionData.ATMID + "\", \"pan_number\":\"" + TransactionData.currentPAN + "\"}");
                             string balanceResponse = NetworkClient.ReceiveResponse();
                             Console.WriteLine($"Balance Response: {balanceResponse}");
                             NetworkClient.CloseConnection();
