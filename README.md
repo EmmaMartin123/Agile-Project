@@ -75,3 +75,7 @@ A key point here is that there is no such thing as “perfect” code—there is
 
 https://youtu.be/e6jpi1J9lqg {sprint 1}
 https://youtu.be/LB2wnWZWp5Y {sprint 2}
+
+## Report
+
+https://github.com/EmmaMartin123/Agile-Project/blob/main/Report.pdf
